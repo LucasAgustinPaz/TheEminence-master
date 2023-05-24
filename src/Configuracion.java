@@ -9,6 +9,7 @@ import java.io.IOException;
 public class Configuracion extends JPanel {
 
     private JButton closeButton;
+    int baldu;
     private JButton PlayMusic;
     private JButton StopMusic;
     private Clip clip;
