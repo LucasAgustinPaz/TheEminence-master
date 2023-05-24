@@ -139,7 +139,7 @@ public class Juego extends JFrame {
         bottomPanel.add(salirButton, BorderLayout.WEST);
         bottomPanel.add(buttonPanel, BorderLayout.CENTER);
 
-        JPanel topPanel = new JPanel(new BorderLayout()); 
+        JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.add(levelLabel, BorderLayout.WEST);
         topPanel.add(experienceLabel, BorderLayout.CENTER);
 
