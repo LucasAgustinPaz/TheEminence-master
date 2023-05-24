@@ -20,8 +20,8 @@ class Gameplay extends JPanel {
     private boolean isButtonPressed = false;
     private JButton botonMinijuego;
     private Clip clip;
-    private ImageIcon suelto = new ImageIcon("C:\\Datos\\programacion\\proyecto final\\TheEminence2-master\\resources\\sprites\\button1.png");
-    private ImageIcon apretado = new ImageIcon("C:\\Datos\\programacion\\proyecto final\\TheEminence2-master\\resources\\sprites\\button2.png");
+    private ImageIcon suelto = new ImageIcon("resources\\sprites\\button1.png");
+    private ImageIcon apretado = new ImageIcon("resources\\sprites\\button2.png");
 
     public Gameplay() {
         level = 1;
