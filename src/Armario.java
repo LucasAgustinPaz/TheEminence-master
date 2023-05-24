@@ -13,7 +13,7 @@ public class Armario extends JPanel {
     private JButton sigSkin;
     private JButton antSkin;
 
-
+private int anios;
 
     private List<String> skins;
     private int indiceActual;

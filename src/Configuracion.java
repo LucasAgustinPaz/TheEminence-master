@@ -14,6 +14,7 @@ public class Configuracion extends JPanel {
     private Clip clip;
 
 
+
     public Configuracion(JPanel panelPrincipal, CardLayout cardLayout){
 
         // Configurar la ventana
