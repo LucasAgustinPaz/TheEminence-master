@@ -25,8 +25,8 @@ public class Configuracion extends JPanel {
         closeButton.setFocusPainted(false);
         closeButton.setBackground(Color.MAGENTA.darker());
 
-        ImageIcon play = new ImageIcon("C:\\Datos\\programacion\\proyecto final\\TheEminence2-master\\resources\\sprites\\startMusic.png");
-        ImageIcon stop = new ImageIcon("C:\\Datos\\programacion\\proyecto final\\TheEminence2-master\\resources\\sprites\\stopMusic.png");
+        ImageIcon play = new ImageIcon("resources\\sprites\\startMusic.png");
+        ImageIcon stop = new ImageIcon("resources\\sprites\\stopMusic.png");
 
         PlayMusic= new JButton(play);
         StopMusic = new JButton(stop);
@@ -48,7 +48,7 @@ public class Configuracion extends JPanel {
 
         PlayMusic.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                PlayMusic("C:\\Datos\\programacion\\proyecto final\\TheEminence2-master\\resources\\musica\\labebe.wav");
+                PlayMusic("resources\\musica\\labebe.wav");
             }
         });
 
