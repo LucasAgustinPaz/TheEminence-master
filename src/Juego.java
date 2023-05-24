@@ -39,9 +39,10 @@ public class Juego extends JFrame {
         experienceMultiplier = 1.0;
 
         setTitle("Juego");
-        setSize(800, 600);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        setUndecorated(true);
 
         panelPrincipal = new JPanel();
         cardLayout = new CardLayout();
