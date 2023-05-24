@@ -12,9 +12,7 @@ import java.util.List;
 public class Armario extends JPanel {
     private JButton sigSkin;
     private JButton antSkin;
-
-
-
+    private JButton closeButton;
     private List<String> skins;
     private int indiceActual;
     private JLabel jLabelSkin;
@@ -25,6 +23,11 @@ public class Armario extends JPanel {
         skins.add("Skin 2");
         skins.add("Skin 3");
         indiceActual = 0;
+
+        closeButton = new JButton("X");
+        closeButton.setBorderPainted(false);
+        closeButton.setFocusPainted(false);
+        closeButton.setBackground(Color.MAGENTA.darker());
 
         // Configurar la ventana
         setLayout(new FlowLayout());
@@ -42,6 +45,7 @@ public class Armario extends JPanel {
 
         add(sigSkin,BorderLayout.NORTH);
         add(antSkin,BorderLayout.NORTH);
+        add(closeButton,BorderLayout.NORTH);
 
         sigSkin.addActionListener(new ActionListener() {
             @Override
@@ -51,6 +55,11 @@ public class Armario extends JPanel {
         antSkin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {recorrerAnteriorSkin();}
+        });
+        closeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panelPrincipal, "menu");
+            }
         });
 
     }
