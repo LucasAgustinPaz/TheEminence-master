@@ -136,10 +136,12 @@ public class Juego extends JFrame {
         buttonPanel.add(armarioButton);
 
         JPanel bottomPanel = new JPanel(new BorderLayout());
+        bottomPanel.setPreferredSize(new Dimension(200,100));
         bottomPanel.add(salirButton, BorderLayout.WEST);
         bottomPanel.add(buttonPanel, BorderLayout.CENTER);
 
         JPanel topPanel = new JPanel(new BorderLayout());
+        topPanel.setPreferredSize(new Dimension(200,100));
         topPanel.add(levelLabel, BorderLayout.WEST);
         topPanel.add(experienceLabel, BorderLayout.CENTER);
 
