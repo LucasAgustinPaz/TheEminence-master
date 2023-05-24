@@ -12,6 +12,7 @@ public class Configuracion extends JPanel {
     private JButton PlayMusic;
     private JButton StopMusic;
     private Clip clip;
+    private int x;
 
 
     public Configuracion(JPanel panelPrincipal, CardLayout cardLayout){
