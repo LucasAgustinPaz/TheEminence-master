@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.TimerTask;
+import java.util.Timer;
 
 public class Minijuego extends JPanel{
 
@@ -14,8 +16,8 @@ public class Minijuego extends JPanel{
     private int objectX;
     private int objectY;
     private static int vecesEjecutado = 30;
-    private boolean running;
-    private int time;
+    private Timer timer;
+
 
     public int getScore() {
         return score;
@@ -36,7 +38,6 @@ public class Minijuego extends JPanel{
 
         closeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                running = false;  // Detener el hilo
                 cardLayout.show(panelPrincipal, "menu");
             }
         });
@@ -50,22 +51,27 @@ public class Minijuego extends JPanel{
     }
 
     public void startMinijuego() {
+        vecesEjecutado = 30;
+        score = 0;
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 if (vecesEjecutado > 0) {
-                    System.out.println("pinta");
                     repaint();
                     menos();
                     System.out.println(vecesEjecutado);
                 }
-
             }
         };
 
         int delay = 1000; // 1 segundo
-        Timer timer = new Timer(delay, actionListener);
-        timer.start();
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                actionListener.actionPerformed(null);
+            }
+        }, delay, delay);
     }
+
 
     public void menos(){
         vecesEjecutado--;
