@@ -225,7 +225,7 @@ public class Juego extends JFrame {
         public boolean startTorneo ( int level){
 
             System.out.println("Torneo Iniciado");
-            int limite = (int) ((usuario.getNivel() * 10) / 3);
+           int limite = (int) ((usuario.getNivel() * 10) / 3);
             if (minijuego.getScore() < limite) {
                 cardLayout.show(panelPrincipal, "minijuego");
                 minijuego.startMinijuego(panelPrincipal, cardLayout, usuario);
