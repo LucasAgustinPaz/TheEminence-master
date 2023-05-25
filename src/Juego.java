@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 public class Juego extends JFrame {
     private JPanel panelPrincipal;
@@ -12,9 +13,9 @@ public class Juego extends JFrame {
     private Configuracion configuracion;
     private Shop shop;
     private Armario armario;
+    private Usuario usuario;
     private JProgressBar experienceLabel;
     private JLabel levelLabel;
-    private int level;
     private int experience;
     private double experienceMultiplier;
     private boolean isButtonPressed = false;
@@ -31,8 +32,9 @@ public class Juego extends JFrame {
     }
 
     public Juego() {
-        level = 1;
-        experience = 0;
+        usuario = new Usuario();
+        usuario.setNivel(1);;
+        usuario.setXp(0);
         experienceMultiplier = 1.0;
 
         setTitle("Juego");
@@ -74,12 +76,12 @@ public class Juego extends JFrame {
     }
 
     private Shop crearPanelShop(JPanel panelPrincipal, CardLayout cardLayout) {
-        Shop shop = new Shop(panelPrincipal, cardLayout);
+        Shop shop = new Shop(panelPrincipal, cardLayout, usuario);
         return shop;
     }
 
     private Armario crearPanelArmario(JPanel panelPrincipal, CardLayout cardLayout) {
-        Armario armario = new Armario(panelPrincipal, cardLayout);
+        Armario armario = new Armario(panelPrincipal, cardLayout, usuario);
         return armario;
     }
 
@@ -92,7 +94,7 @@ public class Juego extends JFrame {
         JButton shopButton = new JButton("Shop");
         JButton armarioButton = new JButton("Armario");
 
-        levelLabel = new JLabel("Rango: " + cambiarNivel(level));
+        levelLabel = new JLabel("Rango: " + cambiarNivel(usuario.getNivel()));
         experienceLabel = new JProgressBar();
         JButton clickButton = new JButton(suelto);
         JButton closeButton = new JButton(apretado);
@@ -197,19 +199,19 @@ public class Juego extends JFrame {
     }
 
     private void gainExperience(int amount) {
-        experience += amount;
-        experienceLabel.setValue(experience);
+        usuario.subirXP(amount);
+        experienceLabel.setValue(usuario.getXp());
 
-        if (experience >= level * 100) {
-            level++;
-            levelLabel.setText("Rango: " + cambiarNivel(level));
+        if (usuario.getXp() >= usuario.getNivel() * 100) {
+            usuario.subirNivel();
+            levelLabel.setText("Rango: " + cambiarNivel(usuario.getNivel()));
 
-            if (!cambiarNivel(level).equals("Radiante")) {
-                experience = 0;
+            if (!cambiarNivel(usuario.getNivel()).equals("Radiante")) {
+                usuario.setXp(0);
             }
 
-            experienceLabel.setMaximum(level * 100);
-            experienceLabel.setValue(experience);
+            experienceLabel.setMaximum(usuario.getNivel() * 100);
+            experienceLabel.setValue(usuario.getXp());
             experienceMultiplier += 0.6;
         }
     }

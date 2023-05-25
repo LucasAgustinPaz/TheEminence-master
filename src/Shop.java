@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class Shop extends JPanel {
     private JButton closeButton;
@@ -10,7 +11,7 @@ public class Shop extends JPanel {
     private JButton skin3;
 
 
-    public Shop(JPanel panelPrincipal, CardLayout cardLayout){
+    public Shop(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario){
         // Configurar la ventana
         setLayout(new FlowLayout());
         setPreferredSize(new Dimension(800, 600));
@@ -20,17 +21,17 @@ public class Shop extends JPanel {
         closeButton.setFocusPainted(false);
         closeButton.setBackground(Color.MAGENTA.darker());
 
-        skin1 = new JButton("vandal prime");
+        skin1 = new JButton("vandal prime 1500");
         skin1.setBorderPainted(false);
         skin1.setFocusPainted(false);
         skin1.setBackground(Color.ORANGE.darker());
 
-        skin2 = new JButton("La mama de gaspar");
+        skin2 = new JButton("vandal gris 500");
         skin2.setBorderPainted(false);
         skin2.setFocusPainted(false);
         skin2.setBackground(Color.PINK.darker());
 
-        skin3= new JButton("vandal re fachera");
+        skin3= new JButton("vandal re fachera 750");
         skin3.setBorderPainted(false);
         skin3.setFocusPainted(false);
         skin3.setBackground(Color.CYAN.darker());
@@ -47,6 +48,36 @@ public class Shop extends JPanel {
             cardLayout.show(panelPrincipal, "menu");
         }
     });
+
+    skin1.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(usuario.getCoins()>=1500){
+                usuario.agregarSkin("vandal Prime");
+                usuario.compra(1500);
+            }
+        }
+    });
+        skin2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(usuario.getCoins()>=500){
+                    usuario.agregarSkin("vandal gris");
+                    usuario.compra(500);
+                }
+            }
+        });
+        skin3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(usuario.getCoins()>=750){
+                    usuario.agregarSkin("vandal fachera");
+                    usuario.compra(750);
+                }
+            }
+        });
+
+
 
 
     }

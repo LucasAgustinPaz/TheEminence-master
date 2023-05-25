@@ -9,16 +9,11 @@ public class Armario extends JPanel {
     private JButton sigSkin;
     private JButton antSkin;
     private JButton closeButton;
-    private List<String> skins;
     private int indiceActual;
     JLabel printSkin;
     private JLabel jLabelSkin;
 
-    public Armario(JPanel panelPrincipal, CardLayout cardLayout) {
-        skins = new ArrayList<String>();
-        skins.add("Skin 1");
-        skins.add("Skin 2");
-        skins.add("Skin 3");
+    public Armario(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
         indiceActual = 0;
 
         closeButton = new JButton("X");
@@ -26,7 +21,7 @@ public class Armario extends JPanel {
         closeButton.setFocusPainted(false);
         closeButton.setBackground(Color.MAGENTA.darker());
 
-        jLabelSkin = new JLabel(skins.get(indiceActual));
+        jLabelSkin = new JLabel(usuario.getSkins().get(indiceActual));
 
         // Configurar la ventana
         setLayout(new BorderLayout());
@@ -53,14 +48,14 @@ public class Armario extends JPanel {
         sigSkin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                recorrerSiguienteSkin();
+                recorrerSiguienteSkin(usuario);
             }
         });
 
         antSkin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                recorrerAnteriorSkin();
+                recorrerAnteriorSkin(usuario);
             }
         });
 
@@ -71,21 +66,21 @@ public class Armario extends JPanel {
         });
     }
 
-    private void recorrerSiguienteSkin() {
-        if (indiceActual < skins.size() - 1) {
+    private void recorrerSiguienteSkin(Usuario usuario) {
+        if (indiceActual < usuario.getSkins().size() - 1) {
             indiceActual++;
         } else {
             indiceActual = 0; // Volver al principio si alcanza el final de la lista
         }
-        jLabelSkin.setText(skins.get(indiceActual));
+        jLabelSkin.setText(usuario.getSkins().get(indiceActual));
     }
 
-    private void recorrerAnteriorSkin() {
+    private void recorrerAnteriorSkin(Usuario usuario) {
         if (indiceActual > 0) {
             indiceActual--;
         } else {
-            indiceActual = skins.size() - 1; // Ir al final de la lista si alcanza el principio
+            indiceActual = usuario.getSkins().size() - 1; // Ir al final de la lista si alcanza el principio
         }
-        jLabelSkin.setText(skins.get(indiceActual));
+        jLabelSkin.setText(usuario.getSkins().get(indiceActual));
     }
 }
