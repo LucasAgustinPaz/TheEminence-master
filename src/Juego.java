@@ -12,6 +12,7 @@ public class Juego extends JFrame {
     private Configuracion configuracion;
     private Shop shop;
     private Armario armario;
+    private Estadistica estadistica;
     private JProgressBar experienceLabel;
     private JLabel levelLabel;
     private int level;
@@ -35,7 +36,6 @@ public class Juego extends JFrame {
         experience = 0;
         experienceMultiplier = 1.0;
 
-        setTitle("Juego");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -50,12 +50,15 @@ public class Juego extends JFrame {
         configuracion = crearPanelConfiguracion(panelPrincipal, cardLayout);
         shop = crearPanelShop(panelPrincipal, cardLayout);
         armario = crearPanelArmario(panelPrincipal, cardLayout);
+        estadistica = crearPanelEstadistica(panelPrincipal,cardLayout);
 
         panelPrincipal.add(panelMenu, "menu");
         panelPrincipal.add(minijuego, "minijuego");
         panelPrincipal.add(configuracion, "Configuracion");
         panelPrincipal.add(shop, "Shop");
         panelPrincipal.add(armario, "Armario");
+        panelPrincipal.add(estadistica,"Estadistica");
+
 
         cardLayout.show(panelPrincipal, "menu");
 
@@ -82,6 +85,10 @@ public class Juego extends JFrame {
         Armario armario = new Armario(panelPrincipal, cardLayout);
         return armario;
     }
+    private Estadistica crearPanelEstadistica(JPanel panelPrincipal,CardLayout cardLayout){
+        Estadistica estadistica = new Estadistica(panelPrincipal,cardLayout);
+        return estadistica;
+    }
 
     private JPanel crearPanelMenu() {
         JPanel panel = new JPanel(new BorderLayout());
@@ -91,6 +98,7 @@ public class Juego extends JFrame {
         JButton minijuegoButton = new JButton("Minijuego");
         JButton shopButton = new JButton("Shop");
         JButton armarioButton = new JButton("Armario");
+        JButton estadisticaButton = new JButton("Estadistica");
 
         levelLabel = new JLabel("Rango: " + cambiarNivel(level));
         experienceLabel = new JProgressBar();
@@ -128,17 +136,28 @@ public class Juego extends JFrame {
             }
         });
 
+        estadisticaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panelPrincipal,"Estadistica");
+            }
+        });
+
+
         JPanel buttonPanel = new JPanel(); // Panel adicional para los botones
         buttonPanel.setLayout(new FlowLayout()); // Utilizamos FlowLayout para alinear los botones
         buttonPanel.add(minijuegoButton);
         buttonPanel.add(configuracionButton);
         buttonPanel.add(shopButton);
         buttonPanel.add(armarioButton);
+        buttonPanel.add(estadisticaButton);
+
 
         JPanel bottomPanel = new JPanel(new BorderLayout());
         bottomPanel.setPreferredSize(new Dimension(200,100));
         bottomPanel.add(salirButton, BorderLayout.WEST);
         bottomPanel.add(buttonPanel, BorderLayout.CENTER);
+
 
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setPreferredSize(new Dimension(200,100));
