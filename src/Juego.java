@@ -14,6 +14,7 @@ public class Juego extends JFrame {
     private Shop shop;
     private Armario armario;
     private Usuario usuario;
+    private EleccionDeRol eleccionDeRol;
     private JProgressBar experienceLabel;
     private JLabel levelLabel;
     private int experience;
@@ -53,12 +54,14 @@ public class Juego extends JFrame {
         configuracion = crearPanelConfiguracion(panelPrincipal, cardLayout);
         shop = crearPanelShop(panelPrincipal, cardLayout);
         armario = crearPanelArmario(panelPrincipal, cardLayout);
+        eleccionDeRol = crearPanelEleccionesDeRol(panelPrincipal, cardLayout);
 
         panelPrincipal.add(panelMenu, "menu");
         panelPrincipal.add(minijuego, "minijuego");
         panelPrincipal.add(configuracion, "Configuracion");
         panelPrincipal.add(shop, "Shop");
         panelPrincipal.add(armario, "Armario");
+        panelPrincipal.add(eleccionDeRol,"Rol");
 
         cardLayout.show(panelPrincipal, "menu");
 
@@ -85,6 +88,10 @@ public class Juego extends JFrame {
         Armario armario = new Armario(panelPrincipal, cardLayout, usuario);
         return armario;
     }
+    private EleccionDeRol crearPanelEleccionesDeRol(JPanel panelPrincipal, CardLayout cardLayout){
+        EleccionDeRol eleccionDeRol = new EleccionDeRol(panelPrincipal,cardLayout,usuario);
+        return eleccionDeRol;
+    }
 
     private JPanel crearPanelMenu() {
         JPanel panel = new JPanel(new BorderLayout());
@@ -94,6 +101,7 @@ public class Juego extends JFrame {
         JButton minijuegoButton = new JButton("Minijuego");
         JButton shopButton = new JButton("Shop");
         JButton armarioButton = new JButton("Armario");
+        JButton eleccionDeRol = new JButton("Rol");
 
         levelLabel = new JLabel("Rango: " + cambiarNivel(usuario.getNivel()));
         experienceLabel = new JProgressBar();
@@ -131,12 +139,18 @@ public class Juego extends JFrame {
             }
         });
 
+        eleccionDeRol.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {cardLayout.show(panelPrincipal, "Rol");}
+        });
+
         JPanel buttonPanel = new JPanel(); // Panel adicional para los botones
         buttonPanel.setLayout(new FlowLayout()); // Utilizamos FlowLayout para alinear los botones
         buttonPanel.add(minijuegoButton);
         buttonPanel.add(configuracionButton);
         buttonPanel.add(shopButton);
         buttonPanel.add(armarioButton);
+        buttonPanel.add(eleccionDeRol);
 
         JPanel bottomPanel = new JPanel(new BorderLayout());
         bottomPanel.setPreferredSize(new Dimension(200, 100));
@@ -215,7 +229,6 @@ public class Juego extends JFrame {
             }
         } else {
             usuario.agregarCoins(10);
-            System.out.println("holaaaaaaaaaaaaaaaaaaaaaaaaaa" + usuario.getCoins());
         }
 
 
