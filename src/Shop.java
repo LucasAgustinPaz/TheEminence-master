@@ -27,11 +27,13 @@ public class Shop extends JPanel {
         skin1.setBackground(Color.ORANGE.darker());
 
         skin2 = new JButton("vandal gris 500");
+
+
         skin2.setBorderPainted(false);
         skin2.setFocusPainted(false);
         skin2.setBackground(Color.PINK.darker());
 
-        skin3= new JButton("vandal re fachera 750");
+        skin3 = new JButton("vandal fachera 750");
         skin3.setBorderPainted(false);
         skin3.setFocusPainted(false);
         skin3.setBackground(Color.CYAN.darker());
@@ -49,36 +51,44 @@ public class Shop extends JPanel {
         }
     });
 
-    skin1.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if(usuario.getCoins()>=1500){
-                usuario.agregarSkin("vandal Prime");
-                usuario.compra(1500);
+
+        skin1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!usuario.getSkins().contains("vandal prime")) {
+                    if (usuario.getCoins() >= 1500) {
+                        usuario.agregarSkin("vandal prime");
+                        usuario.compra(1500);
+                    }
+                }
             }
-        }
-    });
+        });
+
+
         skin2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(usuario.getCoins()>=500){
-                    usuario.agregarSkin("vandal gris");
-                    usuario.compra(500);
+                if (!usuario.getSkins().contains("vandal gris")) {
+                    if (usuario.getCoins() >= 500) {
+                        usuario.agregarSkin("vandal gris");
+                        usuario.compra(500);
+                    }
                 }
             }
         });
+
+
         skin3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(usuario.getCoins()>=750){
-                    usuario.agregarSkin("vandal fachera");
-                    usuario.compra(750);
+                if (!usuario.getSkins().contains("vandal fachera")) {
+                    if (usuario.getCoins() >= 750) {
+                        usuario.agregarSkin("vandal fachera");
+                        usuario.compra(750);
+                    }
                 }
             }
         });
-
-
-
 
     }
 
