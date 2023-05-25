@@ -232,6 +232,7 @@ public class Juego extends JFrame{
             }
         } else {
             usuario.agregarCoins(10);
+            System.out.println(usuario.getCoins());
         }
 
 

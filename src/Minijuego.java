@@ -96,7 +96,6 @@ public class Minijuego extends JPanel{
 
     @Override
     public void paint(Graphics g) {
-        System.out.println("pinta");
         super.paint(g);
 
         // Dibujar el objeto negro
