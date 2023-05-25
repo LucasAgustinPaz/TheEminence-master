@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Juego extends JFrame {
+public class Juego extends JFrame implements Runnable{
     private JPanel panelPrincipal;
     private CardLayout cardLayout;
     private Gameplay gameplay;
@@ -135,4 +135,8 @@ public class Juego extends JFrame {
 
     }
 
+    @Override
+    public void run() {
+
+    }
 }
