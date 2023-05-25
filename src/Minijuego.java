@@ -17,10 +17,15 @@ public class Minijuego extends JPanel{
     private int objectY;
     private static int vecesEjecutado = 30;
     private Timer timer;
+    private boolean minijuegoIniciado = false;
 
 
     public int getScore() {
         return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public Minijuego(JPanel panelPrincipal, CardLayout cardLayout) {
@@ -39,6 +44,7 @@ public class Minijuego extends JPanel{
         closeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(panelPrincipal, "menu");
+                resetMinijuego();
             }
         });
 
@@ -51,25 +57,34 @@ public class Minijuego extends JPanel{
     }
 
     public void startMinijuego() {
+        if (!minijuegoIniciado) {
+            minijuegoIniciado = true;
+            ActionListener actionListener = new ActionListener() {
+                public void actionPerformed(ActionEvent event) {
+                    if (vecesEjecutado > 0) {
+                        repaint();
+                        menos();
+                        //System.out.println(vecesEjecutado);
+                    } else {
+                        resetMinijuego();
+                    }
+                }
+            };
+
+            int delay = 1000; // 1 segundo
+            Timer timer = new Timer();
+            timer.scheduleAtFixedRate(new TimerTask() {
+                public void run() {
+                    actionListener.actionPerformed(null);
+                }
+            }, delay, delay);
+        }
+    }
+
+    private void resetMinijuego() {
+        minijuegoIniciado = false;
         vecesEjecutado = 30;
         score = 0;
-        ActionListener actionListener = new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                if (vecesEjecutado > 0) {
-                    repaint();
-                    menos();
-                    System.out.println(vecesEjecutado);
-                }
-            }
-        };
-
-        int delay = 1000; // 1 segundo
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            public void run() {
-                actionListener.actionPerformed(null);
-            }
-        }, delay, delay);
     }
 
 
@@ -94,7 +109,9 @@ public class Minijuego extends JPanel{
             generateObjectPosition();
             repaint();
         }else {
+            if(score > 0){
             score--;
+            }
             generateObjectPosition();
             repaint();
         }

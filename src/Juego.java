@@ -194,12 +194,13 @@ public class Juego extends JFrame {
     public boolean startTorneo(int level){
 
             System.out.println("Torneo Iniciado");
-            cardLayout.show(panelPrincipal,"minijuego");
-
-            if (minijuego.getScore() > 10){
+            //if(minijuego.getScore() < 10){
+                cardLayout.show(panelPrincipal,"minijuego");
+                minijuego.startMinijuego();
+            //}
+            if (minijuego.getScore() >= 10){
                 return true;
             }
-
             return false;
     }
 
@@ -234,9 +235,13 @@ public class Juego extends JFrame {
         experienceLabel.setValue(usuario.getXp());
 
         if (usuario.getNivel() <= 9) {
+                System.out.println("userxp: "+usuario.getXp());
+                System.out.println("userxp: "+usuario.getNivel());
 
             if (usuario.getXp() >= usuario.getNivel() * 100 && startTorneo(usuario.getNivel())) {
+                minijuego.setScore(0);
                 usuario.subirNivel();
+                experienceMultiplier += 0.6;
                 levelLabel.setText("Rango: " + cambiarNivel(usuario.getNivel()));
 
                 if (!cambiarNivel(usuario.getNivel()).equals("Radiante")) {
@@ -250,7 +255,7 @@ public class Juego extends JFrame {
 
         experienceLabel.setMaximum(usuario.getNivel() * 100);
         experienceLabel.setValue(usuario.getXp());
-        experienceMultiplier += 0.6;
+
     }
 
 
