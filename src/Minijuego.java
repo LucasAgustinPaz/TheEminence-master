@@ -48,7 +48,6 @@ public class Minijuego extends JPanel {
                 cardLayout.show(panelPrincipal, "menu");
             }
         });
-
     }
 
     public void startMinijuego() {

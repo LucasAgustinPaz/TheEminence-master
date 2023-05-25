@@ -56,6 +56,7 @@ public class Juego extends JFrame {
         armario = crearPanelArmario(panelPrincipal, cardLayout);
         eleccionDeRol = crearPanelEleccionesDeRol(panelPrincipal, cardLayout);
 
+
         panelPrincipal.add(panelMenu, "menu");
         panelPrincipal.add(minijuego, "minijuego");
         panelPrincipal.add(configuracion, "Configuracion");
@@ -190,6 +191,18 @@ public class Juego extends JFrame {
         return panel;
     }
 
+    public boolean startTorneo(int level){
+
+            System.out.println("Torneo Iniciado");
+            cardLayout.show(panelPrincipal,"minijuego");
+
+            if (minijuego.getScore() > 10){
+                return true;
+            }
+
+            return false;
+    }
+
     public String cambiarNivel(int level) {
         String nombreNivel = "Hierro";
 
@@ -214,13 +227,15 @@ public class Juego extends JFrame {
         return nombreNivel;
     }
 
+
+
     private void gainExperience(int amount) {
         usuario.subirXP(amount);
         experienceLabel.setValue(usuario.getXp());
 
         if (usuario.getNivel() <= 9) {
 
-            if (usuario.getXp() >= usuario.getNivel() * 100) {
+            if (usuario.getXp() >= usuario.getNivel() * 100 && startTorneo(usuario.getNivel())) {
                 usuario.subirNivel();
                 levelLabel.setText("Rango: " + cambiarNivel(usuario.getNivel()));
 
