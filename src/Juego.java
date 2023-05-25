@@ -16,6 +16,7 @@ public class Juego extends JFrame {
     private Estadistica estadistica;
     private Usuario usuario;
     private EleccionDeRol eleccionDeRol;
+    private Smurfear smurfear;
     private JProgressBar experienceLabel;
     private JLabel levelLabel;
     private int experience;
@@ -56,6 +57,7 @@ public class Juego extends JFrame {
         armario = crearPanelArmario(panelPrincipal, cardLayout);
         estadistica = crearPanelEstadistica(panelPrincipal,cardLayout);
         eleccionDeRol = crearPanelEleccionesDeRol(panelPrincipal, cardLayout);
+        smurfear = crearPanelSmurfear(panelPrincipal,cardLayout);
 
         panelPrincipal.add(panelMenu, "menu");
         panelPrincipal.add(minijuego, "minijuego");
@@ -64,6 +66,7 @@ public class Juego extends JFrame {
         panelPrincipal.add(armario, "Armario");
         panelPrincipal.add(estadistica,"Estadistica");
         panelPrincipal.add(eleccionDeRol,"Rol");
+        panelPrincipal.add(smurfear,"Smurfear");
 
         cardLayout.show(panelPrincipal, "menu");
 
@@ -100,6 +103,10 @@ public class Juego extends JFrame {
             EleccionDeRol eleccionDeRol = new EleccionDeRol(panelPrincipal, cardLayout, usuario);
             return eleccionDeRol;
         }
+        private Smurfear crearPanelSmurfear(JPanel panelPrincipal, CardLayout cardLayout){
+        Smurfear smurfear = new Smurfear(panelPrincipal, cardLayout, usuario);
+        return smurfear;
+        }
 
         private JPanel crearPanelMenu () {
             JPanel panel = new JPanel(new BorderLayout());
@@ -111,6 +118,7 @@ public class Juego extends JFrame {
             JButton armarioButton = new JButton("Armario");
             JButton estadisticaButton = new JButton("Estadistica");
             JButton eleccionDeRol = new JButton("Rol");
+            JButton smurfear = new JButton("Smurfear");
 
             levelLabel = new JLabel("Rango: " + cambiarNivel(usuario.getNivel()));
             experienceLabel = new JProgressBar();
@@ -160,6 +168,10 @@ public class Juego extends JFrame {
                     cardLayout.show(panelPrincipal, "Rol");
                 }
             });
+            smurfear.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {cardLayout.show(panelPrincipal, "Smurfear");}
+            });
 
             JPanel buttonPanel = new JPanel(); // Panel adicional para los botones
             buttonPanel.setLayout(new FlowLayout()); // Utilizamos FlowLayout para alinear los botones
@@ -169,6 +181,7 @@ public class Juego extends JFrame {
             buttonPanel.add(armarioButton);
             buttonPanel.add(estadisticaButton);
             buttonPanel.add(eleccionDeRol);
+            buttonPanel.add(smurfear);
 
             JPanel bottomPanel = new JPanel(new BorderLayout());
             bottomPanel.setPreferredSize(new Dimension(200, 100));
@@ -249,7 +262,10 @@ public class Juego extends JFrame {
 
 
         private void gainExperience ( int amount){
-            usuario.subirXP((amount * (usuario.obtenerNivelRango())));
+            usuario.subirXP((amount * (usuario.obtenerNivelRango())+usuario.getVecesSmufeado()));
+            System.out.println("--------------------------------------------");
+            System.out.println((amount * (usuario.obtenerNivelRango())+usuario.getVecesSmufeado()));
+            System.out.println("________________________________________________________");
             experienceLabel.setValue(usuario.getXp());
 
             if (usuario.getNivel() <= 9) {
