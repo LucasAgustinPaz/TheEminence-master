@@ -85,4 +85,7 @@ public class Usuario {
     public void compra(int gasto){
         coins -= gasto;
     }
+    public void agregarCoins(int monto){
+        coins += monto;
+    }
 }

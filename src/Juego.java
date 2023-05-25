@@ -33,7 +33,8 @@ public class Juego extends JFrame {
 
     public Juego() {
         usuario = new Usuario();
-        usuario.setNivel(1);;
+        usuario.setNivel(1);
+        ;
         usuario.setXp(0);
         experienceMultiplier = 1.0;
 
@@ -138,12 +139,12 @@ public class Juego extends JFrame {
         buttonPanel.add(armarioButton);
 
         JPanel bottomPanel = new JPanel(new BorderLayout());
-        bottomPanel.setPreferredSize(new Dimension(200,100));
+        bottomPanel.setPreferredSize(new Dimension(200, 100));
         bottomPanel.add(salirButton, BorderLayout.WEST);
         bottomPanel.add(buttonPanel, BorderLayout.CENTER);
 
         JPanel topPanel = new JPanel(new BorderLayout());
-        topPanel.setPreferredSize(new Dimension(200,100));
+        topPanel.setPreferredSize(new Dimension(200, 100));
         topPanel.add(levelLabel, BorderLayout.WEST);
         topPanel.add(experienceLabel, BorderLayout.CENTER);
 
@@ -202,18 +203,27 @@ public class Juego extends JFrame {
         usuario.subirXP(amount);
         experienceLabel.setValue(usuario.getXp());
 
-        if (usuario.getXp() >= usuario.getNivel() * 100) {
-            usuario.subirNivel();
-            levelLabel.setText("Rango: " + cambiarNivel(usuario.getNivel()));
+        if (usuario.getNivel() <= 9) {
 
-            if (!cambiarNivel(usuario.getNivel()).equals("Radiante")) {
-                usuario.setXp(0);
+            if (usuario.getXp() >= usuario.getNivel() * 100) {
+                usuario.subirNivel();
+                levelLabel.setText("Rango: " + cambiarNivel(usuario.getNivel()));
+
+                if (!cambiarNivel(usuario.getNivel()).equals("Radiante")) {
+                    usuario.setXp(0);
+                }
             }
-
-            experienceLabel.setMaximum(usuario.getNivel() * 100);
-            experienceLabel.setValue(usuario.getXp());
-            experienceMultiplier += 0.6;
+        } else {
+            usuario.agregarCoins(10);
+            System.out.println("holaaaaaaaaaaaaaaaaaaaaaaaaaa" + usuario.getCoins());
         }
+
+
+        experienceLabel.setMaximum(usuario.getNivel() * 100);
+        experienceLabel.setValue(usuario.getXp());
+        experienceMultiplier += 0.6;
     }
 
+
 }
+
