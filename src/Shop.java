@@ -4,10 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Shop extends JPanel {
-    private static final int FRAME_WIDTH = 600;
-    private static final int FRAME_HEIGHT = 400;
-    private static final int OBJECT_SIZE = 50;
-    private static final int CLICK_RADIUS = 30;
     private JButton closeButton;
     private JButton skin1;
     private JButton skin2;
