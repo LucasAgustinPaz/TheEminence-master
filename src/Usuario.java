@@ -12,7 +12,7 @@ public class Usuario {
     private int horasJugadas=0;
     private int torneosJugados=0;
     private int tapsCount=0;
-    private int vecesSmufeado=1;
+    private int vecesSmufeado=0;
     private String RolPrincipal = "Duelista";
     private HashMap<String, Integer> Roles = new HashMap<>();;
     {
@@ -175,6 +175,10 @@ public class Usuario {
 
        public void borrarSkins(){
         skins.clear();
+       }
+
+       public void sumarClick(){
+        tapsCount++;
        }
 
 

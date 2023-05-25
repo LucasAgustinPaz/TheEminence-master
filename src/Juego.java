@@ -14,7 +14,6 @@ public class Juego extends JFrame {
     private Shop shop;
     private Armario armario;
     private Estadistica estadistica;
-    private Usuario usuario;
     private EleccionDeRol eleccionDeRol;
     private Smurfear smurfear;
     private JProgressBar experienceLabel;
@@ -34,8 +33,7 @@ public class Juego extends JFrame {
         return panelPrincipal;
     }
 
-    public Juego() {
-        usuario = new Usuario();
+    public Juego(Usuario usuario) {
         usuario.setNivel(1);
         ;
         usuario.setXp(0);
@@ -50,14 +48,14 @@ public class Juego extends JFrame {
         cardLayout = new CardLayout();
         panelPrincipal.setLayout(cardLayout);
 
-        JPanel panelMenu = crearPanelMenu();
-        minijuego = crearPanelMinijuego(panelPrincipal, cardLayout);
-        configuracion = crearPanelConfiguracion(panelPrincipal, cardLayout);
-        shop = crearPanelShop(panelPrincipal, cardLayout);
-        armario = crearPanelArmario(panelPrincipal, cardLayout);
-        estadistica = crearPanelEstadistica(panelPrincipal,cardLayout);
-        eleccionDeRol = crearPanelEleccionesDeRol(panelPrincipal, cardLayout);
-        smurfear = crearPanelSmurfear(panelPrincipal,cardLayout);
+        JPanel panelMenu = crearPanelMenu(usuario);
+        minijuego = crearPanelMinijuego(panelPrincipal, cardLayout,usuario);
+        configuracion = crearPanelConfiguracion(panelPrincipal, cardLayout,usuario);
+        shop = crearPanelShop(panelPrincipal, cardLayout,usuario);
+        armario = crearPanelArmario(panelPrincipal, cardLayout,usuario);
+        estadistica = crearPanelEstadistica(panelPrincipal,cardLayout,usuario);
+        eleccionDeRol = crearPanelEleccionesDeRol(panelPrincipal, cardLayout,usuario);
+        smurfear = crearPanelSmurfear(panelPrincipal,cardLayout,usuario);
 
         panelPrincipal.add(panelMenu, "menu");
         panelPrincipal.add(minijuego, "minijuego");
@@ -74,41 +72,41 @@ public class Juego extends JFrame {
         setVisible(true);
     }
 
-    private Minijuego crearPanelMinijuego(JPanel panelPrincipal, CardLayout cardLayout) {
+    private Minijuego crearPanelMinijuego(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
         Minijuego minijuego = new Minijuego(panelPrincipal, cardLayout, usuario);
         return minijuego;
     }
 
-    private Configuracion crearPanelConfiguracion(JPanel panelPrincipal, CardLayout cardLayout) {
+    private Configuracion crearPanelConfiguracion(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
         Configuracion configuracion = new Configuracion(panelPrincipal, cardLayout);
         return configuracion;
     }
 
-    private Shop crearPanelShop(JPanel panelPrincipal, CardLayout cardLayout) {
+    private Shop crearPanelShop(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
         Shop shop = new Shop(panelPrincipal,cardLayout,usuario);
         return shop;
     }
 
-    private Armario crearPanelArmario(JPanel panelPrincipal, CardLayout cardLayout) {
+    private Armario crearPanelArmario(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
         Armario armario = new Armario(panelPrincipal,cardLayout,usuario);
         return armario;
     }
 
-    private Estadistica crearPanelEstadistica(JPanel panelPrincipal,CardLayout cardLayout) {
+    private Estadistica crearPanelEstadistica(JPanel panelPrincipal,CardLayout cardLayout, Usuario usuario) {
         Estadistica estadistica = new Estadistica(panelPrincipal, cardLayout,usuario);
         return estadistica;
     }
 
-        private EleccionDeRol crearPanelEleccionesDeRol (JPanel panelPrincipal, CardLayout cardLayout){
+        private EleccionDeRol crearPanelEleccionesDeRol (JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario){
             EleccionDeRol eleccionDeRol = new EleccionDeRol(panelPrincipal, cardLayout, usuario);
             return eleccionDeRol;
         }
-        private Smurfear crearPanelSmurfear(JPanel panelPrincipal, CardLayout cardLayout){
+        private Smurfear crearPanelSmurfear(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario){
         Smurfear smurfear = new Smurfear(panelPrincipal, cardLayout, usuario);
         return smurfear;
         }
 
-        private JPanel crearPanelMenu () {
+        private JPanel crearPanelMenu (Usuario usuario) {
             JPanel panel = new JPanel(new BorderLayout());
 
             JButton salirButton = new JButton("Salir");
@@ -201,8 +199,8 @@ public class Juego extends JFrame {
             clickButton.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent e) {
                     if (!isButtonPressed) {
-                        usuario.setTapsCount(usuario.getTapsCount() + 1);
-                        gainExperience((int) (10 * experienceMultiplier));
+                        gainExperience((int) (10 * experienceMultiplier),usuario);
+                        usuario.sumarClick();
                     }
                 }
 
@@ -217,12 +215,13 @@ public class Juego extends JFrame {
                     clickButton.setEnabled(true);
                     clickButton.setIcon(suelto);
                 }
+
             });
 
             return panel;
         }
 
-        public boolean startTorneo ( int level){
+        public boolean startTorneo ( int level, Usuario usuario){
 
             System.out.println("Torneo Iniciado");
            int limite = (int) ((usuario.getNivel() * 10) / 3);
@@ -261,22 +260,21 @@ public class Juego extends JFrame {
         }
 
 
-        private void gainExperience ( int amount){
-            usuario.subirXP((amount * (usuario.obtenerNivelRango())+usuario.getVecesSmufeado()));
-            System.out.println("--------------------------------------------");
-            System.out.println((amount * (usuario.obtenerNivelRango())+usuario.getVecesSmufeado()));
-            System.out.println("________________________________________________________");
+        private void gainExperience ( int amount, Usuario usuario){
+            usuario.subirXP((amount * (1+usuario.obtenerNivelRango())+usuario.getVecesSmufeado()));
             experienceLabel.setValue(usuario.getXp());
 
-            if (usuario.getNivel() <= 9) {
-                System.out.println("userxp: " + usuario.getXp());
-                System.out.println("userxp: " + usuario.getNivel());
+            if(usuario.getTapsCount()< (usuario.obtenerNivelRango())*100){
+                usuario.subirNivelRango();
+            }
 
-                if (usuario.getXp() >= usuario.getNivel() * 100 && startTorneo(usuario.getNivel())) {
+            if (usuario.getNivel() <= 9) {
+               // System.out.println("userxp: " + usuario.getXp());
+               // System.out.println("userxp: " + usuario.getNivel());
+
+                if (usuario.getXp() >= usuario.getNivel() * 100 && startTorneo(usuario.getNivel(),usuario)){
                     minijuego.setScore(0);
                     usuario.subirNivel();
-                    usuario.subirNivelRango();
-                    System.out.println(usuario.obtenerNivelRango());
                     usuario.setPromoGanada(false);
                     experienceMultiplier += 0.6;
                     levelLabel.setText("Rango: " + cambiarNivel(usuario.getNivel()));
