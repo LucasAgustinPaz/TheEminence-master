@@ -169,6 +169,7 @@ public class Juego extends JFrame {
         clickButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (!isButtonPressed) {
+                    usuario.setTapsCount(usuario.getTapsCount()+1);
                     gainExperience((int) (10 * experienceMultiplier));
                 }
             }

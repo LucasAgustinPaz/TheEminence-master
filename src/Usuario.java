@@ -9,7 +9,16 @@ public class Usuario {
     private int coins=0;
     private int horasJugadas=0;
     private int torneosJugados=0;
+    private int tapsCount=0;
     private String rol;
+
+    public int getTapsCount() {
+        return tapsCount;
+    }
+
+    public void setTapsCount(int tapsCount) {
+        this.tapsCount = tapsCount;
+    }
 
     public List<String> getSkins() {
         return skins;
