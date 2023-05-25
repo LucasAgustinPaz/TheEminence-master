@@ -71,7 +71,7 @@ public class Juego extends JFrame {
     }
 
     private Minijuego crearPanelMinijuego(JPanel panelPrincipal, CardLayout cardLayout) {
-        Minijuego minijuego = new Minijuego(panelPrincipal, cardLayout);
+        Minijuego minijuego = new Minijuego(panelPrincipal, cardLayout, usuario);
         return minijuego;
     }
 
@@ -112,7 +112,7 @@ public class Juego extends JFrame {
         minijuegoButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(panelPrincipal, "minijuego");
-                minijuego.startMinijuego();
+                minijuego.startMinijuego(panelPrincipal,cardLayout, usuario);
             }
         });
 
@@ -194,11 +194,12 @@ public class Juego extends JFrame {
     public boolean startTorneo(int level){
 
             System.out.println("Torneo Iniciado");
-            //if(minijuego.getScore() < 10){
+            int limite = (int)((usuario.getNivel()*10)/3);
+            if(minijuego.getScore() < limite){
                 cardLayout.show(panelPrincipal,"minijuego");
-                minijuego.startMinijuego();
-            //}
-            if (minijuego.getScore() >= 10){
+                minijuego.startMinijuego(panelPrincipal,cardLayout, usuario);
+            }
+            if (minijuego.getScore() >= limite){
                 return true;
             }
             return false;
@@ -231,7 +232,7 @@ public class Juego extends JFrame {
 
 
     private void gainExperience(int amount) {
-        usuario.subirXP(amount);
+        usuario.subirXP((amount*(usuario.obtenerNivelRango())));
         experienceLabel.setValue(usuario.getXp());
 
         if (usuario.getNivel() <= 9) {
@@ -241,6 +242,9 @@ public class Juego extends JFrame {
             if (usuario.getXp() >= usuario.getNivel() * 100 && startTorneo(usuario.getNivel())) {
                 minijuego.setScore(0);
                 usuario.subirNivel();
+                usuario.subirNivelRango();
+                System.out.println(usuario.obtenerNivelRango());
+                usuario.setPromoGanada(false);
                 experienceMultiplier += 0.6;
                 levelLabel.setText("Rango: " + cambiarNivel(usuario.getNivel()));
 

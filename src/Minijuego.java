@@ -28,8 +28,9 @@ public class Minijuego extends JPanel{
         this.score = score;
     }
 
-    public Minijuego(JPanel panelPrincipal, CardLayout cardLayout) {
+    public Minijuego(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
         score = 0;
+
 
         // Configurar la ventana
         setLayout(new FlowLayout());
@@ -44,7 +45,7 @@ public class Minijuego extends JPanel{
         closeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(panelPrincipal, "menu");
-                resetMinijuego();
+                resetMinijuego(panelPrincipal,cardLayout, usuario);
             }
         });
 
@@ -56,7 +57,8 @@ public class Minijuego extends JPanel{
         });
     }
 
-    public void startMinijuego() {
+    public void startMinijuego(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
+        score=0;
         if (!minijuegoIniciado) {
             minijuegoIniciado = true;
             ActionListener actionListener = new ActionListener() {
@@ -66,7 +68,7 @@ public class Minijuego extends JPanel{
                         menos();
                         //System.out.println(vecesEjecutado);
                     } else {
-                        resetMinijuego();
+                        resetMinijuego(panelPrincipal,cardLayout,usuario);
                     }
                 }
             };
@@ -79,12 +81,19 @@ public class Minijuego extends JPanel{
                 }
             }, delay, delay);
         }
+
     }
 
-    private void resetMinijuego() {
-        minijuegoIniciado = false;
-        vecesEjecutado = 30;
-        score = 0;
+    private void resetMinijuego(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
+        int limite = (int)((usuario.getNivel()*10)/3);
+        System.out.println(limite);
+        if(score<limite) {
+            minijuegoIniciado = false;
+            vecesEjecutado = 30;
+            score = 0;
+        }
+        else{cardLayout.show(panelPrincipal, "menu");
+        usuario.setPromoGanada(true);}
     }
 
 
