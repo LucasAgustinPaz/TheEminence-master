@@ -92,7 +92,7 @@ public class Juego extends JFrame {
     }
 
     private Estadistica crearPanelEstadistica(JPanel panelPrincipal,CardLayout cardLayout) {
-        Estadistica estadistica = new Estadistica(panelPrincipal, cardLayout);
+        Estadistica estadistica = new Estadistica(panelPrincipal, cardLayout,usuario);
         return estadistica;
     }
 
