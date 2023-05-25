@@ -103,18 +103,30 @@ public class Minijuego extends JPanel{
         int centerX = objectX + OBJECT_SIZE / 2;
         int centerY = objectY + OBJECT_SIZE / 2;
         int distance = (int) Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
+        int a = 0;
 
         if (distance <= CLICK_RADIUS) {
             score++;
             generateObjectPosition();
             repaint();
         }else {
+<<<<<<< HEAD
             if(score > 0){
             score--;
             }
             generateObjectPosition();
             repaint();
         }
+=======
+            if(score>0){
+            score--;
+            }
+
+            generateObjectPosition();
+            repaint();
+        }
+
+>>>>>>> interfaz-estadisticas
     }
 
 
@@ -130,7 +142,10 @@ public class Minijuego extends JPanel{
         g.setColor(Color.BLACK);
         g.setFont(new Font("Arial", Font.BOLD, 20));
         String scoreText = "Score: " + score;
+<<<<<<< HEAD
         String timeText = "Tiempo: " + vecesEjecutado;
+=======
+>>>>>>> interfaz-estadisticas
 
         int textWidth = g.getFontMetrics().stringWidth(scoreText);
         int textHeight = g.getFontMetrics().getHeight();
