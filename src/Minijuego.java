@@ -50,6 +50,8 @@ public class Minijuego extends JPanel{
     }
 
     public void startMinijuego() {
+        vecesEjecutado = 30;
+        score = 0;
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 if (vecesEjecutado > 0) {

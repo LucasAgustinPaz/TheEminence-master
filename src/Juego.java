@@ -111,6 +111,7 @@ public class Juego extends JFrame{
 
         minijuegoButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
                 cardLayout.show(panelPrincipal, "minijuego");
                 minijuego.startMinijuego();
             }
