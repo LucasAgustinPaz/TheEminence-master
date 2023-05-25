@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 public class Juego extends JFrame {
     private JPanel panelPrincipal;
@@ -12,10 +13,14 @@ public class Juego extends JFrame {
     private Configuracion configuracion;
     private Shop shop;
     private Armario armario;
+<<<<<<< HEAD
     private Estadistica estadistica;
+=======
+    private Usuario usuario;
+    private EleccionDeRol eleccionDeRol;
+>>>>>>> breake-torneo
     private JProgressBar experienceLabel;
     private JLabel levelLabel;
-    private int level;
     private int experience;
     private double experienceMultiplier;
     private boolean isButtonPressed = false;
@@ -32,8 +37,10 @@ public class Juego extends JFrame {
     }
 
     public Juego() {
-        level = 1;
-        experience = 0;
+        usuario = new Usuario();
+        usuario.setNivel(1);
+        ;
+        usuario.setXp(0);
         experienceMultiplier = 1.0;
 
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -50,15 +57,24 @@ public class Juego extends JFrame {
         configuracion = crearPanelConfiguracion(panelPrincipal, cardLayout);
         shop = crearPanelShop(panelPrincipal, cardLayout);
         armario = crearPanelArmario(panelPrincipal, cardLayout);
+<<<<<<< HEAD
         estadistica = crearPanelEstadistica(panelPrincipal,cardLayout);
+=======
+        eleccionDeRol = crearPanelEleccionesDeRol(panelPrincipal, cardLayout);
+
+>>>>>>> breake-torneo
 
         panelPrincipal.add(panelMenu, "menu");
         panelPrincipal.add(minijuego, "minijuego");
         panelPrincipal.add(configuracion, "Configuracion");
         panelPrincipal.add(shop, "Shop");
         panelPrincipal.add(armario, "Armario");
+<<<<<<< HEAD
         panelPrincipal.add(estadistica,"Estadistica");
 
+=======
+        panelPrincipal.add(eleccionDeRol,"Rol");
+>>>>>>> breake-torneo
 
         cardLayout.show(panelPrincipal, "menu");
 
@@ -67,7 +83,7 @@ public class Juego extends JFrame {
     }
 
     private Minijuego crearPanelMinijuego(JPanel panelPrincipal, CardLayout cardLayout) {
-        Minijuego minijuego = new Minijuego(panelPrincipal, cardLayout);
+        Minijuego minijuego = new Minijuego(panelPrincipal, cardLayout, usuario);
         return minijuego;
     }
 
@@ -77,17 +93,23 @@ public class Juego extends JFrame {
     }
 
     private Shop crearPanelShop(JPanel panelPrincipal, CardLayout cardLayout) {
-        Shop shop = new Shop(panelPrincipal, cardLayout);
+        Shop shop = new Shop(panelPrincipal, cardLayout, usuario);
         return shop;
     }
 
     private Armario crearPanelArmario(JPanel panelPrincipal, CardLayout cardLayout) {
-        Armario armario = new Armario(panelPrincipal, cardLayout);
+        Armario armario = new Armario(panelPrincipal, cardLayout, usuario);
         return armario;
     }
+<<<<<<< HEAD
     private Estadistica crearPanelEstadistica(JPanel panelPrincipal,CardLayout cardLayout){
         Estadistica estadistica = new Estadistica(panelPrincipal,cardLayout);
         return estadistica;
+=======
+    private EleccionDeRol crearPanelEleccionesDeRol(JPanel panelPrincipal, CardLayout cardLayout){
+        EleccionDeRol eleccionDeRol = new EleccionDeRol(panelPrincipal,cardLayout,usuario);
+        return eleccionDeRol;
+>>>>>>> breake-torneo
     }
 
     private JPanel crearPanelMenu() {
@@ -98,9 +120,13 @@ public class Juego extends JFrame {
         JButton minijuegoButton = new JButton("Minijuego");
         JButton shopButton = new JButton("Shop");
         JButton armarioButton = new JButton("Armario");
+<<<<<<< HEAD
         JButton estadisticaButton = new JButton("Estadistica");
+=======
+        JButton eleccionDeRol = new JButton("Rol");
+>>>>>>> breake-torneo
 
-        levelLabel = new JLabel("Rango: " + cambiarNivel(level));
+        levelLabel = new JLabel("Rango: " + cambiarNivel(usuario.getNivel()));
         experienceLabel = new JProgressBar();
         JButton clickButton = new JButton(suelto);
         JButton closeButton = new JButton(apretado);
@@ -108,7 +134,7 @@ public class Juego extends JFrame {
         minijuegoButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(panelPrincipal, "minijuego");
-                minijuego.startMinijuego();
+                minijuego.startMinijuego(panelPrincipal,cardLayout, usuario);
             }
         });
 
@@ -136,6 +162,7 @@ public class Juego extends JFrame {
             }
         });
 
+<<<<<<< HEAD
         estadisticaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -144,23 +171,34 @@ public class Juego extends JFrame {
         });
 
 
+=======
+        eleccionDeRol.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {cardLayout.show(panelPrincipal, "Rol");}
+        });
+
+>>>>>>> breake-torneo
         JPanel buttonPanel = new JPanel(); // Panel adicional para los botones
         buttonPanel.setLayout(new FlowLayout()); // Utilizamos FlowLayout para alinear los botones
         buttonPanel.add(minijuegoButton);
         buttonPanel.add(configuracionButton);
         buttonPanel.add(shopButton);
         buttonPanel.add(armarioButton);
+<<<<<<< HEAD
         buttonPanel.add(estadisticaButton);
 
+=======
+        buttonPanel.add(eleccionDeRol);
+>>>>>>> breake-torneo
 
         JPanel bottomPanel = new JPanel(new BorderLayout());
-        bottomPanel.setPreferredSize(new Dimension(200,100));
+        bottomPanel.setPreferredSize(new Dimension(200, 100));
         bottomPanel.add(salirButton, BorderLayout.WEST);
         bottomPanel.add(buttonPanel, BorderLayout.CENTER);
 
 
         JPanel topPanel = new JPanel(new BorderLayout());
-        topPanel.setPreferredSize(new Dimension(200,100));
+        topPanel.setPreferredSize(new Dimension(200, 100));
         topPanel.add(levelLabel, BorderLayout.WEST);
         topPanel.add(experienceLabel, BorderLayout.CENTER);
 
@@ -171,6 +209,7 @@ public class Juego extends JFrame {
         clickButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (!isButtonPressed) {
+                    usuario.setTapsCount(usuario.getTapsCount()+1);
                     gainExperience((int) (10 * experienceMultiplier));
                 }
             }
@@ -189,6 +228,20 @@ public class Juego extends JFrame {
         });
 
         return panel;
+    }
+
+    public boolean startTorneo(int level){
+
+            System.out.println("Torneo Iniciado");
+            int limite = (int)((usuario.getNivel()*10)/3);
+            if(minijuego.getScore() < limite){
+                cardLayout.show(panelPrincipal,"minijuego");
+                minijuego.startMinijuego(panelPrincipal,cardLayout, usuario);
+            }
+            if (minijuego.getScore() >= limite){
+                return true;
+            }
+            return false;
     }
 
     public String cambiarNivel(int level) {
@@ -215,22 +268,39 @@ public class Juego extends JFrame {
         return nombreNivel;
     }
 
+
+
     private void gainExperience(int amount) {
-        experience += amount;
-        experienceLabel.setValue(experience);
+        usuario.subirXP((amount*(usuario.obtenerNivelRango())));
+        experienceLabel.setValue(usuario.getXp());
 
-        if (experience >= level * 100) {
-            level++;
-            levelLabel.setText("Rango: " + cambiarNivel(level));
+        if (usuario.getNivel() <= 9) {
+                System.out.println("userxp: "+usuario.getXp());
+                System.out.println("userxp: "+usuario.getNivel());
 
-            if (!cambiarNivel(level).equals("Radiante")) {
-                experience = 0;
+            if (usuario.getXp() >= usuario.getNivel() * 100 && startTorneo(usuario.getNivel())) {
+                minijuego.setScore(0);
+                usuario.subirNivel();
+                usuario.subirNivelRango();
+                System.out.println(usuario.obtenerNivelRango());
+                usuario.setPromoGanada(false);
+                experienceMultiplier += 0.6;
+                levelLabel.setText("Rango: " + cambiarNivel(usuario.getNivel()));
+
+                if (!cambiarNivel(usuario.getNivel()).equals("Radiante")) {
+                    usuario.setXp(0);
+                }
             }
-
-            experienceLabel.setMaximum(level * 100);
-            experienceLabel.setValue(experience);
-            experienceMultiplier += 0.6;
+        } else {
+            usuario.agregarCoins(10);
         }
+
+
+        experienceLabel.setMaximum(usuario.getNivel() * 100);
+        experienceLabel.setValue(usuario.getXp());
+
     }
 
+
 }
+
