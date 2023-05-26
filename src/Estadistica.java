@@ -17,16 +17,14 @@ public class Estadistica extends JPanel {
         setLayout(new BorderLayout());
         setPreferredSize(screenSize);
 
+        JPanel closeButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         closeButton = new JButton("X");
         closeButton.setBorderPainted(false);
         closeButton.setFocusPainted(false);
         closeButton.setBackground(Color.MAGENTA.darker());
+        closeButtonPanel.add(closeButton);
 
-        JPanel closeButtonPanel = new JPanel(new BorderLayout());
-        closeButtonPanel.add(closeButton, BorderLayout.SOUTH);
-
-        add(closeButtonPanel, BorderLayout.WEST);
-
+        add(closeButtonPanel, BorderLayout.NORTH);
         closeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(panelPrincipal, "menu");
@@ -37,23 +35,38 @@ public class Estadistica extends JPanel {
         BoxLayout boxLayout = new BoxLayout(statisticsPanel, BoxLayout.Y_AXIS);
         statisticsPanel.setLayout(boxLayout);
 
-        int verticalSpacing = 10; // Ajusta el espacio vertical entre los JLabels
-        clicks = new JLabel("Clicks totales: " + user.getTapsCount());
-        clicks.setBorder(new EmptyBorder(0, 20, verticalSpacing, 0));
+        int verticalSpacing = 50; // Ajusta el espacio vertical entre los JLabels
+
+        Font chelseaFont = new Font("Arial", Font.BOLD, 16); // Crea la instancia de la fuente Chelsea Market
+
+        clicks = new JLabel("Clicks totales:");
+        clicks.setFont(chelseaFont); // Establece la fuente Chelsea Market en el JLabel
+        clicks.setBorder(new EmptyBorder(verticalSpacing, 0, 0, 0));
         statisticsPanel.add(clicks);
 
-        gainCoins = new JLabel("Monedas Ganadas: " + user.getCoins());
-        gainCoins.setBorder(new EmptyBorder(0, 20, verticalSpacing, 0));
+        gainCoins = new JLabel("Monedas Ganadas:");
+        gainCoins.setFont(chelseaFont); // Establece la fuente Chelsea Market en el JLabel
+        gainCoins.setBorder(new EmptyBorder(verticalSpacing, 0, 0, 0));
         statisticsPanel.add(gainCoins);
 
-        tournamentsPlayed = new JLabel("Torneos Jugados: " + user.getTorneosJugados());
-        tournamentsPlayed.setBorder(new EmptyBorder(0, 20, verticalSpacing, 0));
+        tournamentsPlayed = new JLabel("Torneos Jugados:");
+        tournamentsPlayed.setFont(chelseaFont); // Establece la fuente Chelsea Market en el JLabel
+        tournamentsPlayed.setBorder(new EmptyBorder(verticalSpacing, 0, 0, 0));
         statisticsPanel.add(tournamentsPlayed);
 
-        horasJugadas = new JLabel("Horas Jugadas: " + user.getHorasJugadas());
-        horasJugadas.setBorder(new EmptyBorder(0, 20, verticalSpacing, 0));
+        horasJugadas = new JLabel("Horas Jugadas:");
+        horasJugadas.setFont(chelseaFont); // Establece la fuente Chelsea Market en el JLabel
+        horasJugadas.setBorder(new EmptyBorder(verticalSpacing, 0, 0, 0));
         statisticsPanel.add(horasJugadas);
 
-        add(statisticsPanel, BorderLayout.CENTER);
+        add(statisticsPanel, BorderLayout.WEST);
+    }
+
+    public void actualizarEstadisticas(Usuario usuario) {
+        clicks.setText("Clicks totales: " + usuario.getTapsCount());
+        gainCoins.setText("Monedas Ganadas: " + usuario.getCoins());
+        tournamentsPlayed.setText("Torneos Jugados: " + usuario.getTorneosJugados());
+        horasJugadas.setText("Horas Jugadas: " + usuario.getHorasJugadas());
     }
 }
+
