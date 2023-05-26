@@ -3,11 +3,12 @@ import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
         Usuario usuario = new Usuario();
+        JProgressBar experienceLabel =new JProgressBar();
 
         // Hilo para el juego
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new Juego(usuario);
+                new Juego(usuario,experienceLabel);
             }
         });
 
@@ -15,8 +16,9 @@ public class Main {
         Thread hiloXp = new Thread(new Runnable() {
             public void run() {
                 while (true) {
-                    usuario.subirXP(1 * (usuario.getVecesSmufeado()));
+                    usuario.subirXP(0 * (usuario.getVecesSmufeado()));
                     System.out.println(usuario.getXp());
+                    experienceLabel.setValue(usuario.getXp());
 
                     try {
                         Thread.sleep(1000); // Esperar 1 segundo

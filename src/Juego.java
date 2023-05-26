@@ -16,7 +16,6 @@ public class Juego extends JFrame {
     private Estadistica estadistica;
     private EleccionDeRol eleccionDeRol;
     private Smurfear smurfear;
-    private JProgressBar experienceLabel;
     private JLabel levelLabel;
     private int experience;
     private double experienceMultiplier;
@@ -33,7 +32,7 @@ public class Juego extends JFrame {
         return panelPrincipal;
     }
 
-    public Juego(Usuario usuario) {
+    public Juego(Usuario usuario,JProgressBar experienceLabel) {
         usuario.setNivel(1);
         ;
         usuario.setXp(0);
@@ -48,7 +47,7 @@ public class Juego extends JFrame {
         cardLayout = new CardLayout();
         panelPrincipal.setLayout(cardLayout);
 
-        JPanel panelMenu = crearPanelMenu(usuario);
+        JPanel panelMenu = crearPanelMenu(usuario, experienceLabel);
         minijuego = crearPanelMinijuego(panelPrincipal, cardLayout,usuario);
         configuracion = crearPanelConfiguracion(panelPrincipal, cardLayout,usuario);
         shop = crearPanelShop(panelPrincipal, cardLayout,usuario);
@@ -106,7 +105,7 @@ public class Juego extends JFrame {
         return smurfear;
         }
 
-        private JPanel crearPanelMenu (Usuario usuario) {
+        private JPanel crearPanelMenu (Usuario usuario, JProgressBar experienceLabel) {
             JPanel panel = new JPanel(new BorderLayout());
 
             JButton salirButton = new JButton("Salir");
@@ -119,7 +118,6 @@ public class Juego extends JFrame {
             JButton smurfear = new JButton("Smurfear");
 
             levelLabel = new JLabel("Rango: " + cambiarNivel(usuario.getNivel()));
-            experienceLabel = new JProgressBar();
             JButton clickButton = new JButton(suelto);
             JButton closeButton = new JButton(apretado);
 
@@ -199,7 +197,7 @@ public class Juego extends JFrame {
             clickButton.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent e) {
                     if (!isButtonPressed) {
-                        gainExperience((int) (10 * experienceMultiplier),usuario);
+                        gainExperience((int) (10 * experienceMultiplier),usuario,experienceLabel);
                         usuario.sumarClick();
                     }
                 }
@@ -260,7 +258,7 @@ public class Juego extends JFrame {
         }
 
 
-        private void gainExperience ( int amount, Usuario usuario){
+        private void gainExperience ( int amount, Usuario usuario,JProgressBar experienceLabel){
             usuario.subirXP((amount * (1+usuario.obtenerNivelRango())+usuario.getVecesSmufeado()));
             experienceLabel.setValue(usuario.getXp());
 
