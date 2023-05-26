@@ -13,6 +13,7 @@ public class Usuario {
     private int torneosJugados=0;
     private int tapsCount=0;
     private int vecesSmufeado=0;
+    private Inversiones inversiones = new Inversiones();
     private String RolPrincipal = "Duelista";
     private HashMap<String, Integer> Roles = new HashMap<>();;
     {
@@ -20,6 +21,14 @@ public class Usuario {
         Roles.put("Centinela", 0);
         Roles.put("Smoker", 0);
         Roles.put("Iniciador", 0);
+    }
+
+    public Inversiones getInversiones() {
+        return inversiones;
+    }
+
+    public void setInversiones(Inversiones inversiones) {
+        this.inversiones = inversiones;
     }
 
     public int getVecesSmufeado() {
@@ -179,6 +188,10 @@ public class Usuario {
 
        public void sumarClick(){
         tapsCount++;
+       }
+
+       public void gananciaInversiones(){
+        agregarCoins((int)(inversiones.getInversion1()+ inversiones.getInversion2()+ inversiones.getInversion3()));
        }
 
 

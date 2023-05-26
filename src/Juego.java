@@ -19,6 +19,7 @@ public class Juego extends JFrame {
     private Estadistica estadistica;
     private EleccionDeRol eleccionDeRol;
     private Smurfear smurfear;
+    private panelInveriones inveriones;
     private JLabel levelLabel;
     private int estadoMusica;
     private Clip clip;
@@ -60,6 +61,7 @@ public class Juego extends JFrame {
         estadistica = crearPanelEstadistica(panelPrincipal,cardLayout,usuario);
         eleccionDeRol = crearPanelEleccionesDeRol(panelPrincipal, cardLayout,usuario);
         smurfear = crearPanelSmurfear(panelPrincipal,cardLayout,usuario);
+        inveriones = crearPanelInversiones(panelPrincipal, cardLayout, usuario);
 
         panelPrincipal.add(panelMenu, "menu");
         panelPrincipal.add(minijuego, "minijuego");
@@ -69,6 +71,7 @@ public class Juego extends JFrame {
         panelPrincipal.add(estadistica,"Estadistica");
         panelPrincipal.add(eleccionDeRol,"Rol");
         panelPrincipal.add(smurfear,"Smurfear");
+        panelPrincipal.add(inveriones,"Inversiones");
 
         cardLayout.show(panelPrincipal, "menu");
 
@@ -109,6 +112,10 @@ public class Juego extends JFrame {
         Smurfear smurfear = new Smurfear(panelPrincipal, cardLayout, usuario);
         return smurfear;
         }
+        private panelInveriones crearPanelInversiones(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario){
+        panelInveriones inveriones = new panelInveriones(panelPrincipal, cardLayout, usuario);
+        return  inveriones;
+        }
 
         private JPanel crearPanelMenu (Usuario usuario, JProgressBar experienceLabel) {
             JPanel panel = new JPanel(new BorderLayout());
@@ -121,6 +128,7 @@ public class Juego extends JFrame {
             JButton estadisticaButton = new JButton("Estadistica");
             JButton eleccionDeRol = new JButton("Rol");
             JButton smurfear = new JButton("Smurfear");
+            JButton inversiones = new JButton("Inversiones");
 
             levelLabel = new JLabel("Rango: " + cambiarNivel(usuario.getNivel()));
             JButton clickButton = new JButton(suelto);
@@ -174,6 +182,11 @@ public class Juego extends JFrame {
                 public void actionPerformed(ActionEvent e) {cardLayout.show(panelPrincipal, "Smurfear");}
             });
 
+            inversiones.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {cardLayout.show(panelPrincipal, "Inversiones");}
+            });
+
             JPanel buttonPanel = new JPanel(); // Panel adicional para los botones
             buttonPanel.setLayout(new FlowLayout()); // Utilizamos FlowLayout para alinear los botones
             buttonPanel.add(minijuegoButton);
@@ -183,6 +196,7 @@ public class Juego extends JFrame {
             buttonPanel.add(estadisticaButton);
             buttonPanel.add(eleccionDeRol);
             buttonPanel.add(smurfear);
+            buttonPanel.add(inversiones);
 
             JPanel bottomPanel = new JPanel(new BorderLayout());
             bottomPanel.setPreferredSize(new Dimension(200, 100));
