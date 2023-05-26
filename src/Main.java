@@ -13,13 +13,15 @@ public class Main {
         });
 
         // Hilo xp
-        Thread hiloXp = new Thread(new Runnable() {
+        Thread hiloXpCoins = new Thread(new Runnable() {
             public void run() {
                 while (true) {
                     usuario.subirXP((usuario.getVecesSmufeado()));
                    // System.out.println(usuario.getXp());
                     experienceLabel.setValue(usuario.getXp());
-
+                    //coins
+                    usuario.gananciaInversiones();
+                    System.out.println(usuario.getCoins());
                     try {
                         Thread.sleep(1000); // Esperar 1 segundo
                     } catch (InterruptedException e) {
@@ -29,25 +31,8 @@ public class Main {
             }
         });
 
-        hiloXp.start();
+        hiloXpCoins.start();
 
-        // Hilo de coins pasivas
-        Thread hiloInversiones = new Thread(new Runnable() {
-            public void run() {
-                while (true) {
-                        usuario.gananciaInversiones();
-                        System.out.println(usuario.getCoins());
-
-                    try {
-                        Thread.sleep(2000); // Esperar 2 segundos
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-
-        hiloInversiones.start();
 
     }
 }

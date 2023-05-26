@@ -54,4 +54,6 @@ public class Estadistica extends JPanel {
 
         add(statisticsPanel, BorderLayout.CENTER);
     }
+
+
 }
