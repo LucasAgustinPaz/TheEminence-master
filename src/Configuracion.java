@@ -14,7 +14,7 @@ public class Configuracion extends JPanel {
     private Clip clip;
 
 
-    public Configuracion(JPanel panelPrincipal, CardLayout cardLayout){
+    public Configuracion(JPanel panelPrincipal, CardLayout cardLayout,int estadoMusica){
 
         // Configurar la ventana
         setLayout(new FlowLayout());
@@ -48,13 +48,19 @@ public class Configuracion extends JPanel {
 
         PlayMusic.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                PlayMusic("resources\\musica\\labebe.wav");
+                if(estadoMusica==0) {
+                    PlayMusic("resources\\musica\\melodia.wav",estadoMusica);
+
+                }
+
             }
         });
 
         StopMusic.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                StopMusic();
+                if(estadoMusica==1) {
+                    StopMusic(estadoMusica);
+                }
             }
         });
         closeButton.addActionListener(new ActionListener() {
@@ -68,7 +74,7 @@ public class Configuracion extends JPanel {
     }
 
 
-    private void PlayMusic(String filePath) {
+    private void PlayMusic(String filePath,int estadoMusica) {
         try {
             File audioFile = new File(filePath);
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
@@ -81,7 +87,7 @@ public class Configuracion extends JPanel {
         }
     }
 
-    public void StopMusic() {
+    public void StopMusic(int estadoMusica) {
         if (clip != null && clip.isRunning()) {
             clip.stop();
         }

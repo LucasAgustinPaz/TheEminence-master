@@ -34,7 +34,6 @@ public class Estadistica extends JPanel {
         statisticsPanel.setLayout(boxLayout);
 
         int verticalSpacing = 10; // Ajusta el espacio vertical entre los JLabels
-
         clicks = new JLabel("Clicks totales:" + user.getTapsCount()  );
         clicks.setBorder(new EmptyBorder(verticalSpacing, 0, 0, 0));
         statisticsPanel.add(clicks);
@@ -52,6 +51,7 @@ public class Estadistica extends JPanel {
         statisticsPanel.add(horasJugadas);
 
         add(statisticsPanel, BorderLayout.WEST);
+
     }
 }
 

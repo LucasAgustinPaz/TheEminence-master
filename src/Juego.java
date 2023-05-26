@@ -1,9 +1,12 @@
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 public class Juego extends JFrame {
@@ -17,7 +20,8 @@ public class Juego extends JFrame {
     private EleccionDeRol eleccionDeRol;
     private Smurfear smurfear;
     private JLabel levelLabel;
-    private int experience;
+    private int estadoMusica;
+    private Clip clip;
     private double experienceMultiplier;
     private boolean isButtonPressed = false;
 
@@ -32,7 +36,8 @@ public class Juego extends JFrame {
         return panelPrincipal;
     }
 
-    public Juego(Usuario usuario,JProgressBar experienceLabel) {
+    public Juego(Usuario usuario, JProgressBar experienceLabel) {
+        PlayMusic("resources\\musica\\melodia.wav");
         usuario.setNivel(1);
         ;
         usuario.setXp(0);
@@ -49,7 +54,7 @@ public class Juego extends JFrame {
 
         JPanel panelMenu = crearPanelMenu(usuario, experienceLabel);
         minijuego = crearPanelMinijuego(panelPrincipal, cardLayout,usuario);
-        configuracion = crearPanelConfiguracion(panelPrincipal, cardLayout,usuario);
+        configuracion = crearPanelConfiguracion(panelPrincipal, cardLayout,estadoMusica);
         shop = crearPanelShop(panelPrincipal, cardLayout,usuario);
         armario = crearPanelArmario(panelPrincipal, cardLayout,usuario);
         estadistica = crearPanelEstadistica(panelPrincipal,cardLayout,usuario);
@@ -76,8 +81,8 @@ public class Juego extends JFrame {
         return minijuego;
     }
 
-    private Configuracion crearPanelConfiguracion(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
-        Configuracion configuracion = new Configuracion(panelPrincipal, cardLayout);
+    private Configuracion crearPanelConfiguracion(JPanel panelPrincipal, CardLayout cardLayout,int estadoMusica) {
+        Configuracion configuracion = new Configuracion(panelPrincipal, cardLayout,estadoMusica);
         return configuracion;
     }
 
@@ -91,7 +96,7 @@ public class Juego extends JFrame {
         return armario;
     }
 
-    private Estadistica crearPanelEstadistica(JPanel panelPrincipal,CardLayout cardLayout, Usuario usuario) {
+   private Estadistica crearPanelEstadistica(JPanel panelPrincipal,CardLayout cardLayout, Usuario usuario) {
         Estadistica estadistica = new Estadistica(panelPrincipal, cardLayout,usuario);
         return estadistica;
     }
@@ -290,6 +295,20 @@ public class Juego extends JFrame {
             experienceLabel.setValue(usuario.getXp());
 
         }
+    private void PlayMusic(String filePath) {
+        try {
+            File audioFile = new File(filePath);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+            clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            clip.start();
+            estadoMusica=1;
+        } catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
 
     }
+
 
