@@ -139,6 +139,7 @@ public class Juego extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(panelPrincipal, "minijuego");
                 minijuego.startMinijuego(panelPrincipal, cardLayout, usuario);
+
             }
         });
 
@@ -170,6 +171,7 @@ public class Juego extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(panelPrincipal, "Estadistica");
+                estadistica.actualizarEstadisticas(usuario);
             }
         });
         eleccionDeRol.addActionListener(new ActionListener() {
