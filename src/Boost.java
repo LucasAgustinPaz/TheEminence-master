@@ -20,24 +20,15 @@ public class Boost extends JPanel {
         setPreferredSize(new Dimension(800, 600));
 
         closeButton = new JButton("X");
-        closeButton.setBorderPainted(false);
-        closeButton.setFocusPainted(false);
-        closeButton.setBackground(Color.MAGENTA.darker());
 
         boosts = new JButton("Pagar un Eloboost");
-        boosts.setBorderPainted(false);
-        boosts.setFocusPainted(false);
-        boosts.setBackground(Color.RED.darker());
 
         boosts2 = new JButton("Contratar ub Coach");
-        boosts2.setBorderPainted(false);
-        boosts2.setFocusPainted(false);
-        boosts2.setBackground(Color.BLUE.darker());
 
         boosts3 = new JButton("Comprar Perifericos");
-        boosts3.setBorderPainted(false);
-        boosts3.setFocusPainted(false);
-        boosts3.setBackground(Color.YELLOW.darker());
+
+        // Establecer el fondo del panel
+        setOpaque(false);
 
         // Crear un panel interno para los botones y establecer su diseño
         JPanel buttonPanel = new JPanel();

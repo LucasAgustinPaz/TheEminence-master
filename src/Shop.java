@@ -6,6 +6,9 @@ import java.awt.event.ActionListener;
 public class Shop extends JPanel {
     private JButton closeButton;
     private JPanel panelShop;
+    private JPanel panelSkin;
+    private JPanel panelBoost;
+
     private JPanel panelMenu;
     private JButton skinsButton;
     private JButton boostsButton;
@@ -52,6 +55,7 @@ public class Shop extends JPanel {
         skinsButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(panelShop, "Skins");
+
             }
         });
 
