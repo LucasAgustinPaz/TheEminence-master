@@ -12,8 +12,10 @@ public class Estadistica extends JPanel {
     private JLabel horasJugadas;
 
     public Estadistica(JPanel panelPrincipal, CardLayout cardLayout, Usuario user) {
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(1920, 1080));
+        setPreferredSize(screenSize);
 
         closeButton = new JButton("X");
         closeButton.setBorderPainted(false);

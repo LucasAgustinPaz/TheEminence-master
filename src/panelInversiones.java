@@ -15,7 +15,9 @@ public class panelInversiones extends JPanel {
 
     public panelInversiones(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
 
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLayout(new BorderLayout());
+        setPreferredSize(screenSize);
 
         closeButton = new JButton("X");
         inversion1Button = new JButton("inversion1 $1000");

@@ -18,6 +18,7 @@ public class Minijuego extends JPanel{
     private static int vecesEjecutado = 30;
     private Timer timer;
     private boolean minijuegoIniciado = false;
+    private boolean isTimerRunning = false;
 
 
     public int getScore() {
@@ -33,8 +34,9 @@ public class Minijuego extends JPanel{
 
 
         // Configurar la ventana
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLayout(new FlowLayout());
-        setPreferredSize(new Dimension(1920, 1080));
+        setPreferredSize(screenSize);
 
         closeButton = new JButton("X");
         add(closeButton, BorderLayout.PAGE_END);
@@ -58,8 +60,8 @@ public class Minijuego extends JPanel{
     }
 
     public void startMinijuego(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
-        score=0;
         if (!minijuegoIniciado) {
+            score=0;
             minijuegoIniciado = true;
             ActionListener actionListener = new ActionListener() {
                 public void actionPerformed(ActionEvent event) {
@@ -73,27 +75,33 @@ public class Minijuego extends JPanel{
                 }
             };
 
-            int delay = 1000; // 1 segundo
-            Timer timer = new Timer();
-            timer.scheduleAtFixedRate(new TimerTask() {
-                public void run() {
-                    actionListener.actionPerformed(null);
-                }
-            }, delay, delay);
-        }
+            if(!isTimerRunning){
+                int delay = 1000; // 1 segundo
+                Timer timer = new Timer();
+                    timer.scheduleAtFixedRate(new TimerTask() {
+                        public void run() {
+                            actionListener.actionPerformed(null);
+                        }
+                    }, delay, delay);
 
+                    isTimerRunning = true;
+                }
+            }
     }
 
     private void resetMinijuego(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
         int limite = (int)((usuario.getNivel()*10)/3);
         System.out.println(limite);
+
         if(score<limite) {
             minijuegoIniciado = false;
             vecesEjecutado = 30;
             score = 0;
         }
-        else{cardLayout.show(panelPrincipal, "menu");
-        usuario.setPromoGanada(true);}
+
+        else{
+            cardLayout.show(panelPrincipal, "menu");
+            usuario.setPromoGanada(true);}
     }
 
 
@@ -119,25 +127,13 @@ public class Minijuego extends JPanel{
             generateObjectPosition();
             repaint();
         }else {
-<<<<<<< HEAD
             if(score > 0){
             score--;
             }
             generateObjectPosition();
             repaint();
-        }
-=======
-            if(score>0){
-            score--;
             }
-
-            generateObjectPosition();
-            repaint();
         }
-
->>>>>>> interfaz-estadisticas
-    }
-
 
     @Override
     public void paint(Graphics g) {
@@ -151,10 +147,7 @@ public class Minijuego extends JPanel{
         g.setColor(Color.BLACK);
         g.setFont(new Font("Arial", Font.BOLD, 20));
         String scoreText = "Score: " + score;
-<<<<<<< HEAD
         String timeText = "Tiempo: " + vecesEjecutado;
-=======
->>>>>>> interfaz-estadisticas
 
         int textWidth = g.getFontMetrics().stringWidth(scoreText);
         int textHeight = g.getFontMetrics().getHeight();
@@ -163,6 +156,5 @@ public class Minijuego extends JPanel{
 
         g.drawString(scoreText, textX, textY);
         g.drawString(timeText, textX, textY + textHeight); // Dibujar la variable vecesEjecutado
-
     }
 }

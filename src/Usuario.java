@@ -15,12 +15,21 @@ public class Usuario {
     private int vecesSmufeado=0;
     private Inversiones inversiones = new Inversiones();
     private String RolPrincipal = "Duelista";
+    private double experienceMultiplier = 1;
     private HashMap<String, Integer> Roles = new HashMap<>();;
     {
         Roles.put("Duelista", 0);
         Roles.put("Centinela", 0);
         Roles.put("Smoker", 0);
         Roles.put("Iniciador", 0);
+    }
+
+    public double getExperienceMultiplier() {
+        return experienceMultiplier;
+    }
+
+    public void aumentaExperienceMultiplier(){
+        experienceMultiplier += 0.6;
     }
 
     public Inversiones getInversiones() {
@@ -107,6 +116,8 @@ public class Usuario {
         return RolPrincipal;
     }
 
+
+
     public void setRol(String rol) {
         this.RolPrincipal = rol;
         reubicarClaveAlPrincipio(rol);
@@ -114,7 +125,7 @@ public class Usuario {
     }
 
     public Usuario(){
-        skins.add("");
+        skins.add("default");
         coins=2000;
     }
 

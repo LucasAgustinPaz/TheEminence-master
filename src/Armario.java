@@ -13,6 +13,11 @@ public class Armario extends JPanel {
     private JLabel jLabelSkin;
 
     public Armario(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        setLayout(new BorderLayout());
+        setPreferredSize(screenSize);
+
         indiceActual = 0;
 
         closeButton = new JButton("X");
