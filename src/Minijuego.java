@@ -32,7 +32,6 @@ public class Minijuego extends JPanel{
     public Minijuego(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
         score = 0;
 
-
         // Configurar la ventana
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLayout(new FlowLayout());
@@ -63,6 +62,7 @@ public class Minijuego extends JPanel{
         if (!minijuegoIniciado) {
             score=0;
             minijuegoIniciado = true;
+            usuario.sumarTorneos();
             ActionListener actionListener = new ActionListener() {
                 public void actionPerformed(ActionEvent event) {
                     if (vecesEjecutado > 0) {
