@@ -105,7 +105,6 @@ public class Usuario {
     public void subirNivel(){
         nivel++;
     }
-
     public void subirXP(int mount){
         xp += mount;
     }
