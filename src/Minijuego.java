@@ -61,6 +61,7 @@ public class Minijuego extends JPanel{
         score=0;
         if (!minijuegoIniciado) {
             minijuegoIniciado = true;
+            usuario.sumarTorneos();
             ActionListener actionListener = new ActionListener() {
                 public void actionPerformed(ActionEvent event) {
                     if (vecesEjecutado > 0) {

@@ -190,6 +190,10 @@ public class Usuario {
         tapsCount++;
        }
 
+       public void sumarTorneos(){
+        torneosJugados++;
+       }
+
        public void gananciaInversiones(){
         agregarCoins((int)(inversiones.getInversion1()+ inversiones.getInversion2()+ inversiones.getInversion3()));
        }
