@@ -49,7 +49,7 @@ public class Configuracion extends JPanel {
         PlayMusic.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(estadoMusica==0) {
-                    PlayMusic("resources\\musica\\melodia.wav",estadoMusica);
+                    //PlayMusic("resources\\musica\\melodia.wav",estadoMusica);
 
                 }
 
@@ -59,7 +59,7 @@ public class Configuracion extends JPanel {
         StopMusic.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(estadoMusica==1) {
-                    StopMusic(estadoMusica);
+                  //  StopMusic(estadoMusica);
                 }
             }
         });
@@ -73,7 +73,7 @@ public class Configuracion extends JPanel {
 
     }
 
-
+/*
     private void PlayMusic(String filePath,int estadoMusica) {
         try {
             File audioFile = new File(filePath);
@@ -92,5 +92,7 @@ public class Configuracion extends JPanel {
             clip.stop();
         }
     }
+
+ */
 
 }

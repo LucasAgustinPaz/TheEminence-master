@@ -37,7 +37,7 @@ public class Juego extends JFrame {
     }
 
     public Juego(Usuario usuario, JProgressBar experienceLabel) {
-        PlayMusic("resources\\musica\\melodia.wav");
+        //PlayMusic("resources\\musica\\melodia.wav");
         usuario.setNivel(1);
         ;
         usuario.setXp(0);
@@ -295,7 +295,7 @@ public class Juego extends JFrame {
             experienceLabel.setValue(usuario.getXp());
 
         }
-    private void PlayMusic(String filePath) {
+   /* private void PlayMusic(String filePath) {
         try {
             File audioFile = new File(filePath);
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
@@ -307,8 +307,10 @@ public class Juego extends JFrame {
         } catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
             e.printStackTrace();
         }
+
+    */
     }
 
-    }
+
 
 
