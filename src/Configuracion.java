@@ -51,7 +51,7 @@ public class Configuracion extends JPanel {
         PlayMusic.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (estadoMusica == 0) {
-                    //PlayMusic("resources\\musica\\melodia.wav",estadoMusica);
+                    PlayMusic("resources\\musica\\melodia.wav",estadoMusica);
                 }
             }
         });
@@ -59,7 +59,7 @@ public class Configuracion extends JPanel {
         StopMusic.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (estadoMusica == 1) {
-                    //StopMusic(estadoMusica);
+                    StopMusic(estadoMusica);
                 }
             }
         });
@@ -71,7 +71,7 @@ public class Configuracion extends JPanel {
         });
     }
 
-    /*
+
     private void PlayMusic(String filePath,int estadoMusica) {
         try {
             File audioFile = new File(filePath);
@@ -80,6 +80,7 @@ public class Configuracion extends JPanel {
             clip.open(audioStream);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
             clip.start();
+            estadoMusica = 1;
         } catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
             e.printStackTrace();
         }
@@ -88,7 +89,8 @@ public class Configuracion extends JPanel {
     public void StopMusic(int estadoMusica) {
         if (clip != null && clip.isRunning()) {
             clip.stop();
+            estadoMusica=0;
         }
     }
-    */
+
 }
