@@ -7,18 +7,15 @@ import java.io.File;
 import java.io.IOException;
 
 public class Configuracion extends JPanel {
-
     private JButton closeButton;
     private JButton PlayMusic;
     private JButton StopMusic;
     private Clip clip;
 
-
-    public Configuracion(JPanel panelPrincipal, CardLayout cardLayout,int estadoMusica){
-
+    public Configuracion(JPanel panelPrincipal, CardLayout cardLayout, int estadoMusica) {
         // Configurar la ventana
-        setLayout(new FlowLayout());
-        setPreferredSize(new Dimension(800, 600));
+        setLayout(new BorderLayout());
+        setPreferredSize(new Dimension(1920, 1080));
 
         closeButton = new JButton("X");
         closeButton.setBorderPainted(false);
@@ -28,52 +25,53 @@ public class Configuracion extends JPanel {
         ImageIcon play = new ImageIcon("resources\\sprites\\startMusic.png");
         ImageIcon stop = new ImageIcon("resources\\sprites\\stopMusic.png");
 
-        PlayMusic= new JButton(play);
+        PlayMusic = new JButton(play);
         StopMusic = new JButton(stop);
 
-        PlayMusic.setBorderPainted(false); // Eliminar el bordePlayMusic.setContentAreaFilled(false); // Eliminar el fondoPlayMusic.setFocusPainted(false); // Eliminar el resaltado de enfoquePlayMusic.setOpaque(false); // Hacer el botón transparente
-        PlayMusic.setContentAreaFilled(false); // Eliminar el fondo
-        PlayMusic.setFocusPainted(false); // Eliminar el resaltado de enfoque
-        PlayMusic.setOpaque(false); // Hacer el botón transparente
+        PlayMusic.setBorderPainted(false);
+        PlayMusic.setContentAreaFilled(false);
+        PlayMusic.setFocusPainted(false);
+        PlayMusic.setOpaque(false);
 
-        StopMusic.setBorderPainted(false); // Eliminar el borde
-        StopMusic.setContentAreaFilled(false); // Eliminar el fondo
-        StopMusic.setFocusPainted(false); // Eliminar el resaltado de enfoque
-        StopMusic.setOpaque(false); // Hacer el botón transparente
+        StopMusic.setBorderPainted(false);
+        StopMusic.setContentAreaFilled(false);
+        StopMusic.setFocusPainted(false);
+        StopMusic.setOpaque(false);
 
-        add(PlayMusic, BorderLayout.NORTH);
-        add(StopMusic, BorderLayout.SOUTH);
-        add(closeButton, BorderLayout.PAGE_END);
+        JPanel buttonsPanel = new JPanel(new GridLayout(2, 1));
+        buttonsPanel.add(PlayMusic);
+        buttonsPanel.add(StopMusic);
 
+        JPanel closeButtonPanel = new JPanel(new BorderLayout());
+        closeButtonPanel.add(closeButton, BorderLayout.SOUTH);
+
+        add(buttonsPanel, BorderLayout.CENTER);
+        add(closeButtonPanel, BorderLayout.WEST);
 
         PlayMusic.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(estadoMusica==0) {
+                if (estadoMusica == 0) {
                     //PlayMusic("resources\\musica\\melodia.wav",estadoMusica);
-
                 }
-
             }
         });
 
         StopMusic.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(estadoMusica==1) {
-                  //  StopMusic(estadoMusica);
+                if (estadoMusica == 1) {
+                    //StopMusic(estadoMusica);
                 }
             }
         });
+
         closeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(panelPrincipal, "menu");
             }
         });
-
-
-
     }
 
-/*
+    /*
     private void PlayMusic(String filePath,int estadoMusica) {
         try {
             File audioFile = new File(filePath);
@@ -92,7 +90,5 @@ public class Configuracion extends JPanel {
             clip.stop();
         }
     }
-
- */
-
+    */
 }

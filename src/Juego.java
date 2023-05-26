@@ -19,7 +19,7 @@ public class Juego extends JFrame {
     private Estadistica estadistica;
     private EleccionDeRol eleccionDeRol;
     private Smurfear smurfear;
-    private panelInveriones inveriones;
+    private panelInversiones inveriones;
     private JLabel levelLabel;
     private int estadoMusica;
     private Clip clip;
@@ -112,8 +112,8 @@ public class Juego extends JFrame {
         Smurfear smurfear = new Smurfear(panelPrincipal, cardLayout, usuario);
         return smurfear;
         }
-        private panelInveriones crearPanelInversiones(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario){
-        panelInveriones inveriones = new panelInveriones(panelPrincipal, cardLayout, usuario);
+        private panelInversiones crearPanelInversiones(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario){
+        panelInversiones inveriones = new panelInversiones(panelPrincipal, cardLayout, usuario);
         return  inveriones;
         }
 

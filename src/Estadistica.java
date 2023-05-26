@@ -13,16 +13,18 @@ public class Estadistica extends JPanel {
 
     public Estadistica(JPanel panelPrincipal, CardLayout cardLayout, Usuario user) {
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(800, 600));
+        setPreferredSize(new Dimension(1920, 1080));
 
-        JPanel closeButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         closeButton = new JButton("X");
         closeButton.setBorderPainted(false);
         closeButton.setFocusPainted(false);
         closeButton.setBackground(Color.MAGENTA.darker());
-        closeButtonPanel.add(closeButton);
 
-        add(closeButtonPanel, BorderLayout.NORTH);
+        JPanel closeButtonPanel = new JPanel(new BorderLayout());
+        closeButtonPanel.add(closeButton, BorderLayout.SOUTH);
+
+        add(closeButtonPanel, BorderLayout.WEST);
+
         closeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(panelPrincipal, "menu");
@@ -34,24 +36,22 @@ public class Estadistica extends JPanel {
         statisticsPanel.setLayout(boxLayout);
 
         int verticalSpacing = 10; // Ajusta el espacio vertical entre los JLabels
-        clicks = new JLabel("Clicks totales:" + user.getTapsCount()  );
-        clicks.setBorder(new EmptyBorder(verticalSpacing, 0, 0, 0));
+        clicks = new JLabel("Clicks totales: " + user.getTapsCount());
+        clicks.setBorder(new EmptyBorder(0, 20, verticalSpacing, 0));
         statisticsPanel.add(clicks);
 
-        gainCoins = new JLabel("Monedas Ganadas:" + user.getCoins());
-        gainCoins.setBorder(new EmptyBorder(verticalSpacing, 0, 0, 0));
+        gainCoins = new JLabel("Monedas Ganadas: " + user.getCoins());
+        gainCoins.setBorder(new EmptyBorder(0, 20, verticalSpacing, 0));
         statisticsPanel.add(gainCoins);
 
-        tournamentsPlayed = new JLabel("Torneos Jugados:" + user.getTorneosJugados());
-        tournamentsPlayed.setBorder(new EmptyBorder(verticalSpacing, 0, 0, 0));
+        tournamentsPlayed = new JLabel("Torneos Jugados: " + user.getTorneosJugados());
+        tournamentsPlayed.setBorder(new EmptyBorder(0, 20, verticalSpacing, 0));
         statisticsPanel.add(tournamentsPlayed);
 
-        horasJugadas = new JLabel("Horas Jugadas:" + user.getHorasJugadas());
-        horasJugadas.setBorder(new EmptyBorder(verticalSpacing, 0, 0, 0));
+        horasJugadas = new JLabel("Horas Jugadas: " + user.getHorasJugadas());
+        horasJugadas.setBorder(new EmptyBorder(0, 20, verticalSpacing, 0));
         statisticsPanel.add(horasJugadas);
 
-        add(statisticsPanel, BorderLayout.WEST);
-
+        add(statisticsPanel, BorderLayout.CENTER);
     }
 }
-
