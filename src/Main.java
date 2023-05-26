@@ -12,6 +12,8 @@ public class Main {
             }
         });
 
+
+
         // Hilo xp
         Thread hiloXpAndCoins = new Thread(new Runnable() {
             public void run() {
