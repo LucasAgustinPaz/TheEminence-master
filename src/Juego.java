@@ -25,6 +25,8 @@ public class Juego extends JFrame {
     private Clip clip;
     private boolean isButtonPressed = false;
 
+
+
     private ImageIcon suelto = new ImageIcon("resources\\sprites\\netsss.jpeg");
     private ImageIcon apretado = new ImageIcon("resources\\sprites\\netsss.jpeg");
 
@@ -40,6 +42,9 @@ public class Juego extends JFrame {
         PlayMusic("resources\\musica\\melodia.wav");
         usuario.setNivel(1);
         usuario.setXp(0);
+
+
+        usuario.setStartTime(System.currentTimeMillis()); //Seteo tiempo de inicio
 
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -171,8 +176,9 @@ public class Juego extends JFrame {
         estadisticaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(panelPrincipal, "Estadistica");
+                usuario.setEndTime(System.currentTimeMillis()); //Seteo tiempo de fin
                 estadistica.actualizarEstadisticas(usuario);
+                cardLayout.show(panelPrincipal, "Estadistica");
             }
         });
         eleccionDeRol.addActionListener(new ActionListener() {

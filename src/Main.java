@@ -5,6 +5,7 @@ public class Main {
         Usuario usuario = new Usuario();
         JProgressBar experienceLabel =new JProgressBar();
 
+
         // Hilo para el juego
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {

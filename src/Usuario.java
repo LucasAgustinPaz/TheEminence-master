@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,7 +8,9 @@ public class Usuario {
     private int nivel=0;
     private int coins=0;
     private boolean promoGanada=false;
-    private int horasJugadas=0;
+    private long minutosJugados=0;
+    private long startTime;
+    private long endTime;
     private int torneosJugados=0;
     private int tapsCount=0;
     private int vecesSmufeado=0;
@@ -96,12 +97,12 @@ public class Usuario {
         this.coins = coins;
     }
 
-    public int getHorasJugadas() {
-        return horasJugadas;
+    public long getMinutosJugados() {
+        return minutosJugados;
     }
 
-    public void setHorasJugadas(int horasJugadas) {
-        this.horasJugadas = horasJugadas;
+    public void setMinutosJugados(long minutosJugados) {
+        this.minutosJugados = minutosJugados;
     }
 
     public int getTorneosJugados() {
@@ -116,7 +117,21 @@ public class Usuario {
         return RolPrincipal;
     }
 
+    public long getStartTime() {
+        return startTime;
+    }
 
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
+    }
+
+    public long getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(long endTime) {
+        this.endTime = endTime;
+    }
 
     public void setRol(String rol) {
         this.RolPrincipal = rol;
@@ -207,6 +222,11 @@ public class Usuario {
         agregarCoins((int)(inversiones.getInversion1()+ inversiones.getInversion2()+ inversiones.getInversion3()));
        }
 
+       public long sumarMinutos(){
+           long totalTimePlayed = endTime - startTime;
+           minutosJugados = totalTimePlayed/ (1000 * 60);
+           return minutosJugados;
+    }
 
 
 }

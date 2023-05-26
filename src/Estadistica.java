@@ -63,10 +63,10 @@ public class Estadistica extends JPanel {
     }
 
     public void actualizarEstadisticas(Usuario usuario) {
-        clicks.setText("Clicks totales: " + usuario.getTapsCount());
+ +       clicks.setText("Clicks totales: " + usuario.getTapsCount());
         gainCoins.setText("Monedas Ganadas: " + usuario.getCoins());
         tournamentsPlayed.setText("Torneos Jugados: " + usuario.getTorneosJugados());
-        horasJugadas.setText("Horas Jugadas: " + usuario.getHorasJugadas());
+        horasJugadas.setText("Minutos Jugados: " + usuario.sumarMinutos());
     }
 }
 
