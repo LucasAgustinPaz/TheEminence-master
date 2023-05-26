@@ -6,8 +6,8 @@ import java.util.Timer;
 
 public class Minijuego extends JPanel{
 
-    private static final int FRAME_WIDTH = 600;
-    private static final int FRAME_HEIGHT = 400;
+    private static final int FRAME_WIDTH = 1920;
+    private static final int FRAME_HEIGHT = 1080;
     private static final int OBJECT_SIZE = 50;
     private static final int CLICK_RADIUS = 30;
     private JButton closeButton;
@@ -28,12 +28,13 @@ public class Minijuego extends JPanel{
         this.score = score;
     }
 
-    public Minijuego(JPanel panelPrincipal, CardLayout cardLayout) {
+    public Minijuego(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
         score = 0;
+
 
         // Configurar la ventana
         setLayout(new FlowLayout());
-        setPreferredSize(new Dimension(800, 600));
+        setPreferredSize(new Dimension(1920, 1080));
 
         closeButton = new JButton("X");
         add(closeButton, BorderLayout.PAGE_END);
@@ -44,7 +45,7 @@ public class Minijuego extends JPanel{
         closeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(panelPrincipal, "menu");
-                resetMinijuego();
+                resetMinijuego(panelPrincipal,cardLayout, usuario);
             }
         });
 
@@ -56,7 +57,8 @@ public class Minijuego extends JPanel{
         });
     }
 
-    public void startMinijuego() {
+    public void startMinijuego(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
+        score=0;
         if (!minijuegoIniciado) {
             minijuegoIniciado = true;
             ActionListener actionListener = new ActionListener() {
@@ -66,7 +68,7 @@ public class Minijuego extends JPanel{
                         menos();
                         //System.out.println(vecesEjecutado);
                     } else {
-                        resetMinijuego();
+                        resetMinijuego(panelPrincipal,cardLayout,usuario);
                     }
                 }
             };
@@ -79,12 +81,19 @@ public class Minijuego extends JPanel{
                 }
             }, delay, delay);
         }
+
     }
 
-    private void resetMinijuego() {
-        minijuegoIniciado = false;
-        vecesEjecutado = 30;
-        score = 0;
+    private void resetMinijuego(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
+        int limite = (int)((usuario.getNivel()*10)/3);
+        System.out.println(limite);
+        if(score<limite) {
+            minijuegoIniciado = false;
+            vecesEjecutado = 30;
+            score = 0;
+        }
+        else{cardLayout.show(panelPrincipal, "menu");
+        usuario.setPromoGanada(true);}
     }
 
 

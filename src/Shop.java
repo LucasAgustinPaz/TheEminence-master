@@ -11,10 +11,10 @@ public class Shop extends JPanel {
     private JButton skin3;
 
 
-    public Shop(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario){
+    public Shop(JPanel panelPrincipal,CardLayout cardLayout,Usuario usuario){
         // Configurar la ventana
         setLayout(new FlowLayout());
-        setPreferredSize(new Dimension(800, 600));
+        setPreferredSize(new Dimension(1920, 1080));
 
         closeButton = new JButton("X");
         closeButton.setBorderPainted(false);

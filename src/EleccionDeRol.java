@@ -2,19 +2,26 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 public class EleccionDeRol extends JPanel {
     private JButton closeButton;
     private JButton Duelista;
     private JButton Centinela;
     private JButton Smoker;
+    private JButton Iniciador;
 
+    public EleccionDeRol(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
+        // Configurar el panel principal
+        setLayout(new BorderLayout());
+        setPreferredSize(new Dimension(1920, 1080));
 
-    public EleccionDeRol(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario){
-        // Configurar la ventana
-        setLayout(new FlowLayout());
-        setPreferredSize(new Dimension(800, 600));
+        // Panel para los botones
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = GridBagConstraints.RELATIVE;
+        gbc.insets = new Insets(10, 10, 10, 10);
 
         closeButton = new JButton("X");
         closeButton.setBorderPainted(false);
@@ -22,26 +29,18 @@ public class EleccionDeRol extends JPanel {
         closeButton.setBackground(Color.MAGENTA.darker());
 
         Duelista = new JButton("Duelista");
-        Duelista.setBorderPainted(false);
-        Duelista.setFocusPainted(false);
-        Duelista.setBackground(Color.ORANGE.darker());
-
         Centinela = new JButton("Centinela");
-        Centinela.setBorderPainted(false);
-        Centinela.setFocusPainted(false);
-        Centinela.setBackground(Color.PINK.darker());
+        Smoker = new JButton("Smoker");
+        Iniciador = new JButton("Iniciador");
 
-        Smoker= new JButton("Smoker");
-        Smoker.setBorderPainted(false);
-        Smoker.setFocusPainted(false);
-        Smoker.setBackground(Color.CYAN.darker());
+        buttonPanel.add(Duelista, gbc);
+        buttonPanel.add(Centinela, gbc);
+        buttonPanel.add(Smoker, gbc);
+        buttonPanel.add(Iniciador, gbc);
 
-
-        add(closeButton, BorderLayout.PAGE_END);
-        add(Duelista, BorderLayout.PAGE_END);
-        add(Centinela, BorderLayout.PAGE_END);
-        add(Smoker, BorderLayout.PAGE_END);
-
+        // Alinear el botón "X" a la izquierda y abajo
+        add(closeButton, BorderLayout.SOUTH);
+        add(buttonPanel, BorderLayout.CENTER);
 
         closeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -52,17 +51,19 @@ public class EleccionDeRol extends JPanel {
         Duelista.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-             usuario.setRol("Duelista");
+                usuario.setRol("Duelista");
                 System.out.println(usuario.getRol());
             }
         });
+
         Centinela.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-             usuario.setRol("Centinela");
+                usuario.setRol("Centinela");
                 System.out.println(usuario.getRol());
             }
         });
+
         Smoker.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -71,9 +72,12 @@ public class EleccionDeRol extends JPanel {
             }
         });
 
-
-
-
+        Iniciador.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                usuario.setRol("Iniciador");
+                System.out.println(usuario.getRol());
+            }
+        });
     }
-
 }
