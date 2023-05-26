@@ -13,8 +13,9 @@ public class Shop extends JPanel {
 
     public Shop(JPanel panelPrincipal,CardLayout cardLayout,Usuario usuario){
         // Configurar la ventana
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLayout(new FlowLayout());
-        setPreferredSize(new Dimension(1920, 1080));
+        setPreferredSize(screenSize);
 
         closeButton = new JButton("X");
         closeButton.setBorderPainted(false);

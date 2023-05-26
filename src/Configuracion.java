@@ -14,8 +14,9 @@ public class Configuracion extends JPanel {
 
     public Configuracion(JPanel panelPrincipal, CardLayout cardLayout, int estadoMusica) {
         // Configurar la ventana
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(1920, 1080));
+        setPreferredSize(screenSize);
 
         closeButton = new JButton("X");
         closeButton.setBorderPainted(false);

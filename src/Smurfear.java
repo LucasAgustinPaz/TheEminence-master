@@ -12,8 +12,9 @@ public class Smurfear extends JPanel {
 
     public Smurfear(JPanel panelPrincipal,CardLayout cardLayout,Usuario usuario){
         // Configurar la ventana
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLayout(new FlowLayout());
-        setPreferredSize(new Dimension(800, 600));
+        setPreferredSize(screenSize);
 
         closeButton = new JButton("X");
         closeButton.setBorderPainted(false);

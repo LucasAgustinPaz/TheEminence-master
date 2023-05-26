@@ -23,11 +23,10 @@ public class Juego extends JFrame {
     private JLabel levelLabel;
     private int estadoMusica;
     private Clip clip;
-    private double experienceMultiplier;
     private boolean isButtonPressed = false;
 
-    private ImageIcon suelto = new ImageIcon("resources\\sprites\\button1.png");
-    private ImageIcon apretado = new ImageIcon("resources\\sprites\\button2.png");
+    private ImageIcon suelto = new ImageIcon("resources\\sprites\\netsss.jpeg");
+    private ImageIcon apretado = new ImageIcon("resources\\sprites\\netsss.jpeg");
 
     public CardLayout getCardLayout() {
         return cardLayout;
@@ -41,7 +40,6 @@ public class Juego extends JFrame {
         PlayMusic("resources\\musica\\melodia.wav");
         usuario.setNivel(1);
         usuario.setXp(0);
-        experienceMultiplier = 1.0;
 
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -135,6 +133,10 @@ public class Juego extends JFrame {
         JButton clickButton = new JButton(suelto);
         JButton closeButton = new JButton(apretado);
 
+
+        closeButton.setBorderPainted(false);
+        closeButton.setFocusPainted(false);
+
         minijuegoButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(panelPrincipal, "minijuego");
@@ -170,6 +172,7 @@ public class Juego extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(panelPrincipal, "Estadistica");
+                estadistica.actualizarEstadisticas(usuario);
             }
         });
         eleccionDeRol.addActionListener(new ActionListener() {
@@ -221,7 +224,7 @@ public class Juego extends JFrame {
         clickButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (!isButtonPressed) {
-                    gainExperience((int) (10 * experienceMultiplier), usuario, experienceLabel);
+                    gainExperience((int) (10 * usuario.getExperienceMultiplier()), usuario, experienceLabel);
                     usuario.sumarClick();
                 }
             }
@@ -291,14 +294,11 @@ public class Juego extends JFrame {
         }
 
         if (usuario.getNivel() <= 9) {
-            // System.out.println("userxp: " + usuario.getXp());
-            // System.out.println("userxp: " + usuario.getNivel());
-
             if (usuario.getXp() >= usuario.getNivel() * 100 && startTorneo(usuario.getNivel(), usuario)) {
                 minijuego.setScore(0);
                 usuario.subirNivel();
                 usuario.setPromoGanada(false);
-                experienceMultiplier += 0.6;
+                usuario.aumentaExperienceMultiplier();
                 levelLabel.setText("Rango: " + cambiarNivel(usuario.getNivel()));
 
                 if (!cambiarNivel(usuario.getNivel()).equals("Radiante")) {

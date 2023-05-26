@@ -12,8 +12,9 @@ public class EleccionDeRol extends JPanel {
 
     public EleccionDeRol(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
         // Configurar el panel principal
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(1920, 1080));
+        setPreferredSize(screenSize);
 
         // Panel para los botones
         JPanel buttonPanel = new JPanel();
