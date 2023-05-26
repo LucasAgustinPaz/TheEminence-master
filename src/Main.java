@@ -16,7 +16,7 @@ public class Main {
         Thread hiloXp = new Thread(new Runnable() {
             public void run() {
                 while (true) {
-                    usuario.subirXP(0 * (usuario.getVecesSmufeado()));
+                    usuario.subirXP((usuario.getVecesSmufeado()));
                     System.out.println(usuario.getXp());
                     experienceLabel.setValue(usuario.getXp());
 

@@ -9,6 +9,7 @@ public class EleccionDeRol extends JPanel {
     private JButton Duelista;
     private JButton Centinela;
     private JButton Smoker;
+    private JButton Iniciador;
 
 
     public EleccionDeRol(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario){
@@ -36,11 +37,17 @@ public class EleccionDeRol extends JPanel {
         Smoker.setFocusPainted(false);
         Smoker.setBackground(Color.CYAN.darker());
 
+        Iniciador= new JButton("Iniciador");
+        Iniciador.setBorderPainted(false);
+        Iniciador.setFocusPainted(false);
+        Iniciador.setBackground(Color.CYAN.darker());
+
 
         add(closeButton, BorderLayout.PAGE_END);
         add(Duelista, BorderLayout.PAGE_END);
         add(Centinela, BorderLayout.PAGE_END);
         add(Smoker, BorderLayout.PAGE_END);
+        add(Iniciador, BorderLayout.PAGE_END);
 
 
         closeButton.addActionListener(new ActionListener() {
@@ -67,6 +74,13 @@ public class EleccionDeRol extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 usuario.setRol("Smoker");
+                System.out.println(usuario.getRol());
+            }
+        });
+        Iniciador.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                usuario.setRol("Iniciador");
                 System.out.println(usuario.getRol());
             }
         });
