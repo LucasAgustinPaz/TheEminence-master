@@ -12,16 +12,32 @@ public class Usuario {
     private int horasJugadas=0;
     private int torneosJugados=0;
     private int tapsCount=0;
+    private int vecesSmufeado=0;
+    private Inversiones inversiones = new Inversiones();
     private String RolPrincipal = "Duelista";
     private HashMap<String, Integer> Roles = new HashMap<>();;
     {
-        Roles.put("Duelista", 1);
-        Roles.put("Centinela", 1);
-        Roles.put("Smoker", 1);
-        Roles.put("Iniciador", 1);
+        Roles.put("Duelista", 0);
+        Roles.put("Centinela", 0);
+        Roles.put("Smoker", 0);
+        Roles.put("Iniciador", 0);
     }
 
+    public Inversiones getInversiones() {
+        return inversiones;
+    }
 
+    public void setInversiones(Inversiones inversiones) {
+        this.inversiones = inversiones;
+    }
+
+    public int getVecesSmufeado() {
+        return vecesSmufeado;
+    }
+
+    public void setVecesSmufeado(int vecesSmufeado) {
+        this.vecesSmufeado = vecesSmufeado;
+    }
 
     public boolean isPromoGanada() {
         return promoGanada;
@@ -152,6 +168,29 @@ public class Usuario {
 
        public void subirNivelRango(){
         Roles.put(RolPrincipal,(obtenerNivelRango()+1));
+       }
+
+       public void aumentarBoosteoSmurf(){
+        vecesSmufeado += 2;
+       }
+
+       public void setearNivelesRol(){
+           Roles.put("Duelista", 0);
+           Roles.put("Centinela", 0);
+           Roles.put("Smoker", 0);
+           Roles.put("Iniciador", 0);
+       }
+
+       public void borrarSkins(){
+        skins.clear();
+       }
+
+       public void sumarClick(){
+        tapsCount++;
+       }
+
+       public void gananciaInversiones(){
+        agregarCoins((int)(inversiones.getInversion1()+ inversiones.getInversion2()+ inversiones.getInversion3()));
        }
 
 

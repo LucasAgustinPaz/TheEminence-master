@@ -6,8 +6,8 @@ import java.util.Timer;
 
 public class Minijuego extends JPanel{
 
-    private static final int FRAME_WIDTH = 600;
-    private static final int FRAME_HEIGHT = 400;
+    private static final int FRAME_WIDTH = 1920;
+    private static final int FRAME_HEIGHT = 1080;
     private static final int OBJECT_SIZE = 50;
     private static final int CLICK_RADIUS = 30;
     private JButton closeButton;
@@ -34,7 +34,7 @@ public class Minijuego extends JPanel{
 
         // Configurar la ventana
         setLayout(new FlowLayout());
-        setPreferredSize(new Dimension(800, 600));
+        setPreferredSize(new Dimension(1920, 1080));
 
         closeButton = new JButton("X");
         add(closeButton, BorderLayout.PAGE_END);
