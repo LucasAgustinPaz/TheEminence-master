@@ -1,9 +1,11 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class Usuario {
     private List<String> skins = new ArrayList<>();
+    private HashSet<Boost> boosts = new HashSet<>();
     private int xp=0;
     private int nivel=0;
     private int coins=0;
@@ -68,6 +70,7 @@ public class Usuario {
     public List<String> getSkins() {
         return skins;
     }
+    public HashSet<Boost> getBoosts(){return boosts;}
 
     public void setSkins(List<String> skins) {
         this.skins = skins;

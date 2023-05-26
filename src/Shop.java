@@ -7,6 +7,7 @@ import java.util.List;
 public class Shop extends JPanel {
     private JButton closeButton;
     private JPanel panelShop;
+    private JPanel panelMenu;
     private JButton skin1;
     private JButton skin2;
     private JButton skin3;
@@ -24,8 +25,6 @@ public class Shop extends JPanel {
         setLayout(new BorderLayout());
         setPreferredSize(screenSize);
 
-
-        panelShop.add(panelShop);
         panelShop = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
         JPanel closeBottonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -35,13 +34,10 @@ public class Shop extends JPanel {
         closeButton.setBackground(Color.MAGENTA.darker());
 
 
-        JPanel panelMenu = crearPanelMenu(usuario, cardLayout);
-        boosts = crearPanelBoost(panelShop,cardLayout,usuario);
-        skins= crearPanelSkin(panelShop,cardLayout,usuario);
-
+        panelMenu = crearPanelMenu(panelPrincipal, cardLayout, usuario);
+        skins = crearPanelSkin(panelShop,cardLayout,usuario);
+        boosts = crearPanelBoost(panelShop, cardLayout, usuario);
         panelShop.add(panelMenu, "Menu");
-        panelShop.add(boosts,"Mejoras");
-        panelShop.add(skins,"Skins");
 
         cardLayout.show(panelShop, "menu");
 
@@ -59,7 +55,7 @@ public class Shop extends JPanel {
         return skins;
     }
 
-    private JPanel crearPanelMenu (Usuario usuario, CardLayout cardLayout) {
+    private JPanel crearPanelMenu (JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
         JPanel panel = new JPanel(new BorderLayout());
 
         JButton salirButton = new JButton("Salir");
@@ -67,7 +63,10 @@ public class Shop extends JPanel {
         JButton boostsButton = new JButton("Mejoras");
 
         skinsButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {cardLayout.show(panelShop, "Skins");}
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panelShop, "Skins");
+
+            }
         });
 
         boostsButton.addActionListener(new ActionListener() {
@@ -76,9 +75,9 @@ public class Shop extends JPanel {
             }
         });
 
-        salirButton.addActionListener(new ActionListener() {
+        closeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+                cardLayout.show(panelShop, "menu");
             }
         });
 

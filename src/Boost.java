@@ -39,12 +39,22 @@ public class Boost extends JPanel {
         boosts3.setFocusPainted(false);
         boosts3.setBackground(Color.YELLOW.darker());
 
-        add(closeButton, BorderLayout.PAGE_END);
-        add(boosts, BorderLayout.PAGE_END);
-        add(boosts2, BorderLayout.PAGE_END);
-        add(boosts3, BorderLayout.PAGE_END);
+        // Crear un panel interno para los botones y establecer su diseño
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setOpaque(false);
+        buttonPanel.setLayout(new GridLayout(3, 1, 10, 10));
 
-/*
+        // Agregar los botones al panel interno
+        buttonPanel.add(boosts);
+        buttonPanel.add(boosts2);
+        buttonPanel.add(boosts3);
+
+        // Agregar los componentes al panel principal
+        add(closeButton, BorderLayout.SOUTH);
+        add(buttonPanel, BorderLayout.CENTER);
+
+
+
         closeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(panelPrincipal, "menu");
@@ -116,8 +126,8 @@ public class Boost extends JPanel {
             }
             return true;}
     }
-*/
-    }
-}
+
+
+
 
 

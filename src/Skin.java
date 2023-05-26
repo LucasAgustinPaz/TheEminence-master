@@ -38,6 +38,20 @@ public class Skin extends JPanel {
         skin3.setFocusPainted(false);
         skin3.setBackground(Color.CYAN.darker());
 
+        // Crear un panel interno para los botones y establecer su diseño
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setOpaque(false);
+        buttonPanel.setLayout(new GridLayout(3, 1, 10, 10));
+
+        // Agregar los botones al panel interno
+        buttonPanel.add(skin1);
+        buttonPanel.add(skin2);
+        buttonPanel.add(skin3);
+
+        // Agregar los componentes al panel principal
+        add(closeButton, BorderLayout.SOUTH);
+        add(buttonPanel, BorderLayout.CENTER);
+
 
         add(closeButton, BorderLayout.PAGE_END);
         add(skin1, BorderLayout.PAGE_END);
