@@ -6,16 +6,48 @@ import java.util.List;
 
 public class Shop extends JPanel {
     private JButton closeButton;
+    private CardLayout cardLayout;
+    private JPanel panelShop;
     private JButton skin1;
     private JButton skin2;
     private JButton skin3;
+    private JButton boosts;
+    private JButton boosts2;
+    private JButton boosts3;
+    //private Boost boosts;
+    private Skin skins;
+
 
 
     public Shop(JPanel panelPrincipal,CardLayout cardLayout,Usuario usuario){
         // Configurar la ventana
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+        /*panelShop = new JPanel();
+        this.cardLayout = new CardLayout();
+        panelShop.setLayout(this.cardLayout);
+
+        closeButton = new JButton("X");
+        closeButton.setBorderPainted(false);
+        closeButton.setFocusPainted(false);
+        closeButton.setBackground(Color.MAGENTA.darker());
+
+        JPanel panelMenu = crearPanelMenu(usuario);
+        boosts = crearPanelBoost(panelShop,this.cardLayout,usuario);
+        skins= crearPanelSkin(panelShop,this.cardLayout,usuario);
+
+        panelShop.add(panelMenu, "Menu");
+        panelShop.add(boosts,"Mejoras");
+        panelShop.add(skins,"Skins");
+
+        this.cardLayout.show(panelShop, "menu");
+
+        add(panelShop);
+        setVisible(true);*/
+
+        //solucion temporal
+
         setLayout(new FlowLayout());
-        setPreferredSize(screenSize);
+        setPreferredSize(new Dimension(800, 600));
 
         closeButton = new JButton("X");
         closeButton.setBorderPainted(false);
@@ -46,11 +78,11 @@ public class Shop extends JPanel {
         add(skin3, BorderLayout.PAGE_END);
 
 
-    closeButton.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            cardLayout.show(panelPrincipal, "menu");
-        }
-    });
+        closeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panelPrincipal, "menu");
+            }
+        });
 
 
         skin1.addActionListener(new ActionListener() {
@@ -91,6 +123,75 @@ public class Shop extends JPanel {
             }
         });
 
+        setLayout(new FlowLayout());
+        setPreferredSize(new Dimension(800, 600));
+
+        closeButton = new JButton("X");
+        closeButton.setBorderPainted(false);
+        closeButton.setFocusPainted(false);
+        closeButton.setBackground(Color.MAGENTA.darker());
+
+        boosts = new JButton("Pagar un Eloboost");
+        boosts.setBorderPainted(false);
+        boosts.setFocusPainted(false);
+        boosts.setBackground(Color.RED.darker());
+
+        boosts2 = new JButton("Contratar ub Coach");
+        boosts2.setBorderPainted(false);
+        boosts2.setFocusPainted(false);
+        boosts2.setBackground(Color.BLUE.darker());
+
+        boosts3 = new JButton("Comprar Perifericos");
+        boosts3.setBorderPainted(false);
+        boosts3.setFocusPainted(false);
+        boosts3.setBackground(Color.YELLOW.darker());
+
+        add(closeButton, BorderLayout.PAGE_END);
+        add(boosts, BorderLayout.PAGE_END);
+        add(boosts2, BorderLayout.PAGE_END);
+        add(boosts3, BorderLayout.PAGE_END);
+
+
+        closeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panelPrincipal, "menu");
+            }
+        });
+}
+
+    private Boost crearPanelBoost(JPanel panelShop, CardLayout cardLayout, Usuario usuario){
+        Boost boosts = new Boost(panelShop, cardLayout, usuario);
+        return boosts;
     }
 
+    private Skin crearPanelSkin(JPanel panelShop, CardLayout cardLayout, Usuario usuario){
+        Skin skins= new Skin(panelShop,cardLayout,usuario);
+        return skins;
+    }
+
+    private JPanel crearPanelMenu (Usuario usuario) {
+        JPanel panel = new JPanel(new BorderLayout());
+
+        JButton salirButton = new JButton("Salir");
+        JButton skinsButton = new JButton("Skins");
+        JButton boostsButton = new JButton("Mejoras");
+
+        skinsButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {cardLayout.show(panelShop, "Skins");}
+        });
+
+        boostsButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panelShop, "Mejoras");
+            }
+        });
+
+        salirButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+
+        return panel;
+    }
 }
