@@ -11,6 +11,7 @@ public class Minijuego extends JPanel{
     private static final int OBJECT_SIZE = 50;
     private static final int CLICK_RADIUS = 30;
     private JButton closeButton;
+    private JLabel victoria;
 
     private int score;
     private int objectX;
@@ -19,6 +20,7 @@ public class Minijuego extends JPanel{
     private Timer timer;
     private boolean minijuegoIniciado = false;
     private boolean isTimerRunning = false;
+    private boolean ganada = false;
 
 
     public int getScore() {
@@ -43,8 +45,18 @@ public class Minijuego extends JPanel{
         closeButton.setFocusPainted(false);
         closeButton.setBackground(Color.MAGENTA.darker());
 
+        victoria = new JLabel("Victoria");
+        add(victoria,BorderLayout.CENTER);
+        victoria.setVisible(false);
+
         closeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                if(ganada!=true) {
+                    usuario.setPromoGanada(true);
+                    usuario.agregarCoins(score);
+                    System.out.println("acaaaaa");
+                }
+                victoria.setVisible(false);
                 cardLayout.show(panelPrincipal, "menu");
                 resetMinijuego(panelPrincipal,cardLayout, usuario);
             }
@@ -74,7 +86,6 @@ public class Minijuego extends JPanel{
                     }
                 }
             };
-
             if(!isTimerRunning){
                 int delay = 1000; // 1 segundo
                 Timer timer = new Timer();
@@ -98,10 +109,11 @@ public class Minijuego extends JPanel{
             vecesEjecutado = 30;
             score = 0;
         }
-
         else{
-            cardLayout.show(panelPrincipal, "menu");
-            usuario.setPromoGanada(true);}
+            minijuegoIniciado = true;
+            victoria.setVisible(true);
+            ganada = true;
+        }
     }
 
 

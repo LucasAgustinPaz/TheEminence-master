@@ -19,7 +19,7 @@ public class Main {
         Thread hiloXpAndCoins = new Thread(new Runnable() {
             public void run() {
                 while (true) {
-                    usuario.subirXP((usuario.getVecesSmufeado()));
+                    usuario.subirXP((usuario.sumarBoost()) + (usuario.getVecesSmufeado()));
                     usuario.gananciaInversiones();
                     System.out.println("coins: "+usuario.getCoins());
                     System.out.println("userxp: " + usuario.getXp());

@@ -14,7 +14,9 @@ public class Juego extends JFrame {
     private CardLayout cardLayout;
     private Minijuego minijuego;
     private Configuracion configuracion;
+    private Tienda Tienda;
     private Shop shop;
+    private panelBoost panelBoost;
     private Armario armario;
     private Estadistica estadistica;
     private EleccionDeRol eleccionDeRol;
@@ -58,22 +60,27 @@ public class Juego extends JFrame {
         JPanel panelMenu = crearPanelMenu(usuario, experienceLabel);
         minijuego = crearPanelMinijuego(panelPrincipal, cardLayout, usuario);
         configuracion = crearPanelConfiguracion(panelPrincipal, cardLayout, estadoMusica);
-        shop = crearPanelShop(panelPrincipal, cardLayout, usuario);
+        Tienda = crearPanelTienda(panelPrincipal, cardLayout, usuario);
         armario = crearPanelArmario(panelPrincipal, cardLayout, usuario);
         estadistica = crearPanelEstadistica(panelPrincipal, cardLayout, usuario);
         eleccionDeRol = crearPanelEleccionesDeRol(panelPrincipal, cardLayout, usuario);
         smurfear = crearPanelSmurfear(panelPrincipal, cardLayout, usuario);
         inveriones = crearPanelInversiones(panelPrincipal, cardLayout, usuario);
+        shop = crearPanelShop(panelPrincipal, cardLayout, usuario);
+        panelBoost = crearPanelBoost(panelPrincipal, cardLayout, usuario);
+
 
         panelPrincipal.add(panelMenu, "menu");
         panelPrincipal.add(minijuego, "minijuego");
         panelPrincipal.add(configuracion, "Configuracion");
-        panelPrincipal.add(shop, "Shop");
+        panelPrincipal.add(Tienda, "Tienda");
         panelPrincipal.add(armario, "Armario");
         panelPrincipal.add(estadistica, "Estadistica");
         panelPrincipal.add(eleccionDeRol, "Rol");
         panelPrincipal.add(smurfear, "Smurfear");
         panelPrincipal.add(inveriones, "Inversiones");
+        panelPrincipal.add(shop,"Shop");
+        panelPrincipal.add(panelBoost,"Boost");
 
         cardLayout.show(panelPrincipal, "menu");
 
@@ -91,9 +98,9 @@ public class Juego extends JFrame {
         return configuracion;
     }
 
-    private Shop crearPanelShop(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
-        Shop shop = new Shop(panelPrincipal, cardLayout, usuario);
-        return shop;
+    private Tienda crearPanelTienda(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
+        Tienda Tienda = new Tienda(panelPrincipal, cardLayout, usuario);
+        return Tienda;
     }
 
     private Armario crearPanelArmario(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
@@ -121,13 +128,22 @@ public class Juego extends JFrame {
         return inveriones;
     }
 
+    private Shop crearPanelShop(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
+        Shop shop = new Shop(panelPrincipal, cardLayout, usuario);
+        return shop;
+    }
+    private panelBoost crearPanelBoost(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario){
+        panelBoost panelBoost = new panelBoost(panelPrincipal, cardLayout, usuario);
+        return panelBoost;
+    }
+
     private JPanel crearPanelMenu(Usuario usuario, JProgressBar experienceLabel) {
         JPanel panel = new JPanel(new BorderLayout());
 
         JButton salirButton = new JButton("Salir");
         JButton configuracionButton = new JButton("Configuracion");
         JButton minijuegoButton = new JButton("Minijuego");
-        JButton shopButton = new JButton("Shop");
+        JButton TiendaButton = new JButton("Tienda");
         JButton armarioButton = new JButton("Armario");
         JButton estadisticaButton = new JButton("Estadistica");
         JButton eleccionDeRol = new JButton("Rol");
@@ -161,9 +177,9 @@ public class Juego extends JFrame {
             }
         });
 
-        shopButton.addActionListener(new ActionListener() {
+        TiendaButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(panelPrincipal, "Shop");
+                cardLayout.show(panelPrincipal, "Tienda");
             }
         });
 
@@ -205,7 +221,7 @@ public class Juego extends JFrame {
         buttonPanel.setLayout(new FlowLayout()); // Utilizamos FlowLayout para alinear los botones
         buttonPanel.add(minijuegoButton);
         buttonPanel.add(configuracionButton);
-        buttonPanel.add(shopButton);
+        buttonPanel.add(TiendaButton);
         buttonPanel.add(armarioButton);
         buttonPanel.add(estadisticaButton);
         buttonPanel.add(eleccionDeRol);

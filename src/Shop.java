@@ -48,7 +48,7 @@ public class Shop extends JPanel {
 
     closeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            cardLayout.show(panelPrincipal, "menu");
+            cardLayout.show(panelPrincipal, "Tienda");
         }
     });
 

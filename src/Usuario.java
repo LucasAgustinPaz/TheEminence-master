@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Usuario {
     private List<String> skins = new ArrayList<>();
@@ -24,6 +22,55 @@ public class Usuario {
         Roles.put("Smoker", 0);
         Roles.put("Iniciador", 0);
     }
+    MiHashMap<String,Integer> coach = new MiHashMap();{
+        coach.agregarElemento("1",0);
+        coach.agregarElemento("2",0);
+        coach.agregarElemento("3",0);
+        coach.agregarElemento("4",0);
+        coach.agregarElemento("5",0);
+    }
+
+    MiHashMap<String,Integer> eloBoost = new MiHashMap();{
+        eloBoost.agregarElemento("1",0);
+        eloBoost.agregarElemento("2",0);
+        eloBoost.agregarElemento("3",0);
+        eloBoost.agregarElemento("4",0);
+        eloBoost.agregarElemento("5",0);
+    }
+    private Periferico[] perifericos;{
+        perifericos = new Periferico[5];
+        perifericos[0] = new Teclado("Teclado",false);
+        perifericos[1] = new Mouse("Mouse",false);
+        perifericos[2] = new Auriculares("Auriculares",false);
+        perifericos[3] = new Periferico("Rgb");
+        perifericos[4] = new Periferico("MousePad");
+    }
+
+    public Usuario(){
+        skins.add("default");
+        coins=2000;
+    }
+
+    public MiHashMap<String, Integer> getCoach() {
+        return coach;
+    }
+
+    public void setCoach(MiHashMap<String, Integer> coach) {
+        this.coach = coach;
+    }
+
+    public MiHashMap<String, Integer> getEloBoost() {
+        return eloBoost;
+    }
+
+    public void setEloBoost(MiHashMap<String, Integer> eloBoost) {
+        this.eloBoost = eloBoost;
+    }
+
+    public Periferico[] getPerifericos() {
+        return perifericos;
+    }
+
 
     public double getExperienceMultiplier() {
         return experienceMultiplier;
@@ -139,10 +186,7 @@ public class Usuario {
 
     }
 
-    public Usuario(){
-        skins.add("default");
-        coins=2000;
-    }
+
 
     public void subirNivel(){
         nivel++;
@@ -228,5 +272,24 @@ public class Usuario {
            return minutosJugados;
     }
 
+    public int sumarBoost(){
+        int aux=0;
+        Set<String> claves = new HashSet<>(coach.obtenerClaves());
+        claves.addAll(eloBoost.obtenerClaves());
+
+        for (String clave : claves) {
+            int valorCoach = coach.obtenerElemento(clave) != null ? coach.obtenerElemento(clave) : 0;
+            int valorEloBoost = eloBoost.obtenerElemento(clave) != null ? eloBoost.obtenerElemento(clave) : 0;
+            int suma = valorCoach + valorEloBoost;
+            aux += suma;
+        }
+        for(Periferico dato : perifericos){
+            aux += dato.getNivel();
+        }
+
+
+        System.out.println("boost:"+aux);
+        return aux;
+    }
 
 }
