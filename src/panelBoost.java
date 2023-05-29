@@ -144,6 +144,7 @@ public class panelBoost extends JPanel {
                 usuario.compra(1000);
                 usuario.getPerifericos()[0].subirNivel();
                 }
+                if(usuario.getPerifericos()[0].getNivel() == 5){usuario.getPerifericos()[0].setGold(true);}
             }
         });
         Mouse.addActionListener(new ActionListener() {

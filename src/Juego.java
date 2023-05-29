@@ -308,7 +308,7 @@ public class Juego extends JFrame {
 
 
     private void gainExperience(int amount, Usuario usuario, JProgressBar experienceLabel) {
-        usuario.subirXP((amount * (1 + usuario.obtenerNivelRango()) + usuario.getVecesSmufeado()));
+        usuario.subirXP((amount * (1 + usuario.obtenerNivelRango() + usuario.getVecesSmufeado() + usuario.sumarBoost())));
         experienceLabel.setValue(usuario.getXp());
 
         if (usuario.getTapsCount() < (usuario.obtenerNivelRango()) * 100) {

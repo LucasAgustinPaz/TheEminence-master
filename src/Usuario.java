@@ -39,16 +39,16 @@ public class Usuario {
     }
     private Periferico[] perifericos;{
         perifericos = new Periferico[5];
-        perifericos[0] = new Teclado("Teclado",false);
-        perifericos[1] = new Mouse("Mouse",false);
-        perifericos[2] = new Auriculares("Auriculares",false);
+        perifericos[0] = new Periferico("Teclado");
+        perifericos[1] = new Periferico("Mouse");
+        perifericos[2] = new Periferico("Auriculares");
         perifericos[3] = new Periferico("Rgb");
         perifericos[4] = new Periferico("MousePad");
     }
 
     public Usuario(){
         skins.add("default");
-        coins=2000;
+        coins=1000000;
     }
 
     public MiHashMap<String, Integer> getCoach() {
@@ -284,10 +284,14 @@ public class Usuario {
             aux += suma;
         }
         for(Periferico dato : perifericos){
-            aux += dato.getNivel();
+            if(nivel>=5) {
+                if(dato.getGold()==true){
+                aux += dato.getNivel();
+                }
+            }else{
+                aux += dato.getNivel();
+            }
         }
-
-
         System.out.println("boost:"+aux);
         return aux;
     }
