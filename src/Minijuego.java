@@ -53,12 +53,11 @@ public class Minijuego extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 if(ganada!=true) {
                     usuario.setPromoGanada(true);
-                    usuario.agregarCoins(score);
-                    System.out.println("acaaaaa");
                 }
+                    usuario.agregarCoins(score);
                 victoria.setVisible(false);
                 cardLayout.show(panelPrincipal, "menu");
-                resetMinijuego(panelPrincipal,cardLayout, usuario);
+               // resetMinijuego(panelPrincipal,cardLayout, usuario);
             }
         });
 
@@ -71,6 +70,7 @@ public class Minijuego extends JPanel{
     }
 
     public void startMinijuego(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
+        resetMinijuego(panelPrincipal,cardLayout, usuario);
         if (!minijuegoIniciado) {
             score=0;
             minijuegoIniciado = true;
