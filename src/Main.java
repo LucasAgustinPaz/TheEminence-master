@@ -1,12 +1,12 @@
+import com.google.gson.Gson;
+
 import javax.swing.*;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        Usuario usuario = new Usuario();
-        String objetoString = usuario.toString();
+        Usuario usuario = leerArchivoComoObjeto("D:\\Facultad\\Programacion 3\\Proyecto final\\resources\\usuario.json");
         JProgressBar experienceLabel =new JProgressBar();
 
 
@@ -41,16 +41,34 @@ public class Main {
         hiloXpAndCoins.start();
     }
 
-    public void cargar(String objetoString){
-        try {
-            FileWriter archivo = new FileWriter("archivo.txt");
-            BufferedWriter escritor = new BufferedWriter(archivo);
-            // Escribir la cadena en el archivo
-            escritor.write(objetoString);
-            // Cerrar el BufferedWriter
-            escritor.close();
+    public static Usuario leerArchivoComoObjeto(String rutaArchivo) {
+        Gson gson = new Gson();
+        File archivo = new File(rutaArchivo);
+
+        if (!archivo.exists()) {
+            Usuario nuevoUsuario = new Usuario();
+            guardarObjetoComoJSON(nuevoUsuario, rutaArchivo);
+            return nuevoUsuario;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(archivo))) {
+            String json = reader.readLine();
+            return gson.fromJson(json, Usuario.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void guardarObjetoComoJSON(Object objeto, String rutaArchivo) {
+        Gson gson = new Gson();
+        String json = gson.toJson(objeto);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaArchivo))) {
+            writer.write(json);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
 }

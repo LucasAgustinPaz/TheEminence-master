@@ -296,4 +296,19 @@ public class Usuario {
         return aux;
     }
 
+    public void setPerifericos(Periferico[] perifericos) {
+        this.perifericos = perifericos;
+    }
+
+    public void setRolPrincipal(String rolPrincipal) {
+        this.RolPrincipal = rolPrincipal;
+    }
+
+    public void setExperienceMultiplier(double experienceMultiplier) {
+        this.experienceMultiplier = experienceMultiplier;
+    }
+
+    public <V, K> Map<K,V> getRoles() {
+        return (Map<K, V>) Roles;
+    }
 }

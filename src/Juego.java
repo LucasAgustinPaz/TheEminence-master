@@ -1,3 +1,5 @@
+import com.google.gson.Gson;
+
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
@@ -5,7 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
@@ -167,8 +171,8 @@ public class Juego extends JFrame {
 
         salirButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                guardarUsuarioComoJSON(usuario,"D:\\Facultad\\Programacion 3\\Proyecto final\\resources\\usuario");
                 System.exit(0);
-                guardar
             }
         });
 
@@ -351,6 +355,19 @@ public class Juego extends JFrame {
             e.printStackTrace();
         }
     }
+
+    public void guardarUsuarioComoJSON(Usuario usuario, String rutaArchivo) {
+        Gson gson = new Gson();
+        String json = gson.toJson(usuario);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaArchivo))) {
+            writer.write(json);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 }
 
 
