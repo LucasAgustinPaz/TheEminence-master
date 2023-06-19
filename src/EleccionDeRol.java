@@ -52,7 +52,7 @@ public class EleccionDeRol extends JPanel {
         Duelista.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                usuario.setRol("Duelista");
+                usuario.setRol(String.valueOf(Roles.DUELISTA));
                 System.out.println(usuario.getRol());
             }
         });
@@ -60,7 +60,7 @@ public class EleccionDeRol extends JPanel {
         Centinela.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                usuario.setRol("Centinela");
+                usuario.setRol(String.valueOf(Roles.CENTINELA));
                 System.out.println(usuario.getRol());
             }
         });
@@ -68,7 +68,7 @@ public class EleccionDeRol extends JPanel {
         Smoker.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                usuario.setRol("Smoker");
+                usuario.setRol(String.valueOf(Roles.SMOKER));
                 System.out.println(usuario.getRol());
             }
         });
@@ -76,7 +76,7 @@ public class EleccionDeRol extends JPanel {
         Iniciador.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                usuario.setRol("Iniciador");
+                usuario.setRol(String.valueOf(Roles.INICIADOR));
                 System.out.println(usuario.getRol());
             }
         });
