@@ -168,6 +168,7 @@ public class Juego extends JFrame {
         salirButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
+                guardar
             }
         });
 

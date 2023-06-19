@@ -1,8 +1,12 @@
 import javax.swing.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
         Usuario usuario = new Usuario();
+        String objetoString = usuario.toString();
         JProgressBar experienceLabel =new JProgressBar();
 
 
@@ -35,6 +39,18 @@ public class Main {
         });
 
         hiloXpAndCoins.start();
+    }
 
+    public void cargar(String objetoString){
+        try {
+            FileWriter archivo = new FileWriter("archivo.txt");
+            BufferedWriter escritor = new BufferedWriter(archivo);
+            // Escribir la cadena en el archivo
+            escritor.write(objetoString);
+            // Cerrar el BufferedWriter
+            escritor.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
