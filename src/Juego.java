@@ -46,8 +46,6 @@ public class Juego extends JFrame {
 
     public Juego(Usuario usuario, JProgressBar experienceLabel) {
         PlayMusic("resources\\musica\\melodia.wav");
-
-
         usuario.setStartTime(System.currentTimeMillis()); //Seteo tiempo de inicio
 
         setExtendedState(JFrame.MAXIMIZED_BOTH);
