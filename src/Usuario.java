@@ -1,70 +1,82 @@
 import java.util.*;
 
 public class Usuario {
-    private List<String> skins = new ArrayList<>();
-    private int xp=0;
-    private int nivel=0;
-    private int coins=0;
-    private boolean promoGanada=false;
-    private long minutosJugados=0;
+    private List<String> skins;
+    private int xp;
+    private int nivel;
+    private int coins;
+    private boolean promoGanada;
+    private long minutosJugados;
     private long startTime;
     private long endTime;
-    private int torneosJugados=0;
-    private int tapsCount=0;
-    private int vecesSmufeado=0;
-    private Inversiones inversiones = new Inversiones();
-    private String RolPrincipal = "Duelista";
-    private double experienceMultiplier = 1;
-    private HashMap<String, Integer> Roles = new HashMap<>();;
-    {
-        Roles.put("Duelista", 0);
-        Roles.put("Centinela", 0);
-        Roles.put("Smoker", 0);
-        Roles.put("Iniciador", 0);
-    }
-    MiHashMap<String,Integer> coach = new MiHashMap();{
-        coach.agregarElemento("1",0);
-        coach.agregarElemento("2",0);
-        coach.agregarElemento("3",0);
-        coach.agregarElemento("4",0);
-        coach.agregarElemento("5",0);
-    }
+    private int torneosJugados;
+    private int tapsCount;
+    private int vecesSmufeado;
+    private Inversiones inversiones;
+    private String RolPrincipal;
+    private double experienceMultiplier;
+    private HashMap<String, Integer> Roles;
+    private Coach[] coach;
 
-    MiHashMap<String,Integer> eloBoost = new MiHashMap();{
-        eloBoost.agregarElemento("1",0);
-        eloBoost.agregarElemento("2",0);
-        eloBoost.agregarElemento("3",0);
-        eloBoost.agregarElemento("4",0);
-        eloBoost.agregarElemento("5",0);
-    }
-    private Periferico[] perifericos;{
-        perifericos = new Periferico[5];
-        perifericos[0] = new Periferico("Teclado");
-        perifericos[1] = new Periferico("Mouse");
-        perifericos[2] = new Periferico("Auriculares");
-        perifericos[3] = new Periferico("Rgb");
-        perifericos[4] = new Periferico("MousePad");
-    }
+    private eloboost[] eloboost;
+
+    private Periferico[] perifericos;
 
     public Usuario(){
-        skins.add("default");
-        coins=1000000;
+        skins = new ArrayList<>();
+        skins.add("Deafult");
+        xp=0;
+        nivel=0;
+        coins=0;
+        promoGanada=false;
+        minutosJugados=0;
+        startTime=0;
+        endTime=0;
+        torneosJugados=0;
+        tapsCount=0;
+        vecesSmufeado=0;
+        inversiones = new Inversiones();
+        RolPrincipal = "Duelista";
+        experienceMultiplier = 1;
+        Roles = new HashMap<>();
+            Roles.put("Duelista", 0);
+            Roles.put("Centinela", 0);
+            Roles.put("Smoker", 0);
+            Roles.put("Iniciador", 0);
+            coach  = new Coach[5];
+            coach[0] = new Coach("1");
+            coach[1] = new Coach("2");
+            coach[2] = new Coach("3");
+            coach[3] = new Coach("4");
+            coach[4] = new Coach("5");
+            eloboost = new eloboost[5];
+            eloboost[0] = new eloboost("1");
+            eloboost[1] = new eloboost("2");
+            eloboost[2] = new eloboost("3");
+            eloboost[3] = new eloboost("4");
+            eloboost[4] = new eloboost("5");
+            perifericos = new Periferico[5];
+            perifericos[0] = new Periferico("Teclado");
+            perifericos[1] = new Periferico("Mouse");
+            perifericos[2] = new Periferico("Auriculares");
+            perifericos[3] = new Periferico("Rgb");
+            perifericos[4] = new Periferico("MousePad");
     }
 
-    public MiHashMap<String, Integer> getCoach() {
+    public Coach[] getCoach() {
         return coach;
     }
 
-    public void setCoach(MiHashMap<String, Integer> coach) {
+    public void setCoach(Coach[] coach) {
         this.coach = coach;
     }
 
-    public MiHashMap<String, Integer> getEloBoost() {
-        return eloBoost;
+    public eloboost[] getEloboost() {
+        return eloboost;
     }
 
-    public void setEloBoost(MiHashMap<String, Integer> eloBoost) {
-        this.eloBoost = eloBoost;
+    public void setEloboost(eloboost[] eloboost) {
+        this.eloboost = eloboost;
     }
 
     public Periferico[] getPerifericos() {
@@ -274,15 +286,7 @@ public class Usuario {
 
     public int sumarBoost(){
         int aux=0;
-        Set<String> claves = new HashSet<>(coach.obtenerClaves());
-        claves.addAll(eloBoost.obtenerClaves());
 
-        for (String clave : claves) {
-            int valorCoach = coach.obtenerElemento(clave) != null ? coach.obtenerElemento(clave) : 0;
-            int valorEloBoost = eloBoost.obtenerElemento(clave) != null ? eloBoost.obtenerElemento(clave) : 0;
-            int suma = valorCoach + valorEloBoost;
-            aux += suma;
-        }
         for(Periferico dato : perifericos){
             if(nivel>=5) {
                 if(dato.getGold()==true){
@@ -292,8 +296,52 @@ public class Usuario {
                 aux += dato.getNivel();
             }
         }
-        System.out.println("boost:"+aux);
         return aux;
     }
 
+    public Coach coachMayor(){
+        Coach aux = new Coach("aux");
+        for(Coach c : coach){
+            if(c.getNivel()>aux.getNivel()){
+                aux.setNivel(c.getNivel());
+            }
+        }
+        return aux;
+    }
+
+    public eloboost eloboostMayor(){
+         eloboost aux = new eloboost("aux");
+        for(eloboost e : eloboost){
+            if(e.getNivel()>aux.getNivel()){
+                aux.setNivel(e.getNivel());
+            }
+        }
+        return aux;
+    }
+
+    public void setearBoosteos(){
+        for(eloboost e : eloboost){
+                e.setNivel(0);
+        }
+        for(Coach c : coach){
+            c.setNivel(0);
+            }
+        }
+
+
+    public void setPerifericos(Periferico[] perifericos) {
+        this.perifericos = perifericos;
+    }
+
+    public void setRolPrincipal(String rolPrincipal) {
+        this.RolPrincipal = rolPrincipal;
+    }
+
+    public void setExperienceMultiplier(double experienceMultiplier) {
+        this.experienceMultiplier = experienceMultiplier;
+    }
+
+    public <V, K> Map<K,V> getRoles() {
+        return (Map<K, V>) Roles;
+    }
 }

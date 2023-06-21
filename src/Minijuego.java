@@ -4,10 +4,8 @@ import java.awt.event.*;
 import java.util.TimerTask;
 import java.util.Timer;
 
-public class Minijuego extends JPanel{
+public class Minijuego extends JPanel {
 
-    private static final int FRAME_WIDTH = 1920;
-    private static final int FRAME_HEIGHT = 1080;
     private static final int OBJECT_SIZE = 50;
     private static final int CLICK_RADIUS = 30;
     private JButton closeButton;
@@ -22,7 +20,6 @@ public class Minijuego extends JPanel{
     private boolean isTimerRunning = false;
     private boolean ganada = false;
 
-
     public int getScore() {
         return score;
     }
@@ -35,29 +32,29 @@ public class Minijuego extends JPanel{
         score = 0;
 
         // Configurar la ventana
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        adaptarVentana();
+
         setLayout(new FlowLayout());
-        setPreferredSize(screenSize);
 
         closeButton = new JButton("X");
-        add(closeButton, BorderLayout.PAGE_END);
+        add(closeButton);
         closeButton.setBorderPainted(false);
         closeButton.setFocusPainted(false);
         closeButton.setBackground(Color.MAGENTA.darker());
 
         victoria = new JLabel("Victoria");
-        add(victoria,BorderLayout.CENTER);
+        add(victoria);
         victoria.setVisible(false);
 
         closeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(ganada!=true) {
+                if (!ganada) {
                     usuario.setPromoGanada(true);
                 }
-                    usuario.agregarCoins(score);
+                usuario.agregarCoins(score);
                 victoria.setVisible(false);
                 cardLayout.show(panelPrincipal, "menu");
-               // resetMinijuego(panelPrincipal,cardLayout, usuario);
+                // resetMinijuego(panelPrincipal,cardLayout, usuario);
             }
         });
 
@@ -70,9 +67,10 @@ public class Minijuego extends JPanel{
     }
 
     public void startMinijuego(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
-        resetMinijuego(panelPrincipal,cardLayout, usuario);
+        adaptarVentana();
+        resetMinijuego(panelPrincipal, cardLayout, usuario);
         if (!minijuegoIniciado) {
-            score=0;
+            score = 0;
             minijuegoIniciado = true;
             usuario.sumarTorneos();
             ActionListener actionListener = new ActionListener() {
@@ -82,74 +80,76 @@ public class Minijuego extends JPanel{
                         menos();
                         //System.out.println(vecesEjecutado);
                     } else {
-                        resetMinijuego(panelPrincipal,cardLayout,usuario);
+                        resetMinijuego(panelPrincipal, cardLayout, usuario);
                     }
                 }
             };
-            if(!isTimerRunning){
+            if (!isTimerRunning) {
                 int delay = 1000; // 1 segundo
                 Timer timer = new Timer();
-                    timer.scheduleAtFixedRate(new TimerTask() {
-                        public void run() {
-                            actionListener.actionPerformed(null);
-                        }
-                    }, delay, delay);
+                timer.scheduleAtFixedRate(new TimerTask() {
+                    public void run() {
+                        actionListener.actionPerformed(null);
+                    }
+                }, delay, delay);
 
-                    isTimerRunning = true;
-                }
+                isTimerRunning = true;
             }
+        }
     }
 
     private void resetMinijuego(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
-        int limite = (int)((usuario.getNivel()*10)/3);
+        int limite = (int) ((usuario.getNivel() * 10) / 3);
         System.out.println(limite);
 
-        if(score<limite) {
+        if (score < limite) {
             minijuegoIniciado = false;
             vecesEjecutado = 30;
             score = 0;
-        }
-        else{
+        } else {
             minijuegoIniciado = true;
             victoria.setVisible(true);
             ganada = true;
         }
     }
 
-
-    public void menos(){
+    public void menos() {
         vecesEjecutado--;
     }
 
-
+    private void adaptarVentana() {
+        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        if (gd.isFullScreenSupported()) {
+            gd.setFullScreenWindow(SwingUtilities.getWindowAncestor(this));
+        }
+    }
 
     private void generateObjectPosition() {
-        objectX = (int) (Math.random() * (FRAME_WIDTH - OBJECT_SIZE));
-        objectY = (int) (Math.random() * (FRAME_HEIGHT - OBJECT_SIZE));
+        objectX = (int) (Math.random() * (getWidth() - OBJECT_SIZE));
+        objectY = (int) (Math.random() * (getHeight() - OBJECT_SIZE));
     }
 
     private void checkClick(int x, int y) {
         int centerX = objectX + OBJECT_SIZE / 2;
         int centerY = objectY + OBJECT_SIZE / 2;
         int distance = (int) Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
-        int a = 0;
 
         if (distance <= CLICK_RADIUS) {
             score++;
             generateObjectPosition();
             repaint();
-        }else {
-            if(score > 0){
-            score--;
+        } else {
+            if (score > 0) {
+                score--;
             }
             generateObjectPosition();
             repaint();
-            }
         }
+    }
 
     @Override
-    public void paint(Graphics g) {
-        super.paint(g);
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
 
         // Dibujar el objeto negro
         g.setColor(Color.BLACK);

@@ -1,21 +1,10 @@
-public class Periferico {
-    private int nivel=0;
-    String nombre;
-    Boolean gold=false;
+public class Periferico extends Boost {
+    Boolean gold = false;
 
     public Periferico(String nombre) {
-        this.nivel = 0;
-        this.nombre = nombre;
-        this.gold = false;
+        super(nombre);
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 
     public Boolean getGold() {
         return gold;
@@ -26,15 +15,10 @@ public class Periferico {
     }
 
 
-    public int getNivel() {
-        return nivel;
-    }
-
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
-    }
-
-    public void subirNivel(){
-        if(nivel<=4){nivel++;}
+    public void subirNivel() {
+        if (getNivel() <= 4) {
+            int aux = getNivel();
+            setNivel(aux++);
+        }
     }
 }

@@ -187,9 +187,13 @@ public class panelBoost extends JPanel {
         Coach1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (usuario.getCoins() >= 1000 && usuario.getCoach().obtenerElemento("1")<1) {
+                if (usuario.getCoins() >= 1000 && (usuario.getCoach()[0].getNivel()) < 1) {
                     usuario.compra(1000);
-                    usuario.getCoach().agregarElemento("1",1);
+                    usuario.getCoach()[0].setNivel(1);
+                    usuario.getCoach()[0].sumarDuracion();
+                }
+                else if(usuario.getCoins() >= 1000 && (usuario.getCoach()[0].getNivel()) == 1){
+                    usuario.getCoach()[0].sumarDuracion();
                 }
             }
         });
@@ -197,9 +201,13 @@ public class panelBoost extends JPanel {
         Coach2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (usuario.getCoins() >= 1000 && usuario.getCoach().obtenerElemento("2")<1) {
+                if (usuario.getCoins() >= 1000 && (usuario.getCoach()[1].getNivel()) < 1) {
                     usuario.compra(1000);
-                    usuario.getCoach().agregarElemento("2",1);
+                    usuario.getCoach()[1].setNivel(2);
+                    usuario.getCoach()[1].sumarDuracion();
+                }
+                else if(usuario.getCoins() >= 1000 && (usuario.getCoach()[1].getNivel()) == 2){
+                    usuario.getCoach()[1].sumarDuracion();
                 }
             }
         });
@@ -207,74 +215,105 @@ public class panelBoost extends JPanel {
         Coach3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (usuario.getCoins() >= 1000 && usuario.getCoach().obtenerElemento("3")<1) {
+                if (usuario.getCoins() >= 1000 && (usuario.getCoach()[2].getNivel()) < 1) {
                     usuario.compra(1000);
-                    usuario.getCoach().agregarElemento("3",1);
+                    usuario.getCoach()[2].setNivel(3);
+                    usuario.getCoach()[2].sumarDuracion();
+                }
+                else if(usuario.getCoins() >= 1000 && (usuario.getCoach()[2].getNivel()) == 3){
+                    usuario.getCoach()[2].sumarDuracion();
                 }
             }
         });
         Coach4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (usuario.getCoins() >= 1000 && usuario.getCoach().obtenerElemento("4")<1) {
+                if (usuario.getCoins() >= 1000 && (usuario.getCoach()[3].getNivel()) < 1) {
                     usuario.compra(1000);
-                    usuario.getCoach().agregarElemento("4",1);
+                    usuario.getCoach()[3].setNivel(4);
+                    usuario.getCoach()[3].sumarDuracion();
+                }
+                else if(usuario.getCoins() >= 1000 && (usuario.getCoach()[3].getNivel()) == 4){
+                    usuario.getCoach()[3].sumarDuracion();
                 }
             }
         });
         Coach5.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (usuario.getCoins() >= 1000 && usuario.getCoach().obtenerElemento("5")<1) {
-                    usuario.compra(1000);
-                    usuario.getCoach().agregarElemento("5",1);
-                }
+                    if (usuario.getCoins() >= 1000 && (usuario.getCoach()[4].getNivel()) < 1) {
+                        usuario.compra(1000);
+                        usuario.getCoach()[4].setNivel(5);
+                        usuario.getCoach()[4].sumarDuracion();
+                    }
+                    else if(usuario.getCoins() >= 1000 && (usuario.getCoach()[4].getNivel()) == 5){
+                        usuario.getCoach()[4].sumarDuracion();
+                    }
             }
         });
 
         eloBoost1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (usuario.getCoins() >= 1000 && usuario.getEloBoost().obtenerElemento("1")<1) {
+                if (usuario.getCoins() >= 1000 && (usuario.getEloboost()[0].getNivel()) < 1) {
                     usuario.compra(1000);
-                    usuario.getCoach().agregarElemento("1",1);
+                    usuario.getEloboost()[0].setNivel(1);
+                    usuario.getEloboost()[0].sumarDuracion();
+                }
+                else if(usuario.getCoins() >= 1000 && (usuario.getEloboost()[0].getNivel()) == 1){
+                    usuario.getEloboost()[0].sumarDuracion();
                 }
             }
         });
         eloBoost2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (usuario.getCoins() >= 1000 && usuario.getEloBoost().obtenerElemento("2")<1) {
+                if (usuario.getCoins() >= 1000 && (usuario.getEloboost()[1].getNivel()) < 1) {
                     usuario.compra(1000);
-                    usuario.getCoach().agregarElemento("2",1);
+                    usuario.getEloboost()[1].setNivel(2);
+                    usuario.getEloboost()[1].sumarDuracion();
+                }
+                else if(usuario.getCoins() >= 1000 && (usuario.getEloboost()[1].getNivel()) == 2){
+                    usuario.getEloboost()[1].sumarDuracion();
                 }
             }
         });
         eloBoost3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (usuario.getCoins() >= 1000 && usuario.getEloBoost().obtenerElemento("3")<1) {
+                if (usuario.getCoins() >= 1000 && (usuario.getEloboost()[2].getNivel()) < 1) {
                     usuario.compra(1000);
-                    usuario.getCoach().agregarElemento("3",1);
+                    usuario.getEloboost()[2].setNivel(3);
+                    usuario.getEloboost()[2].sumarDuracion();
+                }
+                else if(usuario.getCoins() >= 1000 && (usuario.getEloboost()[2].getNivel()) == 3){
+                    usuario.getEloboost()[2].sumarDuracion();
                 }
             }
         });
         eloBoost4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (usuario.getCoins() >= 1000 && usuario.getEloBoost().obtenerElemento("4")<1) {
+                if (usuario.getCoins() >= 1000 && (usuario.getEloboost()[3].getNivel()) < 1) {
                     usuario.compra(1000);
-                    usuario.getCoach().agregarElemento("4",1);
+                    usuario.getEloboost()[3].setNivel(4);
+                    usuario.getEloboost()[3].sumarDuracion();
+                }
+                else if(usuario.getCoins() >= 1000 && (usuario.getEloboost()[3].getNivel()) == 4){
+                    usuario.getEloboost()[3].sumarDuracion();
                 }
             }
         });
         eloBoost5.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (usuario.getCoins() >= 1000 && usuario.getEloBoost().obtenerElemento("5")<1) {
+                if (usuario.getCoins() >= 1000 && (usuario.getEloboost()[4].getNivel()) < 1) {
                     usuario.compra(1000);
-                    usuario.getCoach().agregarElemento("5",1);
-                    System.out.println("555555");
+                    usuario.getEloboost()[4].setNivel(5);
+                    usuario.getEloboost()[4].sumarDuracion();
+                }
+                else if(usuario.getCoins() >= 1000 && (usuario.getEloboost()[4].getNivel()) == 5){
+                    usuario.getEloboost()[4].sumarDuracion();
                 }
             }
         });

@@ -52,6 +52,7 @@ public class Smurfear extends JPanel {
                     usuario.setCoins(0);
                     usuario.setTorneosJugados(0);
                     usuario.setPromoGanada(false);
+
                     System.out.println("Smurfeado");
                 }
                 else {
