@@ -30,11 +30,10 @@ public class Juego extends JFrame {
     private int estadoMusica;
     private Clip clip;
     private boolean isButtonPressed = false;
+    private ImageIcon suelto = new ImageIcon("resources\\sprites\\balduReyna.jpeg");
+    private ImageIcon imagenRedimensionada = new ImageIcon(suelto.getImage().getScaledInstance(1920, 1080, java.awt.Image.SCALE_SMOOTH));
+    //private ImageIcon apretado = new ImageIcon("resources\\sprites\\balduReyna.jpeg");
 
-
-
-    private ImageIcon suelto = new ImageIcon("resources\\sprites\\netsss.jpeg");
-    private ImageIcon apretado = new ImageIcon("resources\\sprites\\netsss.jpeg");
 
     public CardLayout getCardLayout() {
         return cardLayout;
@@ -53,13 +52,14 @@ public class Juego extends JFrame {
         setLocationRelativeTo(null);
         setUndecorated(true);
 
+
         panelPrincipal = new JPanel();
         cardLayout = new CardLayout();
         panelPrincipal.setLayout(cardLayout);
 
         JPanel panelMenu = crearPanelMenu(usuario, experienceLabel);
         minijuego = crearPanelMinijuego(panelPrincipal, cardLayout, usuario);
-        configuracion = crearPanelConfiguracion(panelPrincipal, cardLayout, estadoMusica);
+        configuracion = crearPanelConfiguracion(panelPrincipal, cardLayout, estadoMusica, clip);
         Tienda = crearPanelTienda(panelPrincipal, cardLayout, usuario);
         armario = crearPanelArmario(panelPrincipal, cardLayout, usuario);
         estadistica = crearPanelEstadistica(panelPrincipal, cardLayout, usuario);
@@ -93,8 +93,8 @@ public class Juego extends JFrame {
         return minijuego;
     }
 
-    private Configuracion crearPanelConfiguracion(JPanel panelPrincipal, CardLayout cardLayout, int estadoMusica) {
-        Configuracion configuracion = new Configuracion(panelPrincipal, cardLayout, estadoMusica);
+    private Configuracion crearPanelConfiguracion(JPanel panelPrincipal, CardLayout cardLayout, int estadoMusica, Clip clip) {
+        Configuracion configuracion = new Configuracion(panelPrincipal, cardLayout, estadoMusica, clip);
         return configuracion;
     }
 
@@ -151,8 +151,8 @@ public class Juego extends JFrame {
         JButton inversiones = new JButton("Inversiones");
 
         levelLabel = new JLabel("Rango: " + cambiarNivel(usuario.getNivel(), usuario));
-        JButton clickButton = new JButton(suelto);
-        JButton closeButton = new JButton(apretado);
+        JButton clickButton = new JButton(imagenRedimensionada);
+        JButton closeButton = new JButton(imagenRedimensionada);
 
 
         closeButton.setBorderPainted(false);
@@ -255,13 +255,13 @@ public class Juego extends JFrame {
             public void mousePressed(MouseEvent e) {
                 isButtonPressed = true;
                 clickButton.setEnabled(false);
-                clickButton.setIcon(apretado);
+                clickButton.setIcon(imagenRedimensionada);
             }
 
             public void mouseReleased(MouseEvent e) {
                 isButtonPressed = false;
                 clickButton.setEnabled(true);
-                clickButton.setIcon(suelto);
+                clickButton.setIcon(imagenRedimensionada);
             }
 
         });
