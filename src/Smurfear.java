@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Smurfear extends JPanel {
     private JButton closeButton;
-
     private JButton smurfear;
 
 
@@ -48,9 +47,7 @@ public class Smurfear extends JPanel {
                     usuario.aumentarBoosteoSmurf();
                     usuario.setXp(0);
                     usuario.setearNivelesRol();
-                    usuario.borrarSkins();
-                    usuario.setCoins(0);
-                    usuario.setTorneosJugados(0);
+                    usuario.agregarCoins(1000);
                     usuario.setPromoGanada(false);
 
                     System.out.println("Smurfeado");

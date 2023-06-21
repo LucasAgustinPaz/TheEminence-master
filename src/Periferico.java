@@ -17,8 +17,7 @@ public class Periferico extends Boost {
 
     public void subirNivel() {
         if (getNivel() <= 4) {
-            int aux = getNivel();
-            setNivel(aux++);
+            setNivel(getNivel()+1);
         }
     }
 }

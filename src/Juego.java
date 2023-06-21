@@ -150,7 +150,7 @@ public class Juego extends JFrame {
         JButton smurfear = new JButton("Smurfear");
         JButton inversiones = new JButton("Inversiones");
 
-        levelLabel = new JLabel("Rango: " + cambiarNivel(usuario.getNivel()));
+        levelLabel = new JLabel("Rango: " + cambiarNivel(usuario.getNivel(), usuario));
         JButton clickButton = new JButton(suelto);
         JButton closeButton = new JButton(apretado);
 
@@ -271,9 +271,10 @@ public class Juego extends JFrame {
 
     public boolean startTorneo(int level, Usuario usuario) {
 
-        System.out.println("Torneo Iniciado");
         int limite = (int) ((usuario.getNivel() * 10) / 3);
-        if (minijuego.getScore() < limite) {
+
+        if (minijuego.getScore() < limite && usuario.getNivel() < 9) {
+            System.out.println("Torneo Iniciado");
             cardLayout.show(panelPrincipal, "minijuego");
             minijuego.startMinijuego(panelPrincipal, cardLayout, usuario);
         }
@@ -283,7 +284,7 @@ public class Juego extends JFrame {
         return false;
     }
 
-    public String cambiarNivel(int level) {
+    public String cambiarNivel(int level, Usuario user) {
         String nombreNivel = "Hierro";
 
         if (level == 2) {
@@ -294,6 +295,7 @@ public class Juego extends JFrame {
             nombreNivel = "Oro";
         } else if (level == 5) {
             nombreNivel = "Platino";
+            user.agregarCoins(1000);
         } else if (level == 6) {
             nombreNivel = "Diamante";
         } else if (level == 7) {
@@ -309,33 +311,29 @@ public class Juego extends JFrame {
 
 
     private void gainExperience(int amount, Usuario usuario, JProgressBar experienceLabel) {
-        usuario.subirXP((amount * (1 + usuario.obtenerNivelRango() + usuario.getVecesSmufeado() + usuario.sumarBoost() + usuario.coachMayor().getNivel())));
+        usuario.subirXP((amount * (1 + usuario.obtenerNivelRango() + usuario.sumarBoost() + usuario.coachMayor().getNivel())));
         experienceLabel.setValue(usuario.getXp());
 
-        if (usuario.getTapsCount() < (usuario.obtenerNivelRango()) * 100) {
-            usuario.subirNivelRango();
-        }
-
-        if (usuario.getNivel() <= 9) {
-            if (usuario.getXp() >= usuario.getNivel() * 100 && startTorneo(usuario.getNivel(), usuario)) {
+        if (usuario.getNivel() < 9) {
+            if (usuario.getXp() >= usuario.getNivel() * 50000 && startTorneo(usuario.getNivel(), usuario)) {
                 minijuego.setScore(0);
                 usuario.subirNivel();
                 usuario.setPromoGanada(false);
                 usuario.aumentaExperienceMultiplier();
                 usuario.coachMayor().restarDuracion();
                 usuario.eloboostMayor().restarDuracion();
-                levelLabel.setText("Rango: " + cambiarNivel(usuario.getNivel()));
+                levelLabel.setText("Rango: " + cambiarNivel(usuario.getNivel(), usuario));
 
-                if (!cambiarNivel(usuario.getNivel()).equals("Radiante")) {
+                if (!cambiarNivel(usuario.getNivel(), usuario).equals("Radiante")) {
                     usuario.setXp(0);
                 }
             }
         } else {
-            usuario.agregarCoins(10);
+            usuario.agregarCoins(2);
         }
 
 
-        experienceLabel.setMaximum(usuario.getNivel() * 100);
+        experienceLabel.setMaximum(usuario.getNivel() * 50000);
         experienceLabel.setValue(usuario.getXp());
 
     }

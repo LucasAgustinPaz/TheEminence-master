@@ -27,7 +27,7 @@ public class Usuario {
         skins.add("Deafult");
         xp=0;
         nivel=0;
-        coins=0;
+        coins=1250;
         promoGanada=false;
         minutosJugados=0;
         startTime=0;
@@ -195,7 +195,6 @@ public class Usuario {
     public void setRol(String rol) {
         this.RolPrincipal = rol;
         reubicarClaveAlPrincipio(rol);
-
     }
 
 
@@ -253,7 +252,7 @@ public class Usuario {
        }
 
        public void aumentarBoosteoSmurf(){
-        vecesSmufeado += 2;
+        vecesSmufeado += 100;
        }
 
        public void setearNivelesRol(){
@@ -287,15 +286,18 @@ public class Usuario {
     public int sumarBoost(){
         int aux=0;
 
-        for(Periferico dato : perifericos){
-            if(nivel>=5) {
-                if(dato.getGold()==true){
-                aux += dato.getNivel();
-                }
-            }else{
+        if(nivel>= 5){
+        for(Periferico dato : perifericos) {
+            if (dato.getGold() == true) {
                 aux += dato.getNivel();
             }
         }
+        }else{
+            for(Periferico dato : perifericos){
+                aux += dato.getNivel();
+            }
+        }
+
         return aux;
     }
 
