@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        Usuario usuario = leerArchivoComoObjeto("D:\\Facultad\\Programacion 3\\Proyecto final\\resources\\usuario.json");
+        Usuario usuario = leerArchivoComoObjeto("resources\\usuario.json");
         JProgressBar experienceLabel =new JProgressBar();
 
 
@@ -23,7 +23,7 @@ public class Main {
         Thread hiloXpAndCoins = new Thread(new Runnable() {
             public void run() {
                 while (true) {
-                    usuario.subirXP((usuario.sumarBoost()) + (usuario.getVecesSmufeado()));
+                    usuario.subirXP((usuario.sumarBoost()) + (usuario.getVecesSmufeado()) + usuario.eloboostMayor().getNivel());
                     usuario.gananciaInversiones();
                     System.out.println("coins: "+usuario.getCoins());
                     System.out.println("userxp: " + usuario.getXp());

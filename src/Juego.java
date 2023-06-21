@@ -46,8 +46,6 @@ public class Juego extends JFrame {
 
     public Juego(Usuario usuario, JProgressBar experienceLabel) {
         PlayMusic("resources\\musica\\melodia.wav");
-        usuario.setNivel(1);
-        usuario.setXp(0);
 
 
         usuario.setStartTime(System.currentTimeMillis()); //Seteo tiempo de inicio
@@ -171,7 +169,7 @@ public class Juego extends JFrame {
 
         salirButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                guardarUsuarioComoJSON(usuario,"D:\\Facultad\\Programacion 3\\Proyecto final\\resources\\usuario");
+                guardarUsuarioComoJSON(usuario,"resources\\usuario.json");
                 System.exit(0);
             }
         });
@@ -313,7 +311,7 @@ public class Juego extends JFrame {
 
 
     private void gainExperience(int amount, Usuario usuario, JProgressBar experienceLabel) {
-        usuario.subirXP((amount * (1 + usuario.obtenerNivelRango() + usuario.getVecesSmufeado() + usuario.sumarBoost())));
+        usuario.subirXP((amount * (1 + usuario.obtenerNivelRango() + usuario.getVecesSmufeado() + usuario.sumarBoost() + usuario.coachMayor().getNivel())));
         experienceLabel.setValue(usuario.getXp());
 
         if (usuario.getTapsCount() < (usuario.obtenerNivelRango()) * 100) {
@@ -326,6 +324,8 @@ public class Juego extends JFrame {
                 usuario.subirNivel();
                 usuario.setPromoGanada(false);
                 usuario.aumentaExperienceMultiplier();
+                usuario.coachMayor().restarDuracion();
+                usuario.eloboostMayor().restarDuracion();
                 levelLabel.setText("Rango: " + cambiarNivel(usuario.getNivel()));
 
                 if (!cambiarNivel(usuario.getNivel()).equals("Radiante")) {
