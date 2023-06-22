@@ -20,8 +20,6 @@ public class Minijuego extends JPanel {
     private boolean isTimerRunning = false;
     private boolean ganada = false;
 
-    private ImageIcon victoriaimagen = new ImageIcon("resources\\sprites\\Assets\\UI\\panel_victoria.png");
-
     public int getScore() {
         return score;
     }
@@ -36,7 +34,7 @@ public class Minijuego extends JPanel {
         // Configurar la ventana
         adaptarVentana();
 
-        setLayout(new BorderLayout());
+        setLayout(new FlowLayout());
 
         closeButton = new JButton(Main.cerrar);
         closeButton.setBorder(Main.emptyBorder);
@@ -44,6 +42,19 @@ public class Minijuego extends JPanel {
         closeButton.setOpaque(false);
         closeButton.setContentAreaFilled(false);
         closeButton.setBorderPainted(false);
+
+        victoria = new JLabel("Victoria");
+        add(victoria);
+        victoria.setVisible(false);
+
+        // Crear un panel para el botón de cerrar
+        JPanel closeButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        closeButtonPanel.setBackground(Color.BLACK);
+        closeButtonPanel.add(closeButton);
+
+
+        add(closeButtonPanel, BorderLayout.PAGE_END);
+
         closeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!ganada) {
@@ -52,21 +63,9 @@ public class Minijuego extends JPanel {
                 usuario.agregarCoins(score);
                 victoria.setVisible(false);
                 cardLayout.show(panelPrincipal, "menu");
-                //resetMinijuego(panelPrincipal,cardLayout, usuario);
+                // resetMinijuego(panelPrincipal,cardLayout, usuario);
             }
         });
-
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setOpaque(false);
-        buttonPanel.add(closeButton);
-
-        victoria = new JLabel(victoriaimagen);
-        victoria.setHorizontalAlignment(JLabel.CENTER);
-        victoria.setVerticalAlignment(JLabel.TOP);
-        victoria.setVisible(false);
-
-        add(victoria, BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.SOUTH);
 
         // Agregar MouseListener para detectar clics en el objeto
         addMouseListener(new MouseAdapter() {
@@ -178,13 +177,5 @@ public class Minijuego extends JPanel {
 
         g.drawString(scoreText, textX, textY);
         g.drawString(timeText, textX, textY + textHeight); // Dibujar la variable vecesEjecutado
-    }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Minijuego");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(new Minijuego(null, null, null));
-        frame.pack();
-        frame.setVisible(true);
     }
 }
