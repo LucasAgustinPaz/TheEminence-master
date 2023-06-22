@@ -34,17 +34,24 @@ public class Minijuego extends JPanel {
         // Configurar la ventana
         adaptarVentana();
 
-        setLayout(new FlowLayout());
+        setLayout(new BorderLayout());
 
-        closeButton = new JButton("X");
-        add(closeButton);
+        closeButton = new JButton(Main.cerrar);
+        closeButton.setBorder(Main.emptyBorder);
+        closeButton.setBackground(Main.transparentColor);
+        closeButton.setOpaque(false);
+        closeButton.setContentAreaFilled(false);
         closeButton.setBorderPainted(false);
-        closeButton.setFocusPainted(false);
-        closeButton.setBackground(Color.MAGENTA.darker());
 
         victoria = new JLabel("Victoria");
-        add(victoria);
-        victoria.setVisible(false);
+        add(victoria, BorderLayout.NORTH);
+
+        // Crear un panel para el botón de cerrar
+        JPanel closeButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        closeButtonPanel.setBackground(Color.BLACK);
+        closeButtonPanel.add(closeButton);
+
+        add(closeButtonPanel, BorderLayout.SOUTH);
 
         closeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -54,7 +61,7 @@ public class Minijuego extends JPanel {
                 usuario.agregarCoins(score);
                 victoria.setVisible(false);
                 cardLayout.show(panelPrincipal, "menu");
-                resetMinijuego(panelPrincipal,cardLayout, usuario);
+                // resetMinijuego(panelPrincipal,cardLayout, usuario);
             }
         });
 
