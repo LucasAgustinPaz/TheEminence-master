@@ -13,6 +13,7 @@ public class Main {
     public static final ImageIcon origin = new ImageIcon("resources\\sprites\\Assets\\skins armas\\vandal_origin.png");
     public static final ImageIcon prime = new ImageIcon("resources\\sprites\\Assets\\skins armas\\vandal_prime.png");
     public static final ImageIcon reaven = new ImageIcon("resources\\sprites\\Assets\\skins armas\\vandal_origin.png");
+    //asd
 
     // Eliminar el borde del botón
     public static final Border emptyBorder = BorderFactory.createEmptyBorder();
