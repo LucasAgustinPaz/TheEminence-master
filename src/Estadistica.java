@@ -17,14 +17,17 @@ public class Estadistica extends JPanel {
         setLayout(new BorderLayout());
         setPreferredSize(screenSize);
 
-        JPanel closeButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        closeButton = new JButton("X");
+        JPanel closeButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        closeButtonPanel.setBackground(Color.BLACK);
+        closeButton = new JButton(Main.cerrar);
+        closeButton.setBorder(Main.emptyBorder);
+        closeButton.setBackground(Main.transparentColor);
+        closeButton.setOpaque(false);
+        closeButton.setContentAreaFilled(false);
         closeButton.setBorderPainted(false);
-        closeButton.setFocusPainted(false);
-        closeButton.setBackground(Color.MAGENTA.darker());
         closeButtonPanel.add(closeButton);
 
-        add(closeButtonPanel, BorderLayout.NORTH);
+        add(closeButtonPanel, BorderLayout.PAGE_END);
         closeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(panelPrincipal, "menu");
@@ -32,8 +35,7 @@ public class Estadistica extends JPanel {
         });
 
         JPanel statisticsPanel = new JPanel();
-        BoxLayout boxLayout = new BoxLayout(statisticsPanel, BoxLayout.Y_AXIS);
-        statisticsPanel.setLayout(boxLayout);
+        statisticsPanel.setLayout(new BoxLayout(statisticsPanel, BoxLayout.Y_AXIS));
 
         int verticalSpacing = 50; // Ajusta el espacio vertical entre los JLabels
 
@@ -59,7 +61,10 @@ public class Estadistica extends JPanel {
         horasJugadas.setBorder(new EmptyBorder(verticalSpacing, 0, 0, 0));
         statisticsPanel.add(horasJugadas);
 
-        add(statisticsPanel, BorderLayout.WEST);
+        JPanel centerPanel = new JPanel(new GridBagLayout());
+        centerPanel.add(statisticsPanel);
+
+        add(centerPanel, BorderLayout.CENTER);
     }
 
     public void actualizarEstadisticas(Usuario usuario) {
@@ -69,4 +74,3 @@ public class Estadistica extends JPanel {
         horasJugadas.setText("Minutos Jugados: " + usuario.sumarMinutos());
     }
 }
-

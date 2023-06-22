@@ -36,6 +36,9 @@ public class Usuario {
         tapsCount=0;
         vecesSmufeado=0;
         inversiones = new Inversiones();
+        inversiones.setInversion1(0);
+        inversiones.setInversion2(0);
+        inversiones.setInversion3(0);
         RolPrincipal = "Duelista";
         experienceMultiplier = 1;
         Roles = new HashMap<>();
@@ -66,139 +69,56 @@ public class Usuario {
     public Coach[] getCoach() {
         return coach;
     }
-
-    public void setCoach(Coach[] coach) {
-        this.coach = coach;
-    }
-
     public eloboost[] getEloboost() {
         return eloboost;
     }
-
-    public void setEloboost(eloboost[] eloboost) {
-        this.eloboost = eloboost;
-    }
-
     public Periferico[] getPerifericos() {
         return perifericos;
     }
-
-
     public double getExperienceMultiplier() {
         return experienceMultiplier;
     }
-
     public void aumentaExperienceMultiplier(){
         experienceMultiplier += 0.6;
     }
-
     public Inversiones getInversiones() {
         return inversiones;
     }
-
-    public void setInversiones(Inversiones inversiones) {
-        this.inversiones = inversiones;
-    }
-
-    public int getVecesSmufeado() {
-        return vecesSmufeado;
-    }
-
-    public void setVecesSmufeado(int vecesSmufeado) {
-        this.vecesSmufeado = vecesSmufeado;
-    }
-
-    public boolean isPromoGanada() {
-        return promoGanada;
-    }
-
+    public int getVecesSmufeado() {return vecesSmufeado;}
     public void setPromoGanada(boolean promoGanada) {
         this.promoGanada = promoGanada;
     }
-
     public int getTapsCount() {
         return tapsCount;
     }
-
-    public void setTapsCount(int tapsCount) {
-        this.tapsCount = tapsCount;
-    }
-
-    public List<String> getSkins() {
-        return skins;
-    }
-
-    public void setSkins(List<String> skins) {
-        this.skins = skins;
-    }
-
-    public int getXp() {
-        return xp;
-    }
-
-    public void setXp(int xp) {
-        this.xp = xp;
-    }
-
+    public List<String> getSkins() {return skins;}
+    public int getXp() {return xp;}
+    public void setXp(int xp) {this.xp = xp;}
     public int getNivel() {
         return nivel;
     }
-
     public void setNivel(int nivel) {
         this.nivel = nivel;
     }
-
     public int getCoins() {
         return coins;
     }
-
-    public void setCoins(int coins) {
-        this.coins = coins;
-    }
-
-    public long getMinutosJugados() {
-        return minutosJugados;
-    }
-
-    public void setMinutosJugados(long minutosJugados) {
-        this.minutosJugados = minutosJugados;
-    }
-
     public int getTorneosJugados() {
         return torneosJugados;
     }
-
-    public void setTorneosJugados(int torneosJugados) {
-        this.torneosJugados = torneosJugados;
-    }
-
     public String getRol() {
         return RolPrincipal;
     }
-
-    public long getStartTime() {
-        return startTime;
-    }
-
     public void setStartTime(long startTime) {
         this.startTime = startTime;
     }
-
-    public long getEndTime() {
-        return endTime;
-    }
-
     public void setEndTime(long endTime) {
         this.endTime = endTime;
     }
-
     public void setRol(String rol) {
         this.RolPrincipal = rol;
         reubicarClaveAlPrincipio(rol);
     }
-
-
-
     public void subirNivel(){
         nivel++;
     }
@@ -246,43 +166,29 @@ public class Usuario {
            }
 
        }
-
-       public void subirNivelRango(){
-        Roles.put(RolPrincipal,(obtenerNivelRango()+1));
-       }
-
        public void aumentarBoosteoSmurf(){
         vecesSmufeado += 100;
        }
-
        public void setearNivelesRol(){
            Roles.put("Duelista", 0);
            Roles.put("Centinela", 0);
            Roles.put("Smoker", 0);
            Roles.put("Iniciador", 0);
        }
-
-       public void borrarSkins(){
-        skins.clear();
-       }
-
        public void sumarClick(){
         tapsCount++;
        }
        public void sumarTorneos(){
         torneosJugados++;
        }
-
        public void gananciaInversiones(){
         agregarCoins((int)(inversiones.getInversion1()+ inversiones.getInversion2()+ inversiones.getInversion3()));
        }
-
        public long sumarMinutos(){
            long totalTimePlayed = endTime - startTime;
            minutosJugados = totalTimePlayed/ (1000 * 60);
            return minutosJugados;
     }
-
     public int sumarBoost(){
         int aux=0;
 
@@ -300,7 +206,6 @@ public class Usuario {
 
         return aux;
     }
-
     public Coach coachMayor(){
         Coach aux = new Coach("aux");
         for(Coach c : coach){
@@ -310,7 +215,6 @@ public class Usuario {
         }
         return aux;
     }
-
     public eloboost eloboostMayor(){
          eloboost aux = new eloboost("aux");
         for(eloboost e : eloboost){
@@ -320,30 +224,5 @@ public class Usuario {
         }
         return aux;
     }
-
-    public void setearBoosteos(){
-        for(eloboost e : eloboost){
-                e.setNivel(0);
-        }
-        for(Coach c : coach){
-            c.setNivel(0);
-            }
-        }
-
-
-    public void setPerifericos(Periferico[] perifericos) {
-        this.perifericos = perifericos;
-    }
-
-    public void setRolPrincipal(String rolPrincipal) {
-        this.RolPrincipal = rolPrincipal;
-    }
-
-    public void setExperienceMultiplier(double experienceMultiplier) {
-        this.experienceMultiplier = experienceMultiplier;
-    }
-
-    public <V, K> Map<K,V> getRoles() {
-        return (Map<K, V>) Roles;
-    }
 }
+

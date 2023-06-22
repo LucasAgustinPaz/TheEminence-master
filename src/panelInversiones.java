@@ -11,26 +11,47 @@ public class panelInversiones extends JPanel {
     private JButton inversion1Button;
     private JButton inversion2Button;
     private JButton inversion3Button;
-    private Image backgroundImage;
 
     public panelInversiones(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
-
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLayout(new BorderLayout());
-        setPreferredSize(screenSize);
 
-        closeButton = new JButton("X");
-        inversion1Button = new JButton("inversion1 $1000");
-        inversion2Button = new JButton("inversion2 $1500");
-        inversion3Button = new JButton("inversion3 $500");
+        closeButton = new JButton(Main.cerrar);
+        closeButton.setBorder(Main.emptyBorder);
+        closeButton.setBackground(Main.transparentColor);
+        closeButton.setOpaque(false);
+        closeButton.setContentAreaFilled(false);
+        closeButton.setBorderPainted(false);
 
-        // Establecer el fondo del panel
-        setOpaque(false);
+        inversion1Button = new JButton("DogeCoin $1000");
+        inversion1Button.setBorder(Main.emptyBorder);
+        inversion1Button.setBackground(Main.transparentColor);
+        inversion1Button.setOpaque(false);
+        inversion1Button.setContentAreaFilled(false);
+        inversion1Button.setBorderPainted(false);
+
+        inversion2Button = new JButton("Bitcoin $1500");
+        inversion2Button.setBorder(Main.emptyBorder);
+        inversion2Button.setBackground(Main.transparentColor);
+        inversion2Button.setOpaque(false);
+        inversion2Button.setContentAreaFilled(false);
+        inversion2Button.setBorderPainted(false);
+
+        inversion3Button = new JButton("Dolares $500");
+        inversion3Button.setBorder(Main.emptyBorder);
+        inversion3Button.setBackground(Main.transparentColor);
+        inversion3Button.setOpaque(false);
+        inversion3Button.setContentAreaFilled(false);
+        inversion3Button.setBorderPainted(false);
+
+
+        // Crear un panel para el botón de cerrar
+        JPanel closeButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        closeButtonPanel.setBackground(Color.BLACK);
+        closeButtonPanel.add(closeButton);
 
         // Crear un panel interno para los botones y establecer su diseño
-        JPanel buttonPanel = new JPanel();
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         buttonPanel.setOpaque(false);
-        buttonPanel.setLayout(new GridLayout(3, 1, 10, 10));
 
         // Agregar los botones al panel interno
         buttonPanel.add(inversion1Button);
@@ -38,7 +59,7 @@ public class panelInversiones extends JPanel {
         buttonPanel.add(inversion3Button);
 
         // Agregar los componentes al panel principal
-        add(closeButton, BorderLayout.SOUTH);
+        add(closeButtonPanel, BorderLayout.PAGE_END);
         add(buttonPanel, BorderLayout.CENTER);
 
         closeButton.addActionListener(new ActionListener() {
@@ -52,7 +73,6 @@ public class panelInversiones extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if (usuario.getCoins() >= 1000) {
                     usuario.getInversiones().aumentarInversion1();
-                    System.out.println("1");
                     usuario.compra(1000);
                 }
             }
@@ -79,12 +99,5 @@ public class panelInversiones extends JPanel {
                 }
             }
         });
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        // Dibujar la imagen de fondo
-        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), null);
     }
 }

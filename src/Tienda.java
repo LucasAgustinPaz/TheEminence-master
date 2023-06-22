@@ -2,53 +2,61 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 public class Tienda extends JPanel {
     private JButton closeButton;
     private JButton skin;
     private JButton boost;
 
-
-
-    public Tienda(JPanel panelPrincipal,CardLayout cardLayout,Usuario usuario){
+    public Tienda(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
         // Configurar la ventana
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        setLayout(new FlowLayout());
-        setPreferredSize(screenSize);
+        setLayout(new BorderLayout());
 
-        closeButton = new JButton("X");
+        closeButton = new JButton(Main.cerrar);
+        closeButton.setBorder(Main.emptyBorder);
+        closeButton.setBackground(Main.transparentColor);
+        closeButton.setOpaque(false);
+        closeButton.setContentAreaFilled(false);
         closeButton.setBorderPainted(false);
-        closeButton.setFocusPainted(false);
-        closeButton.setBackground(Color.MAGENTA.darker());
 
         skin = new JButton("skin");
+        skin.setBorder(Main.emptyBorder);
+        skin.setBackground(Main.transparentColor);
+        skin.setOpaque(false);
+        skin.setContentAreaFilled(false);
         skin.setBorderPainted(false);
-        skin.setFocusPainted(false);
-        skin.setBackground(Color.ORANGE.darker());
 
         boost = new JButton("boost");
-
-
+        boost.setBorder(Main.emptyBorder);
+        boost.setBackground(Main.transparentColor);
+        boost.setOpaque(false);
+        boost.setContentAreaFilled(false);
         boost.setBorderPainted(false);
-        boost.setFocusPainted(false);
-        boost.setBackground(Color.PINK.darker());
 
+        JPanel buttonPanel = new JPanel(new GridBagLayout());
+        buttonPanel.setOpaque(false);
 
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(10, 0, 10, 0);
+        buttonPanel.add(skin, gbc);
 
+        gbc.gridy = 1;
+        buttonPanel.add(boost, gbc);
 
-        add(closeButton, BorderLayout.PAGE_END);
-        add(skin, BorderLayout.PAGE_END);
-        add(boost, BorderLayout.PAGE_END);
+        JPanel closeButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        closeButtonPanel.setBackground(Color.BLACK);
+        closeButtonPanel.add(closeButton);
 
-
+        add(buttonPanel, BorderLayout.CENTER);
+        add(closeButtonPanel, BorderLayout.PAGE_END);
 
         closeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(panelPrincipal, "menu");
             }
         });
-
 
         skin.addActionListener(new ActionListener() {
             @Override
@@ -57,16 +65,11 @@ public class Tienda extends JPanel {
             }
         });
 
-
         boost.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {cardLayout.show(panelPrincipal, "Boost");}
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panelPrincipal, "Boost");
+            }
         });
-
-
-
     }
-
-
-
 }

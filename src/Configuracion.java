@@ -8,10 +8,10 @@ import java.io.IOException;
 
 public class Configuracion extends JPanel {
     private JButton closeButton;
-    private JButton PlayMusic;
-    private JButton StopMusic;
+    private JButton playMusic;
+    private JButton stopMusic;
     private int estadoMusicaEnClase;
-    //private Clip clip;
+    // private Clip clip;
 
     public Configuracion(JPanel panelPrincipal, CardLayout cardLayout, int estadoMusica, Clip clip) {
         // Configurar la ventana
@@ -19,53 +19,66 @@ public class Configuracion extends JPanel {
         setLayout(new BorderLayout());
         setPreferredSize(screenSize);
 
-        closeButton = new JButton("X");
+        closeButton = new JButton(Main.cerrar);
+        closeButton.setBorder(Main.emptyBorder);
+        closeButton.setBackground(Main.transparentColor);
+        closeButton.setOpaque(false);
+        closeButton.setContentAreaFilled(false);
         closeButton.setBorderPainted(false);
-        closeButton.setFocusPainted(false);
-        closeButton.setBackground(Color.MAGENTA.darker());
+
         estadoMusicaEnClase = estadoMusica;
 
         ImageIcon play = new ImageIcon("resources\\sprites\\startMusic.png");
         ImageIcon stop = new ImageIcon("resources\\sprites\\stopMusic.png");
 
-        PlayMusic = new JButton(play);
-        StopMusic = new JButton(stop);
+        playMusic = new JButton(play);
+        playMusic.setBorder(Main.emptyBorder);
+        playMusic.setBackground(Main.transparentColor);
+        playMusic.setOpaque(false);
+        playMusic.setContentAreaFilled(false);
+        playMusic.setBorderPainted(false);
 
-        PlayMusic.setBorderPainted(true);
-        PlayMusic.setContentAreaFilled(false);
-        PlayMusic.setFocusPainted(false);
-        PlayMusic.setOpaque(false);
+        stopMusic = new JButton(stop);
+        stopMusic.setBorder(Main.emptyBorder);
+        stopMusic.setBackground(Main.transparentColor);
+        stopMusic.setOpaque(false);
+        stopMusic.setContentAreaFilled(false);
+        stopMusic.setBorderPainted(false);
 
-        StopMusic.setBorderPainted(true); // cambiar esto antes de todo porque esta para testear
-        StopMusic.setContentAreaFilled(false);
-        StopMusic.setFocusPainted(false);
-        StopMusic.setOpaque(false);
+        JPanel buttonsPanel = new JPanel(new GridBagLayout());
+        buttonsPanel.setOpaque(false);
 
-        JPanel buttonsPanel = new JPanel(new GridLayout(2, 1));
-        buttonsPanel.add(PlayMusic);
-        buttonsPanel.add(StopMusic);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(10, 0, 10, 0);
+        buttonsPanel.add(playMusic, gbc);
 
-        JPanel closeButtonPanel = new JPanel(new BorderLayout());
-        closeButtonPanel.add(closeButton, BorderLayout.SOUTH);
+        gbc.gridy = 1;
+        buttonsPanel.add(stopMusic, gbc);
+
+        JPanel closeButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        closeButtonPanel.setBackground(Color.BLACK);
+        closeButtonPanel.add(closeButton);
 
         add(buttonsPanel, BorderLayout.CENTER);
-        add(closeButtonPanel, BorderLayout.WEST);
+        add(closeButtonPanel, BorderLayout.PAGE_END);
 
-        PlayMusic.addActionListener(new ActionListener() {
+        playMusic.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Estado " + estadoMusicaEnClase);
                 if (estadoMusicaEnClase == 0) {
-                    PlayMusic("resources\\musica\\melodia.wav", clip);
+                    playMusic("resources\\musica\\melodia.wav", clip);
                     estadoMusicaEnClase = 1;
                 }
             }
         });
 
-        StopMusic.addActionListener(new ActionListener() {
+        stopMusic.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (estadoMusicaEnClase == 1) {
                     System.out.println("stoop nashe");
-                    StopMusic(clip);
+                    stopMusic(clip);
                     estadoMusicaEnClase = 0;
                 }
             }
@@ -78,8 +91,7 @@ public class Configuracion extends JPanel {
         });
     }
 
-
-    private void PlayMusic(String filePath, Clip clip) {
+    private void playMusic(String filePath, Clip clip) {
         try {
             File audioFile = new File(filePath);
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
@@ -92,10 +104,9 @@ public class Configuracion extends JPanel {
         }
     }
 
-    public void StopMusic(Clip clip) {
+    public void stopMusic(Clip clip) {
         if (clip != null && clip.isRunning()) {
             clip.stop();
         }
     }
-
 }

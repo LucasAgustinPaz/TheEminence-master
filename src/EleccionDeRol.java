@@ -3,45 +3,74 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 public class EleccionDeRol extends JPanel {
     private JButton closeButton;
-    private JButton Duelista;
-    private JButton Centinela;
-    private JButton Smoker;
-    private JButton Iniciador;
+    private JButton duelistaButton;
+    private JButton centinelaButton;
+    private JButton controladorButton;
+    private JButton iniciadorButton;
+
+    private ImageIcon duelistaIcon = new ImageIcon("resources\\sprites\\Assets\\roles baldu\\rol_duelista.png");
+    private ImageIcon centinelaIcon = new ImageIcon("resources\\sprites\\Assets\\roles baldu\\rol_centinela.png");
+    private ImageIcon controladorIcon = new ImageIcon("resources\\sprites\\Assets\\roles baldu\\rol_controlador.png");
+    private ImageIcon iniciadorIcon = new ImageIcon("resources\\sprites\\Assets\\roles baldu\\rol_iniciador.png");
 
     public EleccionDeRol(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
         // Configurar el panel principal
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLayout(new BorderLayout());
-        setPreferredSize(screenSize);
 
         // Panel para los botones
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = GridBagConstraints.RELATIVE;
-        gbc.insets = new Insets(10, 10, 10, 10);
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 4, 10, 0)); // 1 fila, 4 columnas
 
-        closeButton = new JButton("X");
-        closeButton.setBorderPainted(false);
-        closeButton.setFocusPainted(false);
-        closeButton.setBackground(Color.MAGENTA.darker());
+        duelistaButton = new JButton(duelistaIcon);
+        duelistaButton.setBorder(Main.emptyBorder);
+        duelistaButton.setBackground(Main.transparentColor);
+        duelistaButton.setOpaque(false);
+        duelistaButton.setContentAreaFilled(false);
+        duelistaButton.setBorderPainted(false);
 
-        Duelista = new JButton("Duelista");
-        Centinela = new JButton("Centinela");
-        Smoker = new JButton("Smoker");
-        Iniciador = new JButton("Iniciador");
+        centinelaButton = new JButton(centinelaIcon);
+        centinelaButton.setBorder(Main.emptyBorder);
+        centinelaButton.setBackground(Main.transparentColor);
+        centinelaButton.setOpaque(false);
+        centinelaButton.setContentAreaFilled(false);
+        centinelaButton.setBorderPainted(false);
 
-        buttonPanel.add(Duelista, gbc);
-        buttonPanel.add(Centinela, gbc);
-        buttonPanel.add(Smoker, gbc);
-        buttonPanel.add(Iniciador, gbc);
+        controladorButton = new JButton(controladorIcon);
+        controladorButton.setBorder(Main.emptyBorder);
+        controladorButton.setBackground(Main.transparentColor);
+        controladorButton.setOpaque(false);
+        controladorButton.setContentAreaFilled(false);
+        controladorButton.setBorderPainted(false);
+
+        iniciadorButton = new JButton(iniciadorIcon);
+        iniciadorButton.setBorder(Main.emptyBorder);
+        iniciadorButton.setBackground(Main.transparentColor);
+        iniciadorButton.setOpaque(false);
+        iniciadorButton.setContentAreaFilled(false);
+        iniciadorButton.setBorderPainted(false);
+
+
+        buttonPanel.add(duelistaButton);
+        buttonPanel.add(centinelaButton);
+        buttonPanel.add(controladorButton);
+        buttonPanel.add(iniciadorButton);
 
         // Alinear el botón "X" a la izquierda y abajo
-        add(closeButton, BorderLayout.SOUTH);
+        closeButton = new JButton(Main.cerrar);
+        closeButton.setBorder(Main.emptyBorder);
+        closeButton.setBackground(Main.transparentColor);
+        closeButton.setOpaque(false);
+        closeButton.setContentAreaFilled(false);
+        closeButton.setBorderPainted(false);
+
+        JPanel closeButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        closeButtonPanel.setBackground(Color.BLACK);
+        closeButtonPanel.add(closeButton);
+
         add(buttonPanel, BorderLayout.CENTER);
+        add(closeButtonPanel, BorderLayout.SOUTH);
 
         closeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -49,7 +78,7 @@ public class EleccionDeRol extends JPanel {
             }
         });
 
-        Duelista.addActionListener(new ActionListener() {
+        duelistaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 usuario.setRol(String.valueOf(Roles.DUELISTA));
@@ -57,7 +86,7 @@ public class EleccionDeRol extends JPanel {
             }
         });
 
-        Centinela.addActionListener(new ActionListener() {
+        centinelaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 usuario.setRol(String.valueOf(Roles.CENTINELA));
@@ -65,7 +94,7 @@ public class EleccionDeRol extends JPanel {
             }
         });
 
-        Smoker.addActionListener(new ActionListener() {
+        controladorButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 usuario.setRol(String.valueOf(Roles.SMOKER));
@@ -73,7 +102,7 @@ public class EleccionDeRol extends JPanel {
             }
         });
 
-        Iniciador.addActionListener(new ActionListener() {
+        iniciadorButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 usuario.setRol(String.valueOf(Roles.INICIADOR));

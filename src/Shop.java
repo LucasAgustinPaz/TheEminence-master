@@ -10,48 +10,59 @@ public class Shop extends JPanel {
     private JButton skin2;
     private JButton skin3;
 
-
-    public Shop(JPanel panelPrincipal,CardLayout cardLayout,Usuario usuario){
+    public Shop(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
         // Configurar la ventana
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        setLayout(new FlowLayout());
+        setLayout(new BorderLayout());
         setPreferredSize(screenSize);
 
-        closeButton = new JButton("X");
+        closeButton = new JButton(Main.cerrar);
+        closeButton.setBorder(Main.emptyBorder);
+        closeButton.setBackground(Main.transparentColor);
+        closeButton.setOpaque(false);
+        closeButton.setContentAreaFilled(false);
         closeButton.setBorderPainted(false);
-        closeButton.setFocusPainted(false);
-        closeButton.setBackground(Color.MAGENTA.darker());
 
-        skin1 = new JButton("vandal prime 1500");
+        skin1 = new JButton(Main.prime);
+        skin1.setBorder(Main.emptyBorder);
+        skin1.setBackground(Main.transparentColor);
+        skin1.setOpaque(false);
+        skin1.setContentAreaFilled(false);
         skin1.setBorderPainted(false);
-        skin1.setFocusPainted(false);
-        skin1.setBackground(Color.ORANGE.darker());
 
-        skin2 = new JButton("vandal gris 500");
-
-
+        skin2 = new JButton(Main.origin);
+        skin2.setBorder(Main.emptyBorder);
+        skin2.setBackground(Main.transparentColor);
+        skin2.setOpaque(false);
+        skin2.setContentAreaFilled(false);
         skin2.setBorderPainted(false);
-        skin2.setFocusPainted(false);
-        skin2.setBackground(Color.PINK.darker());
 
-        skin3 = new JButton("vandal fachera 750");
+        skin3 = new JButton(Main.reaven);
+        skin3.setBorder(Main.emptyBorder);
+        skin3.setBackground(Main.transparentColor);
+        skin3.setOpaque(false);
+        skin3.setContentAreaFilled(false);
         skin3.setBorderPainted(false);
-        skin3.setFocusPainted(false);
-        skin3.setBackground(Color.CYAN.darker());
 
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 3, 0, 0)); // 1 fila, 3 columnas
+        buttonPanel.add(skin1);
+        buttonPanel.add(skin2);
+        buttonPanel.add(skin3);
 
-        add(closeButton, BorderLayout.PAGE_END);
-        add(skin1, BorderLayout.PAGE_END);
-        add(skin2, BorderLayout.PAGE_END);
-        add(skin3, BorderLayout.PAGE_END);
+        JPanel closeButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        closeButtonPanel.add(closeButton);
 
+        JPanel centerPanel = new JPanel(new GridBagLayout());
+        centerPanel.add(buttonPanel);
 
-    closeButton.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            cardLayout.show(panelPrincipal, "Tienda");
-        }
-    });
+        add(centerPanel, BorderLayout.CENTER);
+        add(closeButtonPanel, BorderLayout.SOUTH);
 
+        closeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panelPrincipal, "Tienda");
+            }
+        });
 
         skin1.addActionListener(new ActionListener() {
             @Override
@@ -65,7 +76,6 @@ public class Shop extends JPanel {
             }
         });
 
-
         skin2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -78,7 +88,6 @@ public class Shop extends JPanel {
             }
         });
 
-
         skin3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -90,7 +99,5 @@ public class Shop extends JPanel {
                 }
             }
         });
-
     }
-
 }

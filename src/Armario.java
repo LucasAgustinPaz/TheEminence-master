@@ -12,18 +12,22 @@ public class Armario extends JPanel {
     private int indiceActual;
     private JLabel jLabelSkin;
 
-    public Armario(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
+    ImageIcon atras = new ImageIcon("resources\\sprites\\Assets\\UI\\botones HUB\\boton_atras.png");
+    ImageIcon adelante = new ImageIcon("resources\\sprites\\Assets\\UI\\botones HUB\\boton_adelante.png");
 
+    public Armario(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLayout(new BorderLayout());
         setPreferredSize(screenSize);
 
         indiceActual = 0;
 
-        closeButton = new JButton("X");
+        closeButton = new JButton(Main.cerrar);
+        closeButton.setBorder(Main.emptyBorder);
+        closeButton.setBackground(Main.transparentColor);
+        closeButton.setOpaque(false);
+        closeButton.setContentAreaFilled(false);
         closeButton.setBorderPainted(false);
-        closeButton.setFocusPainted(false);
-        closeButton.setBackground(Color.MAGENTA.darker());
 
         jLabelSkin = new JLabel(usuario.getSkins().get(indiceActual));
         jLabelSkin.setHorizontalAlignment(SwingConstants.CENTER);
@@ -32,22 +36,32 @@ public class Armario extends JPanel {
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(1920, 1080));
 
-        sigSkin = new JButton("Siguiente");
+        sigSkin = new JButton(adelante);
+        sigSkin.setBorder(Main.emptyBorder);
+        sigSkin.setBackground(Main.transparentColor);
+        sigSkin.setOpaque(false);
+        sigSkin.setContentAreaFilled(false);
         sigSkin.setBorderPainted(false);
-        sigSkin.setFocusPainted(false);
-        sigSkin.setBackground(Color.blue);
 
-        antSkin = new JButton("Anterior");
+        antSkin = new JButton(atras);
+        antSkin.setBorder(Main.emptyBorder);
+        antSkin.setBackground(Main.transparentColor);
+        antSkin.setOpaque(false);
+        antSkin.setContentAreaFilled(false);
         antSkin.setBorderPainted(false);
-        antSkin.setFocusPainted(false);
-        antSkin.setBackground(Color.blue);
 
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        buttonPanel.add(antSkin);
-        buttonPanel.add(sigSkin);
-        buttonPanel.add(closeButton);
+        JPanel buttonPanel = new JPanel(new BorderLayout());
+        JPanel innerButtonPanel = new JPanel(new FlowLayout());
+        buttonPanel.setBackground(Color.BLACK);
+        innerButtonPanel.setBackground(Color.BLACK);
 
-        add(buttonPanel, BorderLayout.NORTH);
+        innerButtonPanel.add(antSkin);
+        innerButtonPanel.add(sigSkin);
+
+        buttonPanel.add(innerButtonPanel, BorderLayout.CENTER);
+        buttonPanel.add(closeButton, BorderLayout.LINE_START);
+
+        add(buttonPanel, BorderLayout.SOUTH);
         add(jLabelSkin, BorderLayout.CENTER);
 
         closeButton.addActionListener(new ActionListener() {

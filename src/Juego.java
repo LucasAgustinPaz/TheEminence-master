@@ -2,6 +2,8 @@ import com.google.gson.Gson;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.plaf.ButtonUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +14,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+
 
 public class Juego extends JFrame {
     private JPanel panelPrincipal;
@@ -31,8 +34,23 @@ public class Juego extends JFrame {
     private Clip clip;
     private boolean isButtonPressed = false;
     private ImageIcon suelto = new ImageIcon("resources\\sprites\\balduChyper.png");
-   // private ImageIcon imagenRedimensionada = new ImageIcon(suelto.getImage().getScaledInstance(1920, 1080, java.awt.Image.SCALE_SMOOTH));
-
+    private ImageIcon configuracionboton = new ImageIcon("resources\\sprites\\Assets\\UI\\botones HUB\\boton_configuracion.png");
+    private ImageIcon armarioboton = new ImageIcon("resources\\sprites\\Assets\\UI\\botones HUB\\boton_armario.png");
+    private ImageIcon smurfboton = new ImageIcon("resources\\sprites\\Assets\\UI\\botones HUB\\boton_smurf.png");
+    private ImageIcon statsboton = new ImageIcon("resources\\sprites\\Assets\\UI\\botones HUB\\boton_stats.png");
+    private ImageIcon tiendaboton = new ImageIcon("resources\\sprites\\Assets\\UI\\botones HUB\\boton_tienda.png");
+    private ImageIcon rolboton = new ImageIcon("resources\\sprites\\Assets\\UI\\botones HUB\\boton_rol.png");
+    private ImageIcon inversionesboton = new ImageIcon("resources\\sprites\\Assets\\UI\\botones HUB\\boton_inversiones.png");
+    private ImageIcon minijuegoBoton = new ImageIcon("resources\\sprites\\Assets\\UI\\botones HUB\\boton_minijuego.png");
+    private ImageIcon hierro = new ImageIcon("resources\\sprites\\Assets\\tiers\\hierro.png");
+    private ImageIcon ascendente = new ImageIcon("resources\\sprites\\Assets\\tiers\\ascendente.png");
+    private ImageIcon bronce = new ImageIcon("resources\\sprites\\Assets\\tiers\\bronce.png");
+    private ImageIcon diamante = new ImageIcon("resources\\sprites\\Assets\\tiers\\diamante.png");
+    private ImageIcon inmortal = new ImageIcon("resources\\sprites\\Assets\\tiers\\inmortal.png");
+    private ImageIcon oro = new ImageIcon("resources\\sprites\\Assets\\tiers\\oro.png");
+    private ImageIcon plata = new ImageIcon("resources\\sprites\\Assets\\tiers\\plata.png");
+    private ImageIcon platino = new ImageIcon("resources\\sprites\\Assets\\tiers\\platino.png");
+    private ImageIcon radiante = new ImageIcon("resources\\sprites\\Assets\\tiers\\radiante.png");
 
 
     public CardLayout getCardLayout() {
@@ -140,23 +158,86 @@ public class Juego extends JFrame {
     private JPanel crearPanelMenu(Usuario usuario, JProgressBar experienceLabel) {
         JPanel panel = new JPanel(new BorderLayout());
 
-        JButton salirButton = new JButton("Salir");
-        JButton configuracionButton = new JButton("Configuracion");
-        JButton minijuegoButton = new JButton("Minijuego");
-        JButton TiendaButton = new JButton("Tienda");
-        JButton armarioButton = new JButton("Armario");
-        JButton estadisticaButton = new JButton("Estadistica");
-        JButton eleccionDeRol = new JButton("Rol");
-        JButton smurfear = new JButton("Smurfear");
-        JButton inversiones = new JButton("Inversiones");
 
-        levelLabel = new JLabel("Rango: " + cambiarNivel(usuario.getNivel(), usuario));
+        JButton salirButton = new JButton(Main.cerrar);
+        salirButton.setBorder(Main.emptyBorder);
+        salirButton.setBackground(Main.transparentColor);
+        salirButton.setOpaque(false);
+        salirButton.setContentAreaFilled(false);
+        salirButton.setBorderPainted(false);
+
+        JButton configuracionButton = new JButton(configuracionboton);
+        configuracionButton.setBorder(Main.emptyBorder);
+        configuracionButton.setBackground(Main.transparentColor);
+        configuracionButton.setOpaque(false);
+        configuracionButton.setContentAreaFilled(false);
+        configuracionButton.setBorderPainted(false);
+
+        JButton minijuegoButton = new JButton(minijuegoBoton);
+        minijuegoButton.setBorder(Main.emptyBorder);
+        minijuegoButton.setBackground(Main.transparentColor);
+        minijuegoButton.setOpaque(false);
+        minijuegoButton.setContentAreaFilled(false);
+        minijuegoButton.setBorderPainted(false);
+
+        JButton TiendaButton = new JButton(tiendaboton);
+        TiendaButton.setBorder(Main.emptyBorder);
+        TiendaButton.setBackground(Main.transparentColor);
+        TiendaButton.setOpaque(false);
+        TiendaButton.setContentAreaFilled(false);
+        TiendaButton.setBorderPainted(false);
+
+        JButton armarioButton = new JButton(armarioboton);
+        armarioButton.setBorder(Main.emptyBorder);
+        armarioButton.setBackground(Main.transparentColor);
+        armarioButton.setOpaque(false);
+        armarioButton.setContentAreaFilled(false);
+        armarioButton.setBorderPainted(false);
+
+        JButton estadisticaButton = new JButton(statsboton);
+        estadisticaButton.setBorder(Main.emptyBorder);
+        estadisticaButton.setBackground(Main.transparentColor);
+        estadisticaButton.setOpaque(false);
+        estadisticaButton.setContentAreaFilled(false);
+        estadisticaButton.setBorderPainted(false);
+
+        JButton eleccionDeRol = new JButton(rolboton);
+        eleccionDeRol.setBorder(Main.emptyBorder);
+        eleccionDeRol.setBackground(Main.transparentColor);
+        eleccionDeRol.setOpaque(false);
+        eleccionDeRol.setContentAreaFilled(false);
+        eleccionDeRol.setBorderPainted(false);
+
+        JButton smurfear = new JButton(smurfboton);
+        smurfear.setBorder(Main.emptyBorder);
+        smurfear.setBackground(Main.transparentColor);
+        smurfear.setOpaque(false);
+        smurfear.setContentAreaFilled(false);
+        smurfear.setBorderPainted(false);
+
+        JButton inversiones = new JButton(inversionesboton);
+        inversiones.setBorder(Main.emptyBorder);
+        inversiones.setBackground(Main.transparentColor);
+        inversiones.setOpaque(false);
+        inversiones.setContentAreaFilled(false);
+        inversiones.setBorderPainted(false);
+
+        levelLabel = new JLabel();
+        levelLabel.setIcon(hierro);
+
         JButton clickButton = new JButton(suelto);
+        clickButton.setBorder(Main.emptyBorder);
+        clickButton.setBackground(Main.transparentColor);
+        clickButton.setOpaque(false);
+        clickButton.setContentAreaFilled(false);
+        clickButton.setBorderPainted(false);
         JButton closeButton = new JButton(suelto);
-
-
+        closeButton.setBorder(Main.emptyBorder);
+        closeButton.setBackground(Main.transparentColor);
+        closeButton.setOpaque(false);
+        closeButton.setContentAreaFilled(false);
         closeButton.setBorderPainted(false);
-        closeButton.setFocusPainted(false);
+
 
         minijuegoButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -220,6 +301,7 @@ public class Juego extends JFrame {
 
         JPanel buttonPanel = new JPanel(); // Panel adicional para los botones
         buttonPanel.setLayout(new FlowLayout()); // Utilizamos FlowLayout para alinear los botones
+        buttonPanel.setBackground(Color.BLACK);
         buttonPanel.add(minijuegoButton);
         buttonPanel.add(configuracionButton);
         buttonPanel.add(TiendaButton);
@@ -230,6 +312,7 @@ public class Juego extends JFrame {
         buttonPanel.add(inversiones);
 
         JPanel bottomPanel = new JPanel(new BorderLayout());
+        bottomPanel.setBackground(Color.BLACK);
         bottomPanel.setPreferredSize(new Dimension(200, 100));
         bottomPanel.add(salirButton, BorderLayout.WEST);
         bottomPanel.add(buttonPanel, BorderLayout.CENTER);
@@ -238,11 +321,17 @@ public class Juego extends JFrame {
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setPreferredSize(new Dimension(200, 100));
         topPanel.add(levelLabel, BorderLayout.WEST);
+
+        experienceLabel.setBorder(Main.emptyBorder);
+        experienceLabel.setBackground(Main.transparentColor);
+        experienceLabel.setOpaque(false);
+        experienceLabel.setBorderPainted(false);
         topPanel.add(experienceLabel, BorderLayout.CENTER);
 
         panel.add(topPanel, BorderLayout.NORTH);
         panel.add(clickButton, BorderLayout.CENTER);
         panel.add(bottomPanel, BorderLayout.SOUTH);
+        panel.setBackground(Color.BLACK);
 
         clickButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -284,29 +373,29 @@ public class Juego extends JFrame {
         return false;
     }
 
-    public String cambiarNivel(int level, Usuario user) {
-        String nombreNivel = "Hierro";
+    public ImageIcon cambiarNivel(int level, Usuario user) {
+        ImageIcon spriteNivel = hierro;
 
         if (level == 2) {
-            nombreNivel = "Bronce";
+            spriteNivel = bronce;
         } else if (level == 3) {
-            nombreNivel = "Plata";
+            spriteNivel = plata;
         } else if (level == 4) {
-            nombreNivel = "Oro";
+            spriteNivel = oro;
         } else if (level == 5) {
-            nombreNivel = "Platino";
+            spriteNivel = platino;
             user.agregarCoins(1000);
         } else if (level == 6) {
-            nombreNivel = "Diamante";
+            spriteNivel = diamante;
         } else if (level == 7) {
-            nombreNivel = "Ascendente";
+            spriteNivel = ascendente;
         } else if (level == 8) {
-            nombreNivel = "Inmortal";
+            spriteNivel = inmortal;
         } else if (level >= 9) {
-            nombreNivel = "Radiante";
+            spriteNivel = radiante;
         }
 
-        return nombreNivel;
+        return spriteNivel;
     }
 
 
@@ -322,7 +411,7 @@ public class Juego extends JFrame {
                 usuario.aumentaExperienceMultiplier();
                 usuario.coachMayor().restarDuracion();
                 usuario.eloboostMayor().restarDuracion();
-                levelLabel.setText("Rango: " + cambiarNivel(usuario.getNivel(), usuario));
+                levelLabel.setIcon(cambiarNivel(usuario.getNivel(), usuario));
 
                 if (!cambiarNivel(usuario.getNivel(), usuario).equals("Radiante")) {
                     usuario.setXp(0);
