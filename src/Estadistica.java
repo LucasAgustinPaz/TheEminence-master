@@ -6,22 +6,26 @@ import javax.swing.border.EmptyBorder;
 
 public class Estadistica extends JPanel {
     private JButton closeButton;
-    private JLabel clicks;
-    private JLabel gainCoins;
-    private JLabel tournamentsPlayed;
-    private JLabel horasJugadas;
+    private TransparentLabel clicks;
+    private TransparentLabel gainCoins;
+    private TransparentLabel tournamentsPlayed;
+    private TransparentLabel horasJugadas;
 
     public Estadistica(JPanel panelPrincipal, CardLayout cardLayout, Usuario user) {
-
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLayout(new BorderLayout());
-        setPreferredSize(screenSize);
+
+        // Cargar la imagen de fondo desde una ruta específica
+        ImageIcon backgroundImage = new ImageIcon("resources\\sprites\\Assets\\UI\\fondo_blur.png");
+
+        // Crear un JLabel con el ImageIcon como fondo
+        JLabel backgroundLabel = new JLabel(backgroundImage);
+        backgroundLabel.setLayout(new BorderLayout());
+        add(backgroundLabel, BorderLayout.CENTER);
 
         JPanel closeButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         closeButtonPanel.setBackground(Color.BLACK);
         closeButton = new JButton(Main.cerrar);
         closeButton.setBorder(Main.emptyBorder);
-        closeButton.setBackground(Main.transparentColor);
         closeButton.setOpaque(false);
         closeButton.setContentAreaFilled(false);
         closeButton.setBorderPainted(false);
@@ -41,30 +45,38 @@ public class Estadistica extends JPanel {
 
         Font chelseaFont = new Font("Arial", Font.BOLD, 16); // Crea la instancia de la fuente Chelsea Market
 
-        clicks = new JLabel("Clicks totales:");
+        clicks = new TransparentLabel("Clicks totales:");
         clicks.setFont(chelseaFont); // Establece la fuente Chelsea Market en el JLabel
         clicks.setBorder(new EmptyBorder(verticalSpacing, 0, 0, 0));
         statisticsPanel.add(clicks);
 
-        gainCoins = new JLabel("Monedas Ganadas:");
+        gainCoins = new TransparentLabel("Monedas Ganadas:");
         gainCoins.setFont(chelseaFont); // Establece la fuente Chelsea Market en el JLabel
         gainCoins.setBorder(new EmptyBorder(verticalSpacing, 0, 0, 0));
         statisticsPanel.add(gainCoins);
 
-        tournamentsPlayed = new JLabel("Torneos Jugados:");
+        tournamentsPlayed = new TransparentLabel("Torneos Jugados:");
         tournamentsPlayed.setFont(chelseaFont); // Establece la fuente Chelsea Market en el JLabel
         tournamentsPlayed.setBorder(new EmptyBorder(verticalSpacing, 0, 0, 0));
         statisticsPanel.add(tournamentsPlayed);
 
-        horasJugadas = new JLabel("Horas Jugadas:");
+        horasJugadas = new TransparentLabel("Horas Jugadas:");
         horasJugadas.setFont(chelseaFont); // Establece la fuente Chelsea Market en el JLabel
         horasJugadas.setBorder(new EmptyBorder(verticalSpacing, 0, 0, 0));
         statisticsPanel.add(horasJugadas);
 
         JPanel centerPanel = new JPanel(new GridBagLayout());
+        centerPanel.setOpaque(false); // Hacer que el panel sea transparente
         centerPanel.add(statisticsPanel);
 
-        add(centerPanel, BorderLayout.CENTER);
+        // Establecer el fondo transparente para el panel de estadísticas
+        statisticsPanel.setOpaque(false);
+        // Hacer que los componentes del panel de estadísticas sean transparentes
+        setComponentsTransparent(statisticsPanel);
+
+        backgroundLabel.add(centerPanel); // Agregar el centroPanel al backgroundLabel
+
+        setOpaque(false); // Hacer que el panel principal también sea transparente
     }
 
     public void actualizarEstadisticas(Usuario usuario) {
@@ -72,5 +84,16 @@ public class Estadistica extends JPanel {
         gainCoins.setText("Monedas Ganadas: " + usuario.getCoins());
         tournamentsPlayed.setText("Torneos Jugados: " + usuario.getTorneosJugados());
         horasJugadas.setText("Minutos Jugados: " + usuario.sumarMinutos());
+    }
+
+    private void setComponentsTransparent(Container container) {
+        for (Component component : container.getComponents()) {
+            if (component instanceof JComponent) {
+                ((JComponent) component).setOpaque(false);
+                if (component instanceof Container) {
+                    setComponentsTransparent((Container) component);
+                }
+            }
+        }
     }
 }
