@@ -11,7 +11,6 @@ public class Configuracion extends JPanel {
     private JButton playMusic;
     private JButton stopMusic;
     private int estadoMusicaEnClase;
-    // private Clip clip;
 
     public Configuracion(JPanel panelPrincipal, CardLayout cardLayout, int estadoMusica, Clip clip) {
         // Configurar la ventana
@@ -66,20 +65,21 @@ public class Configuracion extends JPanel {
 
         playMusic.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Estado " + estadoMusicaEnClase);
+                System.out.println("Estado PRENDIDO " + estadoMusicaEnClase);
                 if (estadoMusicaEnClase == 0) {
-                    playMusic("resources\\musica\\melodia.wav", clip);
                     estadoMusicaEnClase = 1;
+                    playMusic("resources\\musica\\melodia.wav", clip);
                 }
             }
         });
 
         stopMusic.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                System.out.println("Estado APAGADO " + estadoMusicaEnClase);
                 if (estadoMusicaEnClase == 1) {
                     System.out.println("stoop nashe");
-                    stopMusic(clip);
                     estadoMusicaEnClase = 0;
+                    stopMusic(clip);
                 }
             }
         });

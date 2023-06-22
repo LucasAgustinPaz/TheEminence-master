@@ -30,7 +30,7 @@ public class Juego extends JFrame {
     private Smurfear smurfear;
     private panelInversiones inveriones;
     private JLabel levelLabel;
-    private int estadoMusica;
+    private int estadoMusica  =1;
     private Clip clip;
     private boolean isButtonPressed = false;
     private ImageIcon suelto = new ImageIcon("resources\\sprites\\balduChyper.png");
@@ -435,7 +435,6 @@ public class Juego extends JFrame {
             clip.open(audioStream);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
             clip.start();
-            estadoMusica = 1;
         } catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
             e.printStackTrace();
         }
