@@ -22,7 +22,11 @@ public class Estadistica extends JPanel {
         JLabel backgroundLabel = new JLabel(backgroundImage) {
             @Override
             public Dimension getPreferredSize() {
-                return getParent().getSize(); // Hacer que la imagen de fondo ocupe el espacio
+                Container parent = getParent();
+                if (parent != null) {
+                    return parent.getSize(); // Hacer que la imagen de fondo ocupe el espacio del contenedor principal
+                }
+                return super.getPreferredSize();
             }
         };
         backgroundLabel.setLayout(new BorderLayout());
