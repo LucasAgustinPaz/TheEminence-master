@@ -11,6 +11,7 @@ public class Configuracion extends JPanel {
     private JButton playMusic;
     private JButton stopMusic;
     private int estadoMusicaEnClase;
+    private Clip clip;
 
     public Configuracion(JPanel panelPrincipal, CardLayout cardLayout, int estadoMusica, Clip clip) {
         // Configurar la ventana
@@ -26,6 +27,7 @@ public class Configuracion extends JPanel {
         closeButton.setBorderPainted(false);
 
         estadoMusicaEnClase = estadoMusica;
+        this.clip = clip;
 
         ImageIcon play = new ImageIcon("resources\\sprites\\startMusic.png");
         ImageIcon stop = new ImageIcon("resources\\sprites\\stopMusic.png");
@@ -65,21 +67,20 @@ public class Configuracion extends JPanel {
 
         playMusic.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Estado PRENDIDO " + estadoMusicaEnClase);
                 if (estadoMusicaEnClase == 0) {
+                    System.out.println("ESTADO 0 ENTRA PLAY");
                     estadoMusicaEnClase = 1;
-                    playMusic("resources\\musica\\melodia.wav", clip);
+                    playMusic("resources\\musica\\melodia.wav");
                 }
             }
         });
 
         stopMusic.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Estado APAGADO " + estadoMusicaEnClase);
                 if (estadoMusicaEnClase == 1) {
-                    System.out.println("stoop nashe");
+                    System.out.println("ESTADO 1 ENTRA STOP");
                     estadoMusicaEnClase = 0;
-                    stopMusic(clip);
+                    stopMusic();
                 }
             }
         });
@@ -91,7 +92,7 @@ public class Configuracion extends JPanel {
         });
     }
 
-    private void playMusic(String filePath, Clip clip) {
+    private void playMusic(String filePath) {
         try {
             File audioFile = new File(filePath);
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
@@ -104,7 +105,7 @@ public class Configuracion extends JPanel {
         }
     }
 
-    public void stopMusic(Clip clip) {
+    public void stopMusic() {
         if (clip != null && clip.isRunning()) {
             clip.stop();
         }
