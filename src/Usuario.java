@@ -186,7 +186,7 @@ public class Usuario {
        }
        public long sumarMinutos(){
            long totalTimePlayed = endTime - startTime;
-           minutosJugados = totalTimePlayed/ (1000 * 60);
+           minutosJugados = totalTimePlayed/ (1000 * 60) + minutosJugados;
            return minutosJugados;
     }
     public int sumarBoost(){
