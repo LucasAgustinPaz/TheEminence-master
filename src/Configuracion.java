@@ -74,7 +74,7 @@ public class Configuracion extends JPanel {
                 }
             }
         });
-
+//nogar te quiero
         stopMusic.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (estadoMusicaEnClase == 1) {
