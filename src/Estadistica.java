@@ -23,7 +23,7 @@ public class Estadistica extends JPanel {
         add(backgroundLabel, BorderLayout.CENTER);
 
         JPanel closeButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        closeButtonPanel.setBackground(new Color(0, 0, 0, 0)); // Establecer el fondo transparente
+        closeButtonPanel.setBackground(Color.BLACK);
         closeButton = new JButton(Main.cerrar);
         closeButton.setBorder(Main.emptyBorder);
         closeButton.setOpaque(false);

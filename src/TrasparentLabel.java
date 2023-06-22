@@ -4,7 +4,7 @@ import java.awt.*;
 class TransparentLabel extends JLabel {
     public TransparentLabel(String text) {
         super(text);
-        setForeground(Color.WHITE); // Establecer el color del texto en blanco
+        setForeground(Color.white); // Establecer el color del texto en blanco
         setOpaque(false); // Hacer que el fondo del JLabel sea transparente
     }
 
