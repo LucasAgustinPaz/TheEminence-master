@@ -118,6 +118,9 @@ public class Minijuego extends JPanel {
             minijuegoIniciado = true;
             victoria.setVisible(true);
             ganada = true;
+
+            vecesEjecutado = 30;
+            score = 0;
         }
     }
 
