@@ -3,13 +3,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.border.EmptyBorder;
+import java.io.File;
 
 public class Estadistica extends JPanel {
     private JButton closeButton;
-    private TransparentLabel clicks;
-    private TransparentLabel gainCoins;
-    private TransparentLabel tournamentsPlayed;
-    private TransparentLabel horasJugadas;
+    private JLabel clicks;
+    private JLabel gainCoins;
+    private JLabel tournamentsPlayed;
+    private JLabel horasJugadas;
 
     public Estadistica(JPanel panelPrincipal, CardLayout cardLayout, Usuario user) {
         setLayout(new BorderLayout());
@@ -18,7 +19,12 @@ public class Estadistica extends JPanel {
         ImageIcon backgroundImage = new ImageIcon("resources\\sprites\\Assets\\UI\\fondo_blur.png");
 
         // Crear un JLabel con el ImageIcon como fondo
-        JLabel backgroundLabel = new JLabel(backgroundImage);
+        JLabel backgroundLabel = new JLabel(backgroundImage) {
+            @Override
+            public Dimension getPreferredSize() {
+                return getParent().getSize(); // Hacer que la imagen de fondo ocupe el espacio
+            }
+        };
         backgroundLabel.setLayout(new BorderLayout());
         add(backgroundLabel, BorderLayout.CENTER);
 
@@ -43,26 +49,41 @@ public class Estadistica extends JPanel {
 
         int verticalSpacing = 50; // Ajusta el espacio vertical entre los JLabels
 
-        Font chelseaFont = new Font("Arial", Font.BOLD, 16); // Crea la instancia de la fuente Chelsea Market
+        Font customFont = null;
+        try {
+            // Carga la fuente personalizada desde el archivo .ttf
+            customFont = Font.createFont(Font.TRUETYPE_FONT, new File("resources\\sprites\\Assets\\BebasNeue-Regular.ttf"));
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            // Registra la fuente personalizada en el entorno gráfico
+            ge.registerFont(customFont);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        clicks = new TransparentLabel("Clicks totales:");
-        clicks.setFont(chelseaFont); // Establece la fuente Chelsea Market en el JLabel
+        Font chelseaFont = customFont.deriveFont(Font.BOLD, 16); // Deriva la fuente con el estilo y tamaño deseados
+
+        clicks = new JLabel("Clicks totales:");
+        clicks.setFont(chelseaFont); // Establece la fuente personalizada en el JLabel
         clicks.setBorder(new EmptyBorder(verticalSpacing, 0, 0, 0));
+        clicks.setForeground(Color.WHITE); // Establece la tipografía en blanco
         statisticsPanel.add(clicks);
 
-        gainCoins = new TransparentLabel("Monedas Ganadas:");
-        gainCoins.setFont(chelseaFont); // Establece la fuente Chelsea Market en el JLabel
+        gainCoins = new JLabel("Monedas Ganadas:");
+        gainCoins.setFont(chelseaFont); // Establece la fuente personalizada en el JLabel
         gainCoins.setBorder(new EmptyBorder(verticalSpacing, 0, 0, 0));
+        gainCoins.setForeground(Color.WHITE); // Establece la tipografía en blanco
         statisticsPanel.add(gainCoins);
 
-        tournamentsPlayed = new TransparentLabel("Torneos Jugados:");
-        tournamentsPlayed.setFont(chelseaFont); // Establece la fuente Chelsea Market en el JLabel
+        tournamentsPlayed = new JLabel("Torneos Jugados:");
+        tournamentsPlayed.setFont(chelseaFont); // Establece la fuente personalizada en el JLabel
         tournamentsPlayed.setBorder(new EmptyBorder(verticalSpacing, 0, 0, 0));
+        tournamentsPlayed.setForeground(Color.WHITE); // Establece la tipografía en blanco
         statisticsPanel.add(tournamentsPlayed);
 
-        horasJugadas = new TransparentLabel("Horas Jugadas:");
-        horasJugadas.setFont(chelseaFont); // Establece la fuente Chelsea Market en el JLabel
+        horasJugadas = new JLabel("Horas Jugadas:");
+        horasJugadas.setFont(chelseaFont); // Establece la fuente personalizada en el JLabel
         horasJugadas.setBorder(new EmptyBorder(verticalSpacing, 0, 0, 0));
+        horasJugadas.setForeground(Color.WHITE); // Establece la tipografía en blanco
         statisticsPanel.add(horasJugadas);
 
         JPanel centerPanel = new JPanel(new GridBagLayout());
