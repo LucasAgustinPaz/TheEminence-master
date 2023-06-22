@@ -22,8 +22,21 @@ public class panelBoost extends JPanel {
     private JButton eloBoost4;
     private JButton eloBoost5;
 
-
-
+    ImageIcon auriculares = new ImageIcon("resources\\sprites\\Assets\\UI\\botones SHOP\\btn_auriculares.png");
+    ImageIcon led = new ImageIcon("resources\\sprites\\Assets\\UI\\botones SHOP\\btn_led.png");
+    ImageIcon mouse = new ImageIcon("resources\\sprites\\Assets\\UI\\botones SHOP\\btn_mouse.png");
+    ImageIcon mousepad = new ImageIcon("resources\\sprites\\Assets\\UI\\botones SHOP\\btn_mousepad.png");
+    ImageIcon teclado = new ImageIcon("resources\\sprites\\Assets\\UI\\botones SHOP\\btn_teclado.png");
+    ImageIcon coach_1 = new ImageIcon("resources\\sprites\\Assets\\UI\\botones SHOP\\btn_coach_1.png");
+    ImageIcon coach_2 = new ImageIcon("resources\\sprites\\Assets\\UI\\botones SHOP\\btn_coach_2.png");
+    ImageIcon coach_3 = new ImageIcon("resources\\sprites\\Assets\\UI\\botones SHOP\\btn_coach_3.png");
+    ImageIcon coach_4 = new ImageIcon("resources\\sprites\\Assets\\UI\\botones SHOP\\btn_coach_4.png");
+    ImageIcon coach_5 = new ImageIcon("resources\\sprites\\Assets\\UI\\botones SHOP\\btn_coach_5.png");
+    ImageIcon eloboost_1 = new ImageIcon("resources\\sprites\\Assets\\UI\\botones SHOP\\btn_eloboost_1.png");
+    ImageIcon eloboost_2 = new ImageIcon("resources\\sprites\\Assets\\UI\\botones SHOP\\btn_eloboost_2.png");
+    ImageIcon eloboost_3 = new ImageIcon("resources\\sprites\\Assets\\UI\\botones SHOP\\btn_eloboost_3.png");
+    ImageIcon eloboost_4 = new ImageIcon("resources\\sprites\\Assets\\UI\\botones SHOP\\btn_eloboost_4.png");
+    ImageIcon eloboost_5 = new ImageIcon("resources\\sprites\\Assets\\UI\\botones SHOP\\btn_eloboost_5.png");
 
     public panelBoost(JPanel panelPrincipal,CardLayout cardLayout,Usuario usuario){
         // Configurar la ventana
@@ -31,85 +44,117 @@ public class panelBoost extends JPanel {
         setLayout(new FlowLayout());
         setPreferredSize(screenSize);
 
-        closeButton = new JButton("X");
+        closeButton = new JButton(Main.cerrar);
+        closeButton.setBorder(Main.emptyBorder);
+        closeButton.setBackground(Main.transparentColor);
+        closeButton.setOpaque(false);
+        closeButton.setContentAreaFilled(false);
         closeButton.setBorderPainted(false);
-        closeButton.setFocusPainted(false);
-        closeButton.setBackground(Color.MAGENTA.darker());
 
-        Teclado = new JButton("Teclado 250");
+        Teclado = new JButton(teclado);
+        Teclado.setBorder(Main.emptyBorder);
+        Teclado.setBackground(Main.transparentColor);
+        Teclado.setOpaque(false);
+        Teclado.setContentAreaFilled(false);
         Teclado.setBorderPainted(false);
-        Teclado.setFocusPainted(false);
-        Teclado.setBackground(Color.PINK.darker());
 
-        Mouse = new JButton("Mouse 150");
+        Mouse = new JButton(mouse);
+        Mouse.setBorder(Main.emptyBorder);
+        Mouse.setBackground(Main.transparentColor);
+        Mouse.setOpaque(false);
+        Mouse.setContentAreaFilled(false);
         Mouse.setBorderPainted(false);
-        Mouse.setFocusPainted(false);
-        Mouse.setBackground(Color.PINK.darker());
 
-        Auriculares = new JButton("Auriculares 500");
+        Auriculares = new JButton(auriculares);
+        Auriculares.setBorder(Main.emptyBorder);
+        Auriculares.setBackground(Main.transparentColor);
+        Auriculares.setOpaque(false);
+        Auriculares.setContentAreaFilled(false);
         Auriculares.setBorderPainted(false);
-        Auriculares.setFocusPainted(false);
-        Auriculares.setBackground(Color.PINK.darker());
 
-        RGB = new JButton("RGB 50");
+        RGB = new JButton(led);
+        RGB.setBorder(Main.emptyBorder);
+        RGB.setBackground(Main.transparentColor);
+        RGB.setOpaque(false);
+        RGB.setContentAreaFilled(false);
         RGB.setBorderPainted(false);
-        RGB.setFocusPainted(false);
-        RGB.setBackground(Color.PINK.darker());
 
-        MousePad = new JButton("MousePad 100");
+        MousePad = new JButton(mousepad);
+        MousePad.setBorder(Main.emptyBorder);
+        MousePad.setBackground(Main.transparentColor);
+        MousePad.setOpaque(false);
+        MousePad.setContentAreaFilled(false);
         MousePad.setBorderPainted(false);
-        MousePad.setFocusPainted(false);
-        MousePad.setBackground(Color.PINK.darker());
 
-        Coach1 = new JButton("Coach1 25");
+        Coach1 = new JButton(coach_1);
+        Coach1.setBorder(Main.emptyBorder);
+        Coach1.setBackground(Main.transparentColor);
+        Coach1.setOpaque(false);
+        Coach1.setContentAreaFilled(false);
         Coach1.setBorderPainted(false);
-        Coach1.setFocusPainted(false);
-        Coach1.setBackground(Color.PINK.darker());
 
-        Coach2 = new JButton("Coach2 35");
+        Coach2 = new JButton(coach_2);
+        Coach2.setBorder(Main.emptyBorder);
+        Coach2.setBackground(Main.transparentColor);
+        Coach2.setOpaque(false);
+        Coach2.setContentAreaFilled(false);
         Coach2.setBorderPainted(false);
-        Coach2.setFocusPainted(false);
-        Coach2.setBackground(Color.PINK.darker());
 
-        Coach3 = new JButton("Coach3 50");
+        Coach3 = new JButton(coach_3);
+        Coach3.setBorder(Main.emptyBorder);
+        Coach3.setBackground(Main.transparentColor);
+        Coach3.setOpaque(false);
+        Coach3.setContentAreaFilled(false);
         Coach3.setBorderPainted(false);
-        Coach3.setFocusPainted(false);
-        Coach3.setBackground(Color.PINK.darker());
 
-        Coach4 = new JButton("Coach4 60");
+        Coach4 = new JButton(coach_4);
+        Coach4.setBorder(Main.emptyBorder);
+        Coach4.setBackground(Main.transparentColor);
+        Coach4.setOpaque(false);
+        Coach4.setContentAreaFilled(false);
         Coach4.setBorderPainted(false);
-        Coach4.setFocusPainted(false);
-        Coach4.setBackground(Color.PINK.darker());
 
-        Coach5 = new JButton("Coach5 100");
+        Coach5 = new JButton(coach_5);
+        Coach5.setBorder(Main.emptyBorder);
+        Coach5.setBackground(Main.transparentColor);
+        Coach5.setOpaque(false);
+        Coach5.setContentAreaFilled(false);
         Coach5.setBorderPainted(false);
-        Coach5.setFocusPainted(false);
-        Coach5.setBackground(Color.PINK.darker());
 
-        eloBoost1 = new JButton("eloBoost1 100");
+        eloBoost1 = new JButton(eloboost_1);
+        eloBoost1.setBorder(Main.emptyBorder);
+        eloBoost1.setBackground(Main.transparentColor);
+        eloBoost1.setOpaque(false);
+        eloBoost1.setContentAreaFilled(false);
         eloBoost1.setBorderPainted(false);
-        eloBoost1.setFocusPainted(false);
-        eloBoost1.setBackground(Color.PINK.darker());
 
-        eloBoost2 = new JButton("eloBoost2 150");
+        eloBoost2 = new JButton(eloboost_2);
+        eloBoost2.setBorder(Main.emptyBorder);
+        eloBoost2.setBackground(Main.transparentColor);
+        eloBoost2.setOpaque(false);
+        eloBoost2.setContentAreaFilled(false);
         eloBoost2.setBorderPainted(false);
-        eloBoost2.setFocusPainted(false);
-        eloBoost2.setBackground(Color.PINK.darker());
 
-        eloBoost3 = new JButton("eloBoost3 200");
+        eloBoost3 = new JButton(eloboost_3);
+        eloBoost3.setBorder(Main.emptyBorder);
+        eloBoost3.setBackground(Main.transparentColor);
+        eloBoost3.setOpaque(false);
+        eloBoost3.setContentAreaFilled(false);
         eloBoost3.setBorderPainted(false);
-        eloBoost3.setFocusPainted(false);
-        eloBoost3.setBackground(Color.PINK.darker());
 
-        eloBoost4 = new JButton("eloBoost4 250");
+        eloBoost4 = new JButton(eloboost_4);
+        eloBoost4.setBorder(Main.emptyBorder);
+        eloBoost4.setBackground(Main.transparentColor);
+        eloBoost4.setOpaque(false);
+        eloBoost4.setContentAreaFilled(false);
         eloBoost4.setBorderPainted(false);
-        eloBoost4.setFocusPainted(false);
-        eloBoost4.setBackground(Color.PINK.darker());
 
-        eloBoost5 = new JButton("eloBoost5 320");
+        eloBoost5 = new JButton(eloboost_5);
+        eloBoost5.setBorder(Main.emptyBorder);
+        eloBoost5.setBackground(Main.transparentColor);
+        eloBoost5.setOpaque(false);
+        eloBoost5.setContentAreaFilled(false);
         eloBoost5.setBorderPainted(false);
-        eloBoost5.setFocusPainted(false);
-        eloBoost5.setBackground(Color.PINK.darker());
 
         add(closeButton, BorderLayout.PAGE_END);
         add(Teclado, BorderLayout.PAGE_END);
@@ -127,6 +172,35 @@ public class panelBoost extends JPanel {
         add(eloBoost3, BorderLayout.PAGE_END);
         add(eloBoost4, BorderLayout.PAGE_END);
         add(eloBoost5, BorderLayout.PAGE_END);
+
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        buttonPanel.setBackground(Color.BLACK);
+        buttonPanel.add(closeButton);
+
+        JPanel centerPanel = new JPanel(new GridBagLayout());
+        JPanel centerPanel2 = new JPanel(new GridBagLayout());
+        JPanel centerPanel3 = new JPanel(new GridBagLayout());
+        centerPanel.add(Teclado);
+        centerPanel.add(Mouse);
+        centerPanel.add(MousePad);
+        centerPanel.add(Auriculares);
+        centerPanel.add(RGB);
+        centerPanel2.add(Coach1);
+        centerPanel2.add(Coach2);
+        centerPanel2.add(Coach3);
+        centerPanel2.add(Coach4);
+        centerPanel2.add(Coach5);
+        centerPanel3.add(eloBoost1);
+        centerPanel3.add(eloBoost2);
+        centerPanel3.add(eloBoost3);
+        centerPanel3.add(eloBoost4);
+        centerPanel3.add(eloBoost5);
+
+
+        add(buttonPanel, BorderLayout.PAGE_END);
+        add(centerPanel, BorderLayout.NORTH);
+        add(centerPanel2, BorderLayout.CENTER);
+        add(centerPanel3, BorderLayout.SOUTH);
 
 
 

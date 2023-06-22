@@ -44,11 +44,12 @@ public class Minijuego extends JPanel {
         closeButton.setBorderPainted(false);
 
         victoria = new JLabel("Victoria");
-        add(victoria, BorderLayout.NORTH);
+        victoria.setVisible(false);
+        add(victoria, BorderLayout.CENTER);
 
         // Crear un panel para el botón de cerrar
         JPanel closeButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        closeButtonPanel.setBackground(Color.BLACK);
+        closeButtonPanel.setOpaque(false);
         closeButtonPanel.add(closeButton);
 
         add(closeButtonPanel, BorderLayout.SOUTH);
