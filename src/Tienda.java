@@ -8,6 +8,9 @@ public class Tienda extends JPanel {
     private JButton skin;
     private JButton boost;
 
+    private ImageIcon boostBoton = new ImageIcon("resources\\sprites\\Assets\\UI\\botones HUB\\boton_boost.png");
+    private ImageIcon skinBoton = new ImageIcon("resources\\sprites\\Assets\\UI\\botones HUB\\boton_skins.png");
+
     public Tienda(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
         // Configurar la ventana
         setLayout(new BorderLayout());
@@ -19,14 +22,14 @@ public class Tienda extends JPanel {
         closeButton.setContentAreaFilled(false);
         closeButton.setBorderPainted(false);
 
-        skin = new JButton("skin");
+        skin = new JButton(skinBoton);
         skin.setBorder(Main.emptyBorder);
         skin.setBackground(Main.transparentColor);
         skin.setOpaque(false);
         skin.setContentAreaFilled(false);
         skin.setBorderPainted(false);
 
-        boost = new JButton("boost");
+        boost = new JButton(boostBoton);
         boost.setBorder(Main.emptyBorder);
         boost.setBackground(Main.transparentColor);
         boost.setOpaque(false);
@@ -49,7 +52,11 @@ public class Tienda extends JPanel {
         closeButtonPanel.setBackground(Color.BLACK);
         closeButtonPanel.add(closeButton);
 
-        add(buttonPanel, BorderLayout.CENTER);
+        JPanel centerPanel = new JPanel(new GridBagLayout());
+        centerPanel.setOpaque(false);
+        centerPanel.add(buttonPanel);
+
+        add(centerPanel, BorderLayout.CENTER);
         add(closeButtonPanel, BorderLayout.PAGE_END);
 
         closeButton.addActionListener(new ActionListener() {
