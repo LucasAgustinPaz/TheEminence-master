@@ -30,9 +30,9 @@ public class Juego extends JFrame {
     private int estadoMusica;
     private Clip clip;
     private boolean isButtonPressed = false;
-    private ImageIcon suelto = new ImageIcon("resources\\sprites\\balduReyna.jpeg");
-    private ImageIcon imagenRedimensionada = new ImageIcon(suelto.getImage().getScaledInstance(1920, 1080, java.awt.Image.SCALE_SMOOTH));
-    //private ImageIcon apretado = new ImageIcon("resources\\sprites\\balduReyna.jpeg");
+    private ImageIcon suelto = new ImageIcon("resources\\sprites\\balduChyper.png");
+   // private ImageIcon imagenRedimensionada = new ImageIcon(suelto.getImage().getScaledInstance(1920, 1080, java.awt.Image.SCALE_SMOOTH));
+
 
 
     public CardLayout getCardLayout() {
@@ -151,8 +151,8 @@ public class Juego extends JFrame {
         JButton inversiones = new JButton("Inversiones");
 
         levelLabel = new JLabel("Rango: " + cambiarNivel(usuario.getNivel(), usuario));
-        JButton clickButton = new JButton(imagenRedimensionada);
-        JButton closeButton = new JButton(imagenRedimensionada);
+        JButton clickButton = new JButton(suelto);
+        JButton closeButton = new JButton(suelto);
 
 
         closeButton.setBorderPainted(false);
@@ -255,13 +255,13 @@ public class Juego extends JFrame {
             public void mousePressed(MouseEvent e) {
                 isButtonPressed = true;
                 clickButton.setEnabled(false);
-                clickButton.setIcon(imagenRedimensionada);
+                clickButton.setIcon(suelto);
             }
 
             public void mouseReleased(MouseEvent e) {
                 isButtonPressed = false;
                 clickButton.setEnabled(true);
-                clickButton.setIcon(imagenRedimensionada);
+                clickButton.setIcon(suelto);
             }
 
         });
