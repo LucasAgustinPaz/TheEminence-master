@@ -14,10 +14,7 @@ public class Configuracion extends JPanel {
     private Clip clip;
 
     public Configuracion(JPanel panelPrincipal, CardLayout cardLayout, int estadoMusica, Clip clip) {
-        // Configurar la ventana
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLayout(new BorderLayout());
-        setPreferredSize(screenSize);
 
         closeButton = new JButton(Main.cerrar);
         closeButton.setBorder(Main.emptyBorder);
@@ -46,23 +43,24 @@ public class Configuracion extends JPanel {
         stopMusic.setContentAreaFilled(false);
         stopMusic.setBorderPainted(false);
 
-        JPanel buttonsPanel = new JPanel(new GridBagLayout());
-        buttonsPanel.setOpaque(false);
+        // Usar un JLabel para establecer el fondo del buttonsPanel
+        JLabel buttonsBackgroundLabel = new JLabel(new ImageIcon("resources\\sprites\\Assets\\UI\\fondo_blur.png"));
+        buttonsBackgroundLabel.setLayout(new GridBagLayout());
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.insets = new Insets(10, 0, 10, 0);
-        buttonsPanel.add(playMusic, gbc);
+        buttonsBackgroundLabel.add(playMusic, gbc);
 
         gbc.gridy = 1;
-        buttonsPanel.add(stopMusic, gbc);
+        buttonsBackgroundLabel.add(stopMusic, gbc);
 
         JPanel closeButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         closeButtonPanel.setBackground(Color.BLACK);
         closeButtonPanel.add(closeButton);
 
-        add(buttonsPanel, BorderLayout.CENTER);
+        add(buttonsBackgroundLabel, BorderLayout.CENTER);
         add(closeButtonPanel, BorderLayout.PAGE_END);
 
         playMusic.addActionListener(new ActionListener() {
