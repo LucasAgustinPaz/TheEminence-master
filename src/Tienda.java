@@ -10,6 +10,7 @@ public class Tienda extends JPanel {
 
     private ImageIcon boostBoton = new ImageIcon("resources\\sprites\\Assets\\UI\\botones HUB\\boton_boost.png");
     private ImageIcon skinBoton = new ImageIcon("resources\\sprites\\Assets\\UI\\botones HUB\\boton_skins.png");
+    private ImageIcon backgroundImage = new ImageIcon("resources\\sprites\\Assets\\UI\\fondo_blur.png");
 
     public Tienda(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
         // Configurar la ventana
@@ -39,6 +40,11 @@ public class Tienda extends JPanel {
         JPanel buttonPanel = new JPanel(new GridBagLayout());
         buttonPanel.setOpaque(false);
 
+        // Crear un JLabel con el fondo deseado
+        JLabel buttonPanelBackground = new JLabel(backgroundImage);
+        buttonPanelBackground.setLayout(new BorderLayout());
+        buttonPanelBackground.add(buttonPanel, BorderLayout.CENTER);
+
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -54,7 +60,7 @@ public class Tienda extends JPanel {
 
         JPanel centerPanel = new JPanel(new GridBagLayout());
         centerPanel.setOpaque(false);
-        centerPanel.add(buttonPanel);
+        centerPanel.add(buttonPanelBackground);
 
         add(centerPanel, BorderLayout.CENTER);
         add(closeButtonPanel, BorderLayout.PAGE_END);

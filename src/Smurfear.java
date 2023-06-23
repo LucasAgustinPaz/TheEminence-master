@@ -2,19 +2,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 public class Smurfear extends JPanel {
     private JButton closeButton;
     private JButton smurfear;
 
     private ImageIcon smurfboton = new ImageIcon("resources\\sprites\\Assets\\UI\\botones HUB\\boton_smurf.png");
+    private ImageIcon backgroundImage = new ImageIcon("resources\\sprites\\Assets\\UI\\fondo_blur.png");
 
     public Smurfear(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
         // Configurar la ventana
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLayout(new BorderLayout());
         setPreferredSize(screenSize);
+
 
         closeButton = new JButton(Main.cerrar);
         closeButton.setBorder(Main.emptyBorder);
@@ -35,7 +36,18 @@ public class Smurfear extends JPanel {
         buttonPanel.add(closeButton);
 
         JPanel centerPanel = new JPanel(new GridBagLayout());
-        centerPanel.add(smurfear);
+
+        // Agregar fondo al panel de botones
+        JLabel buttonsBackgroundLabel = new JLabel(backgroundImage);
+        buttonsBackgroundLabel.setLayout(new GridBagLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(0, 0, 10, 0); // Ajusta los mÃ¡rgenes inferiores
+        buttonsBackgroundLabel.add(smurfear, gbc);
+
+        centerPanel.add(buttonsBackgroundLabel);
 
         add(buttonPanel, BorderLayout.PAGE_END);
         add(centerPanel, BorderLayout.CENTER);

@@ -91,7 +91,7 @@ public class Armario extends JPanel {
         } else {
             indiceActual = 0; // Volver al principio si alcanza el final de la lista
         }
-        jLabelSkin.setText(usuario.getSkins().get(indiceActual));
+        jLabelSkin.setIcon(new ImageIcon(usuario.getSkins().get(indiceActual)));
     }
 
     private void recorrerAnteriorSkin(Usuario usuario) {
@@ -100,6 +100,6 @@ public class Armario extends JPanel {
         } else {
             indiceActual = usuario.getSkins().size() - 1; // Ir al final de la lista si alcanza el principio
         }
-        jLabelSkin.setText(usuario.getSkins().get(indiceActual));
+        jLabelSkin.setIcon(new ImageIcon(usuario.getSkins().get(indiceActual)));
     }
 }

@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.border.EmptyBorder;
+import java.io.File;
 
 public class Estadistica extends JPanel {
     private JButton closeButton;
@@ -12,16 +13,29 @@ public class Estadistica extends JPanel {
     private JLabel horasJugadas;
 
     public Estadistica(JPanel panelPrincipal, CardLayout cardLayout, Usuario user) {
-
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLayout(new BorderLayout());
-        setPreferredSize(screenSize);
+
+        // Cargar la imagen de fondo desde una ruta específica
+        ImageIcon backgroundImage = new ImageIcon("resources\\sprites\\Assets\\UI\\fondo_blur.png");
+
+        // Crear un JLabel con el ImageIcon como fondo
+        JLabel backgroundLabel = new JLabel(backgroundImage) {
+            @Override
+            public Dimension getPreferredSize() {
+                Container parent = getParent();
+                if (parent != null) {
+                    return parent.getSize(); // Hacer que la imagen de fondo ocupe el espacio del contenedor principal
+                }
+                return super.getPreferredSize();
+            }
+        };
+        backgroundLabel.setLayout(new BorderLayout());
+        add(backgroundLabel, BorderLayout.CENTER);
 
         JPanel closeButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         closeButtonPanel.setBackground(Color.BLACK);
         closeButton = new JButton(Main.cerrar);
         closeButton.setBorder(Main.emptyBorder);
-        closeButton.setBackground(Main.transparentColor);
         closeButton.setOpaque(false);
         closeButton.setContentAreaFilled(false);
         closeButton.setBorderPainted(false);
@@ -39,32 +53,55 @@ public class Estadistica extends JPanel {
 
         int verticalSpacing = 50; // Ajusta el espacio vertical entre los JLabels
 
-        Font chelseaFont = new Font("Arial", Font.BOLD, 16); // Crea la instancia de la fuente Chelsea Market
+        Font customFont = null;
+        try {
+            // Carga la fuente personalizada desde el archivo .ttf
+            customFont = Font.createFont(Font.TRUETYPE_FONT, new File("resources\\sprites\\Assets\\BebasNeue-Regular.ttf"));
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            // Registra la fuente personalizada en el entorno gráfico
+            ge.registerFont(customFont);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Font chelseaFont = customFont.deriveFont(Font.BOLD, 16); // Deriva la fuente con el estilo y tamaño deseados
 
         clicks = new JLabel("Clicks totales:");
-        clicks.setFont(chelseaFont); // Establece la fuente Chelsea Market en el JLabel
+        clicks.setFont(chelseaFont); // Establece la fuente personalizada en el JLabel
         clicks.setBorder(new EmptyBorder(verticalSpacing, 0, 0, 0));
+        clicks.setForeground(Color.WHITE); // Establece la tipografía en blanco
         statisticsPanel.add(clicks);
 
         gainCoins = new JLabel("Monedas Ganadas:");
-        gainCoins.setFont(chelseaFont); // Establece la fuente Chelsea Market en el JLabel
+        gainCoins.setFont(chelseaFont); // Establece la fuente personalizada en el JLabel
         gainCoins.setBorder(new EmptyBorder(verticalSpacing, 0, 0, 0));
+        gainCoins.setForeground(Color.WHITE); // Establece la tipografía en blanco
         statisticsPanel.add(gainCoins);
 
         tournamentsPlayed = new JLabel("Torneos Jugados:");
-        tournamentsPlayed.setFont(chelseaFont); // Establece la fuente Chelsea Market en el JLabel
+        tournamentsPlayed.setFont(chelseaFont); // Establece la fuente personalizada en el JLabel
         tournamentsPlayed.setBorder(new EmptyBorder(verticalSpacing, 0, 0, 0));
+        tournamentsPlayed.setForeground(Color.WHITE); // Establece la tipografía en blanco
         statisticsPanel.add(tournamentsPlayed);
 
         horasJugadas = new JLabel("Horas Jugadas:");
-        horasJugadas.setFont(chelseaFont); // Establece la fuente Chelsea Market en el JLabel
+        horasJugadas.setFont(chelseaFont); // Establece la fuente personalizada en el JLabel
         horasJugadas.setBorder(new EmptyBorder(verticalSpacing, 0, 0, 0));
+        horasJugadas.setForeground(Color.WHITE); // Establece la tipografía en blanco
         statisticsPanel.add(horasJugadas);
 
         JPanel centerPanel = new JPanel(new GridBagLayout());
+        centerPanel.setOpaque(false); // Hacer que el panel sea transparente
         centerPanel.add(statisticsPanel);
 
-        add(centerPanel, BorderLayout.CENTER);
+        // Establecer el fondo transparente para el panel de estadísticas
+        statisticsPanel.setOpaque(false);
+        // Hacer que los componentes del panel de estadísticas sean transparentes
+        setComponentsTransparent(statisticsPanel);
+
+        backgroundLabel.add(centerPanel); // Agregar el centroPanel al backgroundLabel
+
+        setOpaque(false); // Hacer que el panel principal también sea transparente
     }
 
     public void actualizarEstadisticas(Usuario usuario) {
@@ -72,5 +109,16 @@ public class Estadistica extends JPanel {
         gainCoins.setText("Monedas Ganadas: " + usuario.getCoins());
         tournamentsPlayed.setText("Torneos Jugados: " + usuario.getTorneosJugados());
         horasJugadas.setText("Minutos Jugados: " + usuario.sumarMinutos());
+    }
+
+    private void setComponentsTransparent(Container container) {
+        for (Component component : container.getComponents()) {
+            if (component instanceof JComponent) {
+                ((JComponent) component).setOpaque(false);
+                if (component instanceof Container) {
+                    setComponentsTransparent((Container) component);
+                }
+            }
+        }
     }
 }

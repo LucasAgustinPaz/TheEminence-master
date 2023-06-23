@@ -43,7 +43,6 @@ public class panelInversiones extends JPanel {
         inversion3Button.setContentAreaFilled(false);
         inversion3Button.setBorderPainted(false);
 
-
         // Crear un panel para el botón de cerrar
         JPanel closeButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         closeButtonPanel.setBackground(Color.BLACK);
@@ -58,9 +57,17 @@ public class panelInversiones extends JPanel {
         buttonPanel.add(inversion2Button);
         buttonPanel.add(inversion3Button);
 
-        // Agregar los componentes al panel principal
+        // Cargar la imagen de fondo
+        ImageIcon backgroundImage = new ImageIcon("resources\\sprites\\Assets\\UI\\fondo_blur.png");
+
+        // Crear un JLabel con el fondo deseado
+        JLabel buttonPanelBackground = new JLabel(backgroundImage);
+        buttonPanelBackground.setLayout(new BorderLayout());
+        buttonPanelBackground.add(buttonPanel, BorderLayout.CENTER);
+
+        // Agregar el componente al panel principal
         add(closeButtonPanel, BorderLayout.PAGE_END);
-        add(buttonPanel, BorderLayout.CENTER);
+        add(buttonPanelBackground, BorderLayout.CENTER);
 
         closeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

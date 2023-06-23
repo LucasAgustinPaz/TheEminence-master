@@ -24,10 +24,10 @@ public class Usuario {
 
     public Usuario(){
         skins = new ArrayList<>();
-        skins.add("Deafult");
+        skins.add("resources\\sprites\\Assets\\skins armas\\vandal_default.png");
         xp=0;
         nivel=0;
-        coins=1250;
+        coins=3000;
         promoGanada=false;
         minutosJugados=0;
         startTime=0;
