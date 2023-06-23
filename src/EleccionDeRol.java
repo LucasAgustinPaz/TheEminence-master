@@ -11,6 +11,9 @@ public class EleccionDeRol extends JPanel {
     private JButton controladorButton;
     private JButton iniciadorButton;
 
+
+
+    private ImageIcon LucasLindo = new ImageIcon();
     private ImageIcon duelistaIcon = new ImageIcon("resources\\sprites\\Assets\\roles baldu\\rol_duelista.png");
     private ImageIcon centinelaIcon = new ImageIcon("resources\\sprites\\Assets\\roles baldu\\rol_centinela.png");
     private ImageIcon controladorIcon = new ImageIcon("resources\\sprites\\Assets\\roles baldu\\rol_controlador.png");
@@ -22,6 +25,7 @@ public class EleccionDeRol extends JPanel {
 
         // Panel para los botones
         JPanel buttonPanel = new JPanel(new GridLayout(1, 4, 10, 0)); // 1 fila, 4 columnas
+        buttonPanel.setBackground(Color.BLACK);
 
         duelistaButton = new JButton(duelistaIcon);
         duelistaButton.setBorder(Main.emptyBorder);
@@ -110,4 +114,5 @@ public class EleccionDeRol extends JPanel {
             }
         });
     }
+
 }

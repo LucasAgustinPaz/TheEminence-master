@@ -24,7 +24,7 @@ public class Usuario {
 
     public Usuario(){
         skins = new ArrayList<>();
-        skins.add("resources\\sprites\\Assets\\skins armas\\vandal_default.png");
+        skins.add("resources\\sprites\\Assets\\skins armas\\vandal_base.png");
         xp=0;
         nivel=0;
         coins=3000;
@@ -65,7 +65,9 @@ public class Usuario {
             perifericos[3] = new Periferico("Rgb");
             perifericos[4] = new Periferico("MousePad");
     }
-
+    public String getRolPrincipal() {
+        return RolPrincipal;
+    }
     public Coach[] getCoach() {
         return coach;
     }

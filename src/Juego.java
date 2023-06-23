@@ -34,7 +34,11 @@ public class Juego extends JFrame {
     private Clip clip;
     private PanelVictoria panelVictoria;
     private boolean isButtonPressed = false;
-    private ImageIcon suelto = new ImageIcon("resources\\sprites\\Assets\\skins baldu\\skin_1.png");
+    private ImageIcon eminenceDuelista = new ImageIcon("resources\\sprites\\Assets\\skins baldu\\skin_1.png");
+    private ImageIcon eminenceCentinela = new ImageIcon("resources\\sprites\\Assets\\skins baldu\\skin_2.png");
+    private ImageIcon eminenceControlador = new ImageIcon("resources\\sprites\\Assets\\skins baldu\\skin_3.png");
+    private ImageIcon eminenceIniciador = new ImageIcon("resources\\sprites\\Assets\\skins baldu\\skin_4.png");
+    private ImageIcon suelto;
     private ImageIcon configuracionboton = new ImageIcon("resources\\sprites\\Assets\\UI\\botones HUB\\boton_configuracion.png");
     private ImageIcon armarioboton = new ImageIcon("resources\\sprites\\Assets\\UI\\botones HUB\\boton_armario.png");
     private ImageIcon smurfboton = new ImageIcon("resources\\sprites\\Assets\\UI\\botones HUB\\boton_smurf.png");
@@ -65,6 +69,8 @@ public class Juego extends JFrame {
     public Juego(Usuario usuario, JProgressBar experienceLabel) {
         PlayMusic("resources\\musica\\melodia.wav");
         usuario.setStartTime(System.currentTimeMillis()); //Seteo tiempo de inicio
+        suelto = eminenceDuelista;
+        cambiarBaldu(usuario);
 
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -240,7 +246,7 @@ public class Juego extends JFrame {
         clickButton.setContentAreaFilled(false);
         clickButton.setBorderPainted(false);
 
-        JButton closeButton = new JButton(suelto);
+        JButton closeButton = new JButton(Main.cerrar);
         closeButton.setBorder(Main.emptyBorder);
         closeButton.setBackground(Main.transparentColor);
         closeButton.setOpaque(false);
@@ -410,7 +416,7 @@ public class Juego extends JFrame {
 
 
     private void gainExperience(int amount, Usuario usuario, JProgressBar experienceLabel) {
-        usuario.subirXP((amount * (1000 + usuario.obtenerNivelRango() + usuario.sumarBoost() + usuario.coachMayor().getNivel())));
+        usuario.subirXP((amount * (1 + usuario.obtenerNivelRango() + usuario.sumarBoost() + usuario.coachMayor().getNivel())));
         experienceLabel.setValue(usuario.getXp());
 
         if (usuario.getNivel() < 9) {
@@ -429,8 +435,7 @@ public class Juego extends JFrame {
         } else {
             usuario.agregarCoins(2);
         }
-
-
+        cambiarBaldu(usuario);
         experienceLabel.setMaximum(usuario.getNivel() * 50000);
         experienceLabel.setValue(usuario.getXp());
 
@@ -456,6 +461,20 @@ public class Juego extends JFrame {
             writer.write(json);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    public void cambiarBaldu(Usuario usuario){
+        if(usuario.getRolPrincipal() == Roles.INICIADOR.toString()){
+            suelto = eminenceIniciador;
+        }
+        else if(usuario.getRolPrincipal() == Roles.SMOKER.toString()){
+            suelto = eminenceControlador;
+        }
+        else if(usuario.getRolPrincipal() == Roles.CENTINELA.toString()){
+            suelto = eminenceCentinela;
+        }
+        else if(usuario.getRolPrincipal() == Roles.DUELISTA.toString()){
+            suelto = eminenceDuelista;
         }
     }
 
