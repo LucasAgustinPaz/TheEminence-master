@@ -11,6 +11,9 @@ public class panelInversiones extends JPanel {
     private JButton inversion1Button;
     private JButton inversion2Button;
     private JButton inversion3Button;
+    private ImageIcon dogecoin = new ImageIcon("resources\\sprites\\Assets\\UI\\botones HUB\\boton_dogecoin.png");
+    private ImageIcon dolar = new ImageIcon("resources\\sprites\\Assets\\UI\\botones HUB\\boton_dolar.png");
+    private ImageIcon dogecoin2 = new ImageIcon("resources\\sprites\\Assets\\UI\\botones HUB\\boton_dogecoin.png");
 
     public panelInversiones(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
         setLayout(new BorderLayout());
@@ -22,21 +25,21 @@ public class panelInversiones extends JPanel {
         closeButton.setContentAreaFilled(false);
         closeButton.setBorderPainted(false);
 
-        inversion1Button = new JButton("DogeCoin $1000");
+        inversion1Button = new JButton(dogecoin);
         inversion1Button.setBorder(Main.emptyBorder);
         inversion1Button.setBackground(Main.transparentColor);
         inversion1Button.setOpaque(false);
         inversion1Button.setContentAreaFilled(false);
         inversion1Button.setBorderPainted(false);
 
-        inversion2Button = new JButton("Bitcoin $1500");
+        inversion2Button = new JButton(dogecoin2);
         inversion2Button.setBorder(Main.emptyBorder);
         inversion2Button.setBackground(Main.transparentColor);
         inversion2Button.setOpaque(false);
         inversion2Button.setContentAreaFilled(false);
         inversion2Button.setBorderPainted(false);
 
-        inversion3Button = new JButton("Dolares $500");
+        inversion3Button = new JButton(dolar);
         inversion3Button.setBorder(Main.emptyBorder);
         inversion3Button.setBackground(Main.transparentColor);
         inversion3Button.setOpaque(false);
