@@ -256,7 +256,7 @@ public class Juego extends JFrame {
 
         minijuegoButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(panelPrincipal, "miniuego");
+                cardLayout.show(panelPrincipal, "minijuego");
                 minijuego.startMinijuego(panelPrincipal, cardLayout, usuario);
             }
         });
@@ -423,6 +423,7 @@ public class Juego extends JFrame {
             if (usuario.getXp() >= usuario.getNivel() * 50000 && startTorneo(usuario.getNivel(), usuario)) {
                 usuario.subirNivel();
                 usuario.setPromoGanada(false);
+
                 usuario.aumentaExperienceMultiplier();
                 usuario.coachMayor().restarDuracion();
                 usuario.eloboostMayor().restarDuracion();

@@ -82,15 +82,14 @@ public class Minijuego extends JPanel {
             }
         });
 
+        objetoSprite = new ImageIcon("resources\\sprites\\Assets\\UI\\icon_aim.png").getImage();
+
         // Agregar MouseListener para detectar clics en el objeto
         addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 checkClick(e.getX(), e.getY());
             }
         });
-
-        // Cargar el sprite del objeto negro
-        objetoSprite = new ImageIcon("resources\\sprites\\Assets\\UI\\icon_aim.png").getImage(); // Reemplaza "ruta_del_sprite" con la ruta real del sprite
     }
 
     public void startMinijuego(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
@@ -105,7 +104,6 @@ public class Minijuego extends JPanel {
                     if (vecesEjecutado > 0) {
                         repaint();
                         menos();
-                        //System.out.println(vecesEjecutado);
                     } else {
                         resetMinijuego(panelPrincipal, cardLayout, usuario);
                     }
@@ -135,8 +133,12 @@ public class Minijuego extends JPanel {
             score = 0;
         } else {
             minijuegoIniciado = true;
-            victoria.setVisible(true);
             ganada = true;
+
+            vecesEjecutado = 30;
+            //score = 0;
+
+            cardLayout.show(panelPrincipal, "Victoria");
         }
     }
 
