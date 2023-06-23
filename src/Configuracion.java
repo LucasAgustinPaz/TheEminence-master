@@ -26,8 +26,8 @@ public class Configuracion extends JPanel {
         estadoMusicaEnClase = estadoMusica;
         this.clip = clip;
 
-        ImageIcon play = new ImageIcon("resources\\sprites\\Assets\\UI\\botones HUB\\boton_adelante.png");
-        ImageIcon stop = new ImageIcon("resources\\sprites\\Assets\\UI\\botones HUB\\boton_adelante.png");
+        ImageIcon play = new ImageIcon("resources\\sprites\\Assets\\UI\\startMusic.png");
+        ImageIcon stop = new ImageIcon("resources\\sprites\\Assets\\UI\\stopMusic.png");
 
         playMusic = new JButton(play);
         playMusic.setBorder(Main.emptyBorder);
