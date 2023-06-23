@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.TimerTask;
 import java.util.Timer;
+import java.io.File;
 
 public class Minijuego extends JPanel {
 
@@ -20,6 +21,10 @@ public class Minijuego extends JPanel {
     private boolean isTimerRunning = false;
     private boolean ganada = false;
 
+    private Image fondoImage;
+    private Font customFont;
+    private Image objetoSprite; // Nuevo
+
     public int getScore() {
         return score;
     }
@@ -35,6 +40,17 @@ public class Minijuego extends JPanel {
         adaptarVentana();
 
         setLayout(new BorderLayout());
+
+        // Cargar la imagen de fondo
+        fondoImage = new ImageIcon("resources\\sprites\\Assets\\UI\\fondo_aim.png").getImage();
+
+        // Cargar la fuente personalizada
+        try {
+            customFont = Font.createFont(Font.TRUETYPE_FONT, new File("resources\\sprites\\Assets\\BebasNeue-Regular.ttf"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Manejar la excepción si ocurre algún error al cargar la fuente
+        }
 
         closeButton = new JButton(Main.cerrar);
         closeButton.setBorder(Main.emptyBorder);
@@ -72,6 +88,9 @@ public class Minijuego extends JPanel {
                 checkClick(e.getX(), e.getY());
             }
         });
+
+        // Cargar el sprite del objeto negro
+        objetoSprite = new ImageIcon("resources\\sprites\\Assets\\UI\\icon_aim.png").getImage(); // Reemplaza "ruta_del_sprite" con la ruta real del sprite
     }
 
     public void startMinijuego(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
@@ -159,13 +178,15 @@ public class Minijuego extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        // Dibujar el objeto negro
-        g.setColor(Color.BLACK);
-        g.fillOval(objectX, objectY, OBJECT_SIZE, OBJECT_SIZE);
+        // Dibujar el fondo
+        g.drawImage(fondoImage, 0, 0, getWidth(), getHeight(), this);
+
+        // Dibujar el sprite del objeto negro
+        g.drawImage(objetoSprite, objectX, objectY, OBJECT_SIZE, OBJECT_SIZE, this);
 
         // Dibujar el puntaje
-        g.setColor(Color.BLACK);
-        g.setFont(new Font("Arial", Font.BOLD, 20));
+        g.setColor(Color.WHITE);
+        g.setFont(customFont.deriveFont(Font.BOLD, 20));
         String scoreText = "Score: " + score;
         String timeText = "Tiempo: " + vecesEjecutado;
 
@@ -175,6 +196,6 @@ public class Minijuego extends JPanel {
         int textY = textHeight; // Posición Y en la esquina superior izquierda
 
         g.drawString(scoreText, textX, textY);
-        g.drawString(timeText, textX, textY + textHeight); // Dibujar la variable vecesEjecutado
+        g.drawString(timeText, textX, textY + textHeight);
     }
 }
