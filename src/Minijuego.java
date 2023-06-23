@@ -135,8 +135,9 @@ public class Minijuego extends JPanel {
             score = 0;
         } else {
             minijuegoIniciado = true;
-            victoria.setVisible(true);
             ganada = true;
+            vecesEjecutado=30;
+            cardLayout.show(panelPrincipal,"Victoria");
         }
     }
 
