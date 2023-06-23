@@ -70,10 +70,6 @@ public class Usuario {
         return coach;
     }
 
-    public boolean isPromoGanada() {
-        return promoGanada;
-    }
-
     public eloboost[] getEloboost() {
         return eloboost;
     }
