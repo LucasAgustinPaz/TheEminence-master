@@ -30,8 +30,9 @@ public class Juego extends JFrame {
     private Smurfear smurfear;
     private panelInversiones inveriones;
     private JLabel levelLabel;
-    private int estadoMusica  =1;
+    private int estadoMusica = 1;
     private Clip clip;
+    private PanelVictoria panelVictoria;
     private boolean isButtonPressed = false;
     private ImageIcon suelto = new ImageIcon("resources\\sprites\\balduChyper.png");
     private ImageIcon configuracionboton = new ImageIcon("resources\\sprites\\Assets\\UI\\botones HUB\\boton_configuracion.png");
@@ -86,6 +87,7 @@ public class Juego extends JFrame {
         inveriones = crearPanelInversiones(panelPrincipal, cardLayout, usuario);
         shop = crearPanelShop(panelPrincipal, cardLayout, usuario);
         panelBoost = crearPanelBoost(panelPrincipal, cardLayout, usuario);
+        panelVictoria = crearPanelVictoria(panelPrincipal, cardLayout, usuario);
 
 
         panelPrincipal.add(panelMenu, "menu");
@@ -99,11 +101,17 @@ public class Juego extends JFrame {
         panelPrincipal.add(inveriones, "Inversiones");
         panelPrincipal.add(shop,"Shop");
         panelPrincipal.add(panelBoost,"Boost");
+        panelPrincipal.add(panelVictoria, "Victoria");
 
         cardLayout.show(panelPrincipal, "menu");
 
         add(panelPrincipal);
         setVisible(true);
+    }
+
+    private PanelVictoria crearPanelVictoria(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
+        PanelVictoria panelVictoria = new PanelVictoria(panelPrincipal, cardLayout, usuario);
+        return panelVictoria;
     }
 
     private Minijuego crearPanelMinijuego(JPanel panelPrincipal, CardLayout cardLayout, Usuario usuario) {
@@ -223,7 +231,7 @@ public class Juego extends JFrame {
         inversiones.setBorderPainted(false);
 
         levelLabel = new JLabel();
-        levelLabel.setIcon(hierro);
+        levelLabel.setIcon(cambiarNivel(usuario.getNivel(),usuario));
 
         JButton clickButton = new JButton(suelto);
         clickButton.setBorder(Main.emptyBorder);
@@ -231,6 +239,7 @@ public class Juego extends JFrame {
         clickButton.setOpaque(false);
         clickButton.setContentAreaFilled(false);
         clickButton.setBorderPainted(false);
+
         JButton closeButton = new JButton(suelto);
         closeButton.setBorder(Main.emptyBorder);
         closeButton.setBackground(Main.transparentColor);
@@ -368,6 +377,7 @@ public class Juego extends JFrame {
             minijuego.startMinijuego(panelPrincipal, cardLayout, usuario);
         }
         if (minijuego.getScore() >= limite) {
+            minijuego.setScore(0);
             return true;
         }
         return false;
@@ -400,12 +410,11 @@ public class Juego extends JFrame {
 
 
     private void gainExperience(int amount, Usuario usuario, JProgressBar experienceLabel) {
-        usuario.subirXP((amount * (1 + usuario.obtenerNivelRango() + usuario.sumarBoost() + usuario.coachMayor().getNivel())));
+        usuario.subirXP((amount * (1000 + usuario.obtenerNivelRango() + usuario.sumarBoost() + usuario.coachMayor().getNivel())));
         experienceLabel.setValue(usuario.getXp());
 
         if (usuario.getNivel() < 9) {
             if (usuario.getXp() >= usuario.getNivel() * 50000 && startTorneo(usuario.getNivel(), usuario)) {
-                minijuego.setScore(0);
                 usuario.subirNivel();
                 usuario.setPromoGanada(false);
                 usuario.aumentaExperienceMultiplier();

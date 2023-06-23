@@ -69,6 +69,11 @@ public class Usuario {
     public Coach[] getCoach() {
         return coach;
     }
+
+    public boolean isPromoGanada() {
+        return promoGanada;
+    }
+
     public eloboost[] getEloboost() {
         return eloboost;
     }

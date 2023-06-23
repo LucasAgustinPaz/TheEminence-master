@@ -86,7 +86,6 @@ public class Minijuego extends JPanel {
                     if (vecesEjecutado > 0) {
                         repaint();
                         menos();
-                        //System.out.println(vecesEjecutado);
                     } else {
                         resetMinijuego(panelPrincipal, cardLayout, usuario);
                     }
@@ -116,11 +115,12 @@ public class Minijuego extends JPanel {
             score = 0;
         } else {
             minijuegoIniciado = true;
-            victoria.setVisible(true);
             ganada = true;
 
             vecesEjecutado = 30;
-            score = 0;
+            //score = 0;
+
+            cardLayout.show(panelPrincipal, "Victoria");
         }
     }
 
