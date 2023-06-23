@@ -22,6 +22,7 @@ public class panelBoost extends JPanel {
     private JButton eloBoost4;
     private JButton eloBoost5;
 
+    private ImageIcon backgroundImage = new ImageIcon("resources\\sprites\\Assets\\UI\\fondo_blur.png");
     ImageIcon auriculares = new ImageIcon("resources\\sprites\\Assets\\UI\\botones SHOP\\btn_auriculares.png");
     ImageIcon led = new ImageIcon("resources\\sprites\\Assets\\UI\\botones SHOP\\btn_led.png");
     ImageIcon mouse = new ImageIcon("resources\\sprites\\Assets\\UI\\botones SHOP\\btn_mouse.png");
@@ -201,6 +202,8 @@ public class panelBoost extends JPanel {
         add(centerPanel, BorderLayout.NORTH);
         add(centerPanel2, BorderLayout.CENTER);
         add(centerPanel3, BorderLayout.SOUTH);
+
+
 
 
 
@@ -402,9 +405,6 @@ public class panelBoost extends JPanel {
                 }
             }
         });
-
-
-
     }
 
 }

@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 public class EleccionDeRol extends JPanel {
     private JButton closeButton;
     private JButton duelistaButton;
@@ -22,6 +21,7 @@ public class EleccionDeRol extends JPanel {
 
         // Panel para los botones
         JPanel buttonPanel = new JPanel(new GridLayout(1, 4, 10, 0)); // 1 fila, 4 columnas
+        buttonPanel.setBackground(Color.BLACK); // Establecer color de fondo
 
         duelistaButton = new JButton(duelistaIcon);
         duelistaButton.setBorder(Main.emptyBorder);
