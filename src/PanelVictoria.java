@@ -10,13 +10,11 @@ public class PanelVictoria extends JPanel {
     private JButton mostrarVictoria;
     private ImageIcon botonVictoria = new ImageIcon("resources\\sprites\\Assets\\UI\\panel_victoria.png");
 
-
     public PanelVictoria(JPanel panelPrincipal, CardLayout cardLayout, Usuario user) {
         // Configurar la ventana
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLayout(new BorderLayout());
         setPreferredSize(screenSize);
-
 
         closeButton = new JButton(Main.cerrar);
         closeButton.setBorder(Main.emptyBorder);
@@ -25,10 +23,9 @@ public class PanelVictoria extends JPanel {
         closeButton.setContentAreaFilled(false);
         closeButton.setBorderPainted(false);
 
-
         mostrarVictoria = new JButton(botonVictoria);
         mostrarVictoria.setBorder(Main.emptyBorder);
-        mostrarVictoria.setBackground(Main.transparentColor);
+        mostrarVictoria.setBackground(Color.BLACK);
         mostrarVictoria.setOpaque(false);
         mostrarVictoria.setContentAreaFilled(false);
         mostrarVictoria.setBorderPainted(false);
@@ -54,11 +51,17 @@ public class PanelVictoria extends JPanel {
         add(buttonsPanel, BorderLayout.CENTER);
         add(closeButtonPanel, BorderLayout.PAGE_END);
 
-
         closeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(panelPrincipal, "menu");
             }
         });
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, getWidth(), getHeight());
     }
 }
